@@ -1,0 +1,19 @@
+{
+  "name": "reform-js",
+  "version": "1.0.0",
+  "description": "A library for build user forms and generating data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "forms"
+  ],
+  "author": "Morphosium Yazilim ve Donanim Hizmetleri Ticareti Ltd. Sti.",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "typescript": "^3.9.7"
+  }
+}
