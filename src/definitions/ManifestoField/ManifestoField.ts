@@ -1,9 +1,6 @@
 import { FieldType } from "../Types/ManifestoFieldType";
 
-export type generic  = {[index: string]:any};
-
-export interface IManifestoFieldBase extends generic {
-
+export interface IManifestoFieldBase {
     content: IManifestoField[]
 }
 
@@ -16,6 +13,7 @@ export abstract class ManifestoField implements IManifestoField {
         if (base)
             for (const key in base) {
                 if (Object.prototype.hasOwnProperty.call(base, key) && key != "type") {
+                    //@ts-ignore
                     const prop = base[key];
                     //@ts-ignore
                     this[key] = prop

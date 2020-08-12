@@ -8,7 +8,6 @@ export interface IElementFieldBase extends IManifestoFieldBase {
 }
 
 export interface IElementField extends IElementFieldBase, IManifestoField {
-    reflection : HTMLElement
 }
 
 export class ElementField extends ManifestoField implements IElementField {
