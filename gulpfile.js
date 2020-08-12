@@ -1,16 +1,22 @@
 var gulp = require('gulp');
 var ts = require('gulp-typescript');
+const { series } = require('gulp');
+const tsFiles = "src/**/*.ts";
 
-function defaultTask(cb) {
-    // place code for your default task here
-    return gulp.src('src/**/*.ts')
-    .pipe(ts({
-        noImplicitAny: true,
-        outFile: 'reform.dist.js'
-    }))
-    .pipe(gulp.dest('dist'));
-
+const compileFromTs = (cb) => {
+    gulp.src(tsFiles)
+        .pipe(ts({
+            noImplicitAny: true,
+            //outFile: 'reform.dist.js'
+        }))
+        .pipe(gulp.dest('output'));
     cb();
-  }
+};
 
-  exports.default = defaultTask
+const watchChanges = (cb) => {
+    gulp.watch(tsFiles, series(compileFromTs))
+    cb();
+}
+
+gulp.task("default", watchChanges)
+gulp.task("watch-on-changes", watchChanges)

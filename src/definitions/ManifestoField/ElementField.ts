@@ -7,12 +7,15 @@ export interface IElementFieldBase extends IManifestoFieldBase {
     classes : string[]
 }
 
-export interface IElementField extends IElementFieldBase, IManifestoField {}
+export interface IElementField extends IElementFieldBase, IManifestoField {
+    reflection : HTMLElement
+}
 
 export class ElementField extends ManifestoField implements IElementField {
     constructor(base? : IElementFieldBase) {
         super(base)
     }
+    reflection: HTMLElement;
     type: FieldType = "ELEMENT";
     content: IManifestoField[];
 
