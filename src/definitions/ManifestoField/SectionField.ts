@@ -2,7 +2,7 @@ import { IManifestoFieldBase, IManifestoField, ManifestoField } from "./Manifest
 import { FieldType } from "../Types/ManifestoFieldType";
 
 export interface ISectionFieldBase extends IManifestoFieldBase {
-    sectionName : string;
+    sectionName? : string;
 }
 
 export interface ISectionField extends IManifestoField, ISectionFieldBase {
@@ -16,4 +16,8 @@ export class SectionField extends ManifestoField implements ISectionField {
     constructor(base : ISectionFieldBase) {
         super(base);
     }
+}
+
+export class RootSectionField extends SectionField {
+    sectionName = "root";
 }

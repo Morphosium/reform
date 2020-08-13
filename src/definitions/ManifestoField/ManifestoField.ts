@@ -1,7 +1,7 @@
 import { FieldType } from "../Types/ManifestoFieldType";
 
 export interface IManifestoFieldBase {
-    content: IManifestoField[]
+    content?: IManifestoField[]
 }
 
 export interface IManifestoField extends IManifestoFieldBase {
