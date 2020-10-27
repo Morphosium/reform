@@ -1,12 +1,6 @@
-import { FieldType } from "../Types/ManifestoFieldType";
+import { IManifestoField } from "./IManifestoField";
+import { IManifestoFieldBase } from "./IManifestoFieldBase";
 
-export interface IManifestoFieldBase {
-    content?: IManifestoField[]
-}
-
-export interface IManifestoField extends IManifestoFieldBase {
-    readonly type: FieldType;
-}
 
 export abstract class ManifestoField implements IManifestoField {
     constructor(base?: IManifestoFieldBase) {
@@ -20,8 +14,6 @@ export abstract class ManifestoField implements IManifestoField {
                 }
             }
     }
-    abstract type: FieldType;
-    content: IManifestoField[];
 }
 
 // PARAMETER => MANIFESTO => VIEW
