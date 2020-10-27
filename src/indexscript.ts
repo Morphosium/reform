@@ -4,7 +4,7 @@ import { RootSectionField } from "./definitions/ManifestoField/SectionField/inde
 import { Reflection } from "./Reflection/Reflector";
 
 function southParkCharacters() {
-    let array = [],
+    let array = [], arraySub = [],
         source: Array<{ name: string, imgUrl: string }> = [
             {
                 name: "cartman",
@@ -23,10 +23,10 @@ function southParkCharacters() {
                 imgUrl: "https://upload.wikimedia.org/wikipedia/en/6/6f/KennyMcCormick.png"
             },
         ]
-
+    let chr;
     for (let index = 0; index < source.length; index++) {
-        const chr = source[index];
-        array.push(new ElementField({
+        chr = source[index];
+        arraySub.push(new ElementField({
             content: [],
             tag: "img",
             attributes: [
@@ -43,9 +43,27 @@ function southParkCharacters() {
                     value: "100px"
                 }
             ]
-        }))
-    }
+        }));
 
+        if ((index + 1) % 2 == 0) {
+            array.push(new ElementField({
+                content: arraySub,
+                tag: "div",
+                attributes: [
+
+                ]
+            }));
+            arraySub = [];
+
+        }
+    }
+    array.push(new ElementField({
+        content: arraySub,
+        tag: "div",
+        attributes: [
+
+        ]
+    }));
     return array;
 }
 
