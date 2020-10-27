@@ -1,7 +1,7 @@
 import { IManifesto } from "../definitions/Manifesto";
-import { IElementField } from "../definitions/ManifestoField/ElementField";
+import { IElementField } from "../definitions/ManifestoField/ElementField/index";
 import { IManifestoField } from "../definitions/ManifestoField/ManifestoField/IManifestoField";
-import { RootSectionField } from "../definitions/ManifestoField/SectionField";
+import { RootSectionField } from "../definitions/ManifestoField/SectionField/index";
 
 export class Reflection {
     baseElement: HTMLElement;

@@ -1,4 +1,4 @@
-import { ISectionField, ISectionFieldBase, SectionField } from "./ManifestoField/SectionField";
+import { ISectionField, ISectionFieldBase, SectionField } from "./ManifestoField/SectionField/index";
 
 export interface IManifesto {
     rootSection: ISectionField;

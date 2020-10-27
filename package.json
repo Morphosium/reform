@@ -11,7 +11,10 @@
   ],
   "author": "Morphosium Yazilim ve Donanim Hizmetleri Ticareti Ltd. Sti.",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "es6-imports-renamer": "^0.1.6",
+    "gulp-es6-imports-renamer": "^0.1.8"
+  },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-typescript": "^6.0.0-alpha.1",

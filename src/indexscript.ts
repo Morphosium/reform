@@ -1,7 +1,7 @@
 
-import { ElementField } from "./definitions/ManifestoField/ElementField/index.js";
-import { RootSectionField } from "./definitions/ManifestoField/SectionField/index.js";
-import { Reflection } from "./Reflection/Reflector.js";
+import { ElementField } from "./definitions/ManifestoField/ElementField/index";
+import { RootSectionField } from "./definitions/ManifestoField/SectionField/index";
+import { Reflection } from "./Reflection/Reflector";
 
 function southParkCharacters() {
     let array = [],

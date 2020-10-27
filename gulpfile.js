@@ -2,14 +2,24 @@ var gulp = require('gulp');
 var ts = require('gulp-typescript');
 const { series } = require('gulp');
 const tsFiles = "src/**/*.ts";
-const testTsFiles = "./indexscript.ts"
+
+
+var rename = require('gulp-es6-imports-renamer');
+
+var fs = require('fs');
+var path = require('path');
+var recast = require('recast');
+var renamer = require('es6-imports-renamer');
+
+function renameFn(originalPath, parentPath, callback) {
+	callback(null, path.join(originalPath, 'index'));
+}
 
 const compileFromTs = (cb) => {
     gulp.src(tsFiles)
         .pipe(ts({
             noImplicitAny: true,
-            target: "es6",
-            module: "es6"
+            module: "UMD",
             //outFile: 'reform.dist.js'
         }))
         .pipe(gulp.dest('output'));

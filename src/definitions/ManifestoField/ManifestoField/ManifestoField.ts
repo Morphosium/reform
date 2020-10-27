@@ -6,11 +6,13 @@ export abstract class ManifestoField implements IManifestoField {
     constructor(base?: IManifestoFieldBase) {
         if (base)
             for (const key in base) {
-                if (Object.prototype.hasOwnProperty.call(base, key) && key != "type") {
+
+                if (Object.prototype.hasOwnProperty.call(base, key)) {
                     //@ts-ignore
                     const prop = base[key];
                     //@ts-ignore
                     this[key] = prop
+
                 }
             }
     }

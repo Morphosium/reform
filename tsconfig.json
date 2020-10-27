@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
-        "module": "es6",
-        "target": "es6",
+        "module": "UMD",
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
