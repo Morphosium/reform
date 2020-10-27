@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var ts = require('gulp-typescript');
 const { series } = require('gulp');
 const tsFiles = "src/**/*.ts";
+const testTsFiles = "./indexscript.ts"
 
 const compileFromTs = (cb) => {
     gulp.src(tsFiles)
@@ -12,6 +13,7 @@ const compileFromTs = (cb) => {
         .pipe(gulp.dest('output'));
     cb();
 };
+
 
 const watchChanges = (cb) => {
     gulp.watch(tsFiles, series(compileFromTs))

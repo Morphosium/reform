@@ -3,4 +3,5 @@ import { IInputFieldBase } from "./IInputFieldBase";
 
 
 export interface IInputField<V extends any> extends IElementField, IInputFieldBase<V> {
+    isInput: boolean;
 }

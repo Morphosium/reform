@@ -4,9 +4,9 @@ import { IManifestoFieldBase } from "../ManifestoField/IManifestoFieldBase";
 
 
 export interface IElementFieldBase extends IManifestoFieldBase {
-    isElement: boolean;
     tag?: string;
     id?: string;
     class?: string;
+    attributes : Array<{key: string, value: string}>;
     content: IManifestoField[];
 }

@@ -1,7 +1,7 @@
 import { ISectionField, ISectionFieldBase, SectionField } from "./ManifestoField/SectionField";
 
 export interface IManifesto {
-    rootSection: ISectionField
+    rootSection: ISectionField;
 }
 
 export class Manifesto implements IManifesto {

@@ -6,6 +6,7 @@ import { IElementFieldBase } from "./IElementFieldBase";
 
 export class ElementField extends ManifestoField implements IElementField {
     readonly isElement = true;
+    attributes: {key: string, value: string}[] = [];
     reflection: HTMLElement;
     content: IManifestoField[];
     tag: string = "";
@@ -15,4 +16,5 @@ export class ElementField extends ManifestoField implements IElementField {
     constructor(base?: IElementFieldBase) {
         super(base)
     }
+
 }
