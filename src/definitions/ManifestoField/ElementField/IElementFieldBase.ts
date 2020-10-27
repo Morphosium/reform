@@ -9,4 +9,6 @@ export interface IElementFieldBase extends IManifestoFieldBase {
     class?: string;
     attributes : Array<{key: string, value: string}>;
     content: IManifestoField[];
+
+
 }

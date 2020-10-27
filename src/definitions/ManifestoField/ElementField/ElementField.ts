@@ -15,6 +15,14 @@ export class ElementField extends ManifestoField implements IElementField {
 
     constructor(base?: IElementFieldBase) {
         super(base)
+        // this.attributes = base.attributes;
+        // this.tag = base.tag;
+        for (const key in base) {
+            if (Object.prototype.hasOwnProperty.call(base, key)) {
+                this[key] = base[key];
+                
+            }
+        }
     }
 
 }
