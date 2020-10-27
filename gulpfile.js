@@ -8,6 +8,8 @@ const compileFromTs = (cb) => {
     gulp.src(tsFiles)
         .pipe(ts({
             noImplicitAny: true,
+            target: "es6",
+            module: "es6"
             //outFile: 'reform.dist.js'
         }))
         .pipe(gulp.dest('output'));
