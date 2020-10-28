@@ -29,7 +29,7 @@ export class Reflection {
             const field = fields[index];
             if (field.isElement) {
                 const elementField = field as IElementField;
-                const element = document.createElement(elementField.tag);
+                const element = document.createElement(elementField.tag || "div");
                 element.className = elementField.class;
                 if (elementField.attributes?.length > 0) {
                     for (let attributeIndex = 0; attributeIndex < elementField.attributes.length; attributeIndex++) {

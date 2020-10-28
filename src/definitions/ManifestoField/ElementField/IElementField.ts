@@ -8,6 +8,6 @@ export interface IElementField extends IElementFieldBase, IManifestoField {
     id?: string;
     class?: string;
     content: IManifestoField[];
-    attributes : Array<{key: string, value: string}>;
+    attributes?: Array<{key: string, value: string}>;
     isElement: boolean;
 }
