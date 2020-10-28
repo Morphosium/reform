@@ -4,7 +4,7 @@ import { RootSectionField } from "./definitions/ManifestoField/SectionField/inde
 import { Reflection } from "./Reflection/Reflector";
 
 function southParkCharacters() {
-    let array = [], arraySub = [],
+    let array = [],
         source: Array<{ name: string, imgUrl: string }> = [
             {
                 name: "cartman",
@@ -26,7 +26,7 @@ function southParkCharacters() {
     let chr;
     for (let index = 0; index < source.length; index++) {
         chr = source[index];
-        arraySub.push(new ElementField({
+        array.push(new ElementField({
             content: [],
             tag: "img",
             attributes: [
@@ -45,25 +45,8 @@ function southParkCharacters() {
             ]
         }));
 
-        if ((index + 1) % 2 == 0) {
-            array.push(new ElementField({
-                content: arraySub,
-                tag: "div",
-                attributes: [
-
-                ]
-            }));
-            arraySub = [];
-
-        }
     }
-    array.push(new ElementField({
-        content: arraySub,
-        tag: "div",
-        attributes: [
 
-        ]
-    }));
     return array;
 }
 

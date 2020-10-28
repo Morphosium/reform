@@ -1,9 +1,9 @@
 import { IManifestoField } from "../ManifestoField/IManifestoField";
-import { IElementFieldBase } from "./IElementFieldBase";
+import { IElementFieldInitial } from "./IElementFieldInitial";
 
 
 
-export interface IElementField extends IElementFieldBase, IManifestoField {
+export interface IElementField extends IElementFieldInitial, IManifestoField {
     tag?: string;
     id?: string;
     class?: string;

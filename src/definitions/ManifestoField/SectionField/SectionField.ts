@@ -1,6 +1,6 @@
 import { ManifestoField } from "../ManifestoField/ManifestoField";
 import { IManifestoField } from "../ManifestoField/IManifestoField";
-import { ISectionFieldBase } from "./ISectionFieldBase";
+import { ISectionFieldInitial } from "./ISectionFieldInitial";
 import { ISectionField } from "./ISectionField";
 import { ObjectFieldTransfer } from "../../Utils/ObjectFieldTransfer";
 
@@ -9,7 +9,7 @@ export class SectionField extends ManifestoField implements ISectionField {
     sectionName: string;
     content: IManifestoField[];
 
-    constructor(base : ISectionFieldBase) {
+    constructor(base : ISectionFieldInitial) {
         super(base);
         ObjectFieldTransfer(base, this);
     }

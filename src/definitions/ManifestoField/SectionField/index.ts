@@ -1,4 +1,4 @@
 export * from "./ISectionField";
-export * from "./ISectionFieldBase";
+export * from "./ISectionFieldInitial";
 export * from "./RootSectionField";
 export * from "./SectionField";

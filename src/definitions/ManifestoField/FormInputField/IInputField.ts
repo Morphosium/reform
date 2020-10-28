@@ -1,7 +1,7 @@
 import { IElementField } from "../ElementField/IElementField";
-import { IInputFieldBase } from "./IInputFieldBase";
+import { IInputFieldInitial } from "./IInputFieldInitial";
 
 
-export interface IInputField<V extends any> extends IElementField, IInputFieldBase<V> {
+export interface IInputField<V extends any> extends IElementField, IInputFieldInitial<V> {
     isInput: boolean;
 }

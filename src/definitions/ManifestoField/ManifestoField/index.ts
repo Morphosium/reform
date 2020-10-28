@@ -1,3 +1,3 @@
 export * from "./IManifestoField";
-export * from "./IManifestoFieldBase";
+export * from "./IManifestoFieldInitial";
 export * from "./ManifestoField";

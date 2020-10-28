@@ -1,8 +1,8 @@
 import { IManifestoField } from "../ManifestoField/IManifestoField";
-import { ISectionFieldBase } from "./ISectionFieldBase";
+import { ISectionFieldInitial } from "./ISectionFieldInitial";
 
 
-export interface ISectionField extends IManifestoField, ISectionFieldBase {
+export interface ISectionField extends IManifestoField, ISectionFieldInitial {
     isSection: boolean;
     content: IManifestoField[];
 }

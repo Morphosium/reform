@@ -1,6 +1,6 @@
 import { IManifestoField } from "./IManifestoField";
 
 
-export interface IManifestoFieldBase {
+export interface IManifestoFieldInitial {
     content?: IManifestoField[];
 }

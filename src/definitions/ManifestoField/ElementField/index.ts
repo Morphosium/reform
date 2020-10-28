@@ -1,3 +1,3 @@
 export * from "./ElementField";
 export * from "./IElementField";
-export * from "./IElementFieldBase";
+export * from "./IElementFieldInitial";

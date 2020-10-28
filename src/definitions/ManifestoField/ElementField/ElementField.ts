@@ -1,7 +1,7 @@
 import { ManifestoField } from "../ManifestoField/ManifestoField";
 import { IManifestoField } from "../ManifestoField/IManifestoField";
 import { IElementField } from "./IElementField";
-import { IElementFieldBase } from "./IElementFieldBase";
+import { IElementFieldInitial } from "./IElementFieldInitial";
 import { ObjectFieldTransfer } from "../../Utils/ObjectFieldTransfer";
 
 
@@ -14,7 +14,7 @@ export class ElementField extends ManifestoField implements IElementField {
     id: string = "";
     class: string = "";
 
-    constructor(base?: IElementFieldBase) {
+    constructor(base?: IElementFieldInitial) {
         super(base)
         ObjectFieldTransfer(base, this);
     }

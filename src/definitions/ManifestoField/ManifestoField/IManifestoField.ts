@@ -1,8 +1,8 @@
-import { IManifestoFieldBase } from "./IManifestoFieldBase";
+import { IManifestoFieldInitial } from "./IManifestoFieldInitial";
 
 
 
-export interface IManifestoField extends IManifestoFieldBase {
+export interface IManifestoField extends IManifestoFieldInitial {
     isElement?: boolean;
     isSection?: boolean;
     isInput?: boolean;
