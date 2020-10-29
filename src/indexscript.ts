@@ -1,7 +1,9 @@
 
-import { ElementField } from "./definitions/ManifestoField/ElementField/index";
-import { RootSectionField } from "./definitions/ManifestoField/SectionField/index";
-import { Reflection } from "./Reflection/Reflector";
+import { ElementField } from "./Definitions/ManifestoField/ElementField/index";
+import { RootSectionField } from "./Definitions/ManifestoField/SectionField/index";
+import { ElementFieldEventBinding } from "./Definitions/Types/ElementFieldEventBinding";
+import { ElementReflection } from "./Reflection/ElementReflection";
+import { Reflector } from "./Reflection/Reflector";
 
 function southParkCharacters() {
     let array = [],
@@ -26,6 +28,19 @@ function southParkCharacters() {
     let chr;
     for (let index = 0; index < source.length; index++) {
         chr = source[index];
+        let eventThings : ElementFieldEventBinding = {};
+        if (chr.name === "kenny") {
+            eventThings = {
+                "click":
+                    [
+                        (reflection, event) => {
+                            reflection.element.style.display = "none";
+                            alert("Oh my god, they killed kenny");
+                            alert("You bastard");
+                        }
+                    ]
+            }
+        }
         array.push(new ElementField({
             content: [],
             tag: "img",
@@ -42,7 +57,8 @@ function southParkCharacters() {
                     key: "height",
                     value: "100px"
                 }
-            ]
+            ],
+            eventBindings: eventThings
         }));
 
     }
@@ -51,7 +67,7 @@ function southParkCharacters() {
 }
 
 
-const reflector = new Reflection(new RootSectionField({
+const reflector = new Reflector(new RootSectionField({
     content: [
         ...southParkCharacters()
     ]
