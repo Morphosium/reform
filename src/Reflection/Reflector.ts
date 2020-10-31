@@ -6,6 +6,7 @@ import { ElementReflection } from "./ElementReflection";
 
 export class Reflector {
     baseElement: HTMLElement;
+    
 
     constructor(public rootManifest: RootSectionField) {
 
@@ -20,23 +21,24 @@ export class Reflector {
             this.baseElement = elementOrSelector;
         }
         if (this.baseElement)
-            this.expand(this.baseElement, this.rootManifest.content);
+            this.expand(this.baseElement, this.rootManifest);
     }
 
-    expand(baseElement: HTMLElement, fields: Array<IManifestoField>) {
+    expand(baseElement: HTMLElement, baseField: IManifestoField) {
         /** in section, no element changes, content expanded into same element
          * in element, new element will be created and contents expanded into them
          */
+        const fields = baseField.content;
         for (let index = 0; index < fields.length; index++) {
             const field = fields[index];
             if (field.isElement) {
                 const elementField = field as IElementField;
                 const element = document.createElement(elementField.tag || "div");
                 const elementReflection = new ElementReflection(elementField, element, this, baseElement);
-               
+                
             }
             if (field.isSection) {
-                this.expand(baseElement, field.content);
+                this.expand(baseElement, field);
             }
         }
     }

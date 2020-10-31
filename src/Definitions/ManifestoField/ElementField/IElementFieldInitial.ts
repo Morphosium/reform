@@ -9,6 +9,6 @@ export interface IElementFieldInitial extends IManifestoFieldInitial {
     id?: string;
     class?: string;
     attributes?: Array<{key: string, value: string}>;
-    content: IManifestoField[];
+    content?: IManifestoField[];
     eventBindings? : ElementFieldEventBinding;
 }

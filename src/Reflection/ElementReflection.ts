@@ -25,6 +25,6 @@ export class ElementReflection extends Reflection {
         }
 
         baseElement.appendChild(element);
-        reflector.expand(element, elementField.content);
+        reflector.expand(element,elementField);
     }
 }

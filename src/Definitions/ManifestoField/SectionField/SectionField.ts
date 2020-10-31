@@ -8,11 +8,14 @@ export class SectionField extends ManifestoField implements ISectionField {
     readonly isSection = true;
     sectionName: string;
     content: IManifestoField[];
+    name: string;
+
 
     constructor(base : ISectionFieldInitial) {
         super(base);
         ObjectFieldTransfer(base, this);
     }
+
     
 }
 
