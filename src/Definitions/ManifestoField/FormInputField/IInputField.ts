@@ -1,8 +1,8 @@
 import { IElementField } from "../ElementField/IElementField";
-import { IManifestoField } from "../ManifestoField/index";
-import { IInputFieldInitial } from "./IInputFieldInitial";
+import { IInitialFied } from "../InitialField/index";
+import { IInputFieldBase } from "./IInputFieldBase";
 
 
-export interface IInputField<V extends any = string> extends IManifestoField, IInputFieldInitial<V> {
+export interface IInputField<V extends any = string> extends IInitialFied, IInputFieldBase<V> {
     isInput: boolean;
 }

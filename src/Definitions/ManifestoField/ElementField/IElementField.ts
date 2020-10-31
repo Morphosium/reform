@@ -1,15 +1,17 @@
 import { ElementFieldEventBinding } from "../../Types/ElementFieldEventBinding";
 import { IKeyValue } from "../../Types/KeyValue";
-import { IManifestoField } from "../ManifestoField/IManifestoField";
-import { IElementFieldInitial } from "./IElementFieldInitial";
+import { IInitialFied } from "../InitialField/IInitialField";
+import { IElementFieldBase } from "./IElementFieldBase";
 
 
 
-export interface IElementField extends IElementFieldInitial, IManifestoField {
+
+
+export interface IElementField extends IElementFieldBase, IInitialFied {
     tag?: string;
     id?: string;
     class?: string;
-    content: IManifestoField[] | string;
+    content: IInitialFied[] | string;
     attributes?: Array<IKeyValue>;
     isElement: boolean;
     eventBindings? : ElementFieldEventBinding;

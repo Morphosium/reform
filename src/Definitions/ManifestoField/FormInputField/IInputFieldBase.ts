@@ -1,9 +1,8 @@
-import { IElementFieldInitial } from "../ElementField/IElementFieldInitial";
 import { InputType } from "../../Types/InputType";
-import { IManifestoFieldInitial } from "../ManifestoField/index";
+import { IInitialFiedBase } from "../InitialField/index";
 
 
-export interface IInputFieldInitial<V extends any | string = string> extends IManifestoFieldInitial {
+export interface IInputFieldBase<V extends any | string = string> extends IInitialFiedBase {
     inputType: InputType;
     name: string;
     label?: string;

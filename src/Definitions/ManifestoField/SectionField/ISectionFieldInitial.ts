@@ -1,9 +1,9 @@
-import { IManifestoField } from "../ManifestoField/IManifestoField";
-import { IManifestoFieldInitial } from "../ManifestoField/IManifestoFieldInitial";
+import { IInitialFied } from "../InitialField/IInitialField";
+import { IInitialFiedBase } from "../InitialField/IInitialFieldBase";
 
 
-export interface ISectionFieldInitial extends IManifestoFieldInitial {
-    content: IManifestoField[];
+export interface ISectionFieldBase extends IInitialFiedBase {
+    content: IInitialFied[];
     name?: string;
-    root: boolean;
+    root?: boolean;
 }

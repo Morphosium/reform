@@ -1,7 +1,7 @@
-import { IInputField, IManifestoFieldInitial } from "../Definitions/index";
+import { IInputField, IInitialFiedBase } from "../Definitions/index";
 import { IManifesto } from "../Definitions/Manifesto";
 import { IElementField } from "../Definitions/ManifestoField/ElementField/index";
-import { IManifestoField } from "../Definitions/ManifestoField/ManifestoField/IManifestoField";
+import { IInitialFied } from "../Definitions/ManifestoField/InitialField/IInitialField";
 import { ISectionField, RootSectionField } from "../Definitions/ManifestoField/SectionField/index";
 import { ElementReflection } from "./Reflections/ElementReflection";
 import { InputReflection } from "./Reflections/InputReflection";
@@ -31,14 +31,14 @@ export class Reflector {
         }
     }
 
-    expand(baseElement: HTMLElement, parentField: IManifestoField, parentSectionReflection? : SectionReflection) {
+    expand(baseElement: HTMLElement, parentField: IInitialFied, parentSectionReflection? : SectionReflection) {
         /** in section, no element changes, content expanded into same element
          * in element, new element will be created and contents expanded into them
          */
         const fields = parentField.content;
         if (fields instanceof Array) {
             for (let index = 0; index < fields.length; index++) {
-                const field = fields[index] as IManifestoField;
+                const field = fields[index] as IInitialFied;
                 console.info(field);
                 if (field.isSection) {
                     const sectionReflection = new SectionReflection(field as ISectionField, this, baseElement, null)

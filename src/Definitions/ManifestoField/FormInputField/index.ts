@@ -1,3 +1,3 @@
 export * from "./FormInputField";
 export * from "./IInputField";
-export * from "./IInputFieldInitial";
+export * from "./IInputFieldBase";
