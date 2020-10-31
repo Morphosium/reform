@@ -2,5 +2,5 @@ import { IManifestoField } from "./IManifestoField";
 
 
 export interface IManifestoFieldInitial {
-    content?: IManifestoField[];
+    content?: IManifestoField[] | string;
 }

@@ -3,11 +3,12 @@ import { InputType } from "../../Types/InputType";
 import { IManifestoFieldInitial } from "../ManifestoField/index";
 
 
-export interface IInputFieldInitial<V extends any | string> extends IManifestoFieldInitial {
+export interface IInputFieldInitial<V extends any | string = string> extends IManifestoFieldInitial {
     inputType: InputType;
     name: string;
     label?: string;
-    value?: V;
+    initialValue?: V;
+    placeholder?: string;
     labelClass? : string;
     inputClass? : string;
     labelAttributes? : string;

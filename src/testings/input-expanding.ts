@@ -6,15 +6,15 @@ const reflector = new Reflector(new RootSectionField({
         new InputField(
             {
                 inputType: "text",
-                name: "Name",
+                name: "firstName",
                 label: "İsim"
             }
         ),
         new InputField(
             {
                 inputType: "text",
-                name: "Name",
-                label: "İsim"
+                name: "lastName",
+                label: "Soyisim"
             }
         ),
     ]

@@ -2,7 +2,7 @@
 import { ElementField } from "../Definitions/ManifestoField/ElementField/index";
 import { RootSectionField } from "../Definitions/ManifestoField/SectionField/index";
 import { ElementFieldEventBinding } from "../Definitions/Types/ElementFieldEventBinding";
-import { ElementReflection } from "../Reflection/ElementReflection";
+import { ElementReflection } from "../Reflection/Reflections/ElementReflection";
 import { Reflector } from "../Reflection/Reflector";
 
 function southParkCharacters() {

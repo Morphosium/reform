@@ -3,7 +3,8 @@ import { IManifestoFieldInitial } from "./IManifestoFieldInitial";
 
 
 export abstract class ManifestoField implements IManifestoField {
-    content: IManifestoField[];
+    content: string | IManifestoField[];
+
     constructor(base?: IManifestoFieldInitial) {
         this.content = base.content;
         
