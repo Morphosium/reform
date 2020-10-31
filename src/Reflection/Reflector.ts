@@ -2,17 +2,21 @@ import { IInputField, IInitialFiedBase } from "../Definitions/index";
 import { IElementField } from "../Definitions/ManifestoField/ElementField/index";
 import { IInitialFied } from "../Definitions/ManifestoField/InitialField/IInitialField";
 import { ISectionField, RootSectionField } from "../Definitions/ManifestoField/SectionField/index";
+import { Subject } from "../Definitions/Utils/Reactivity/Base/Subject.class";
+import { EventObserve } from "../Definitions/Utils/Reactivity/EventObverser";
 import { ElementReflection } from "./Reflections/ElementReflection";
 import { InputReflection } from "./Reflections/InputReflection";
+import { Reflection } from "./Reflections/Reflection";
 import { SectionReflection } from "./Reflections/SectionReflection";
 
 export class Reflector {
     baseElement: HTMLElement;
     rootSectionReflection: SectionReflection;
 
+    onValueChange : Subject;
 
     constructor(public rootManifest: RootSectionField) {
-
+        this.onValueChange = new Subject();
     }
 
     expandThere(elementOrSelector: HTMLElement | string) {
@@ -27,10 +31,19 @@ export class Reflector {
         if (this.baseElement) {
             // this.expand(this.baseElement, this.rootManifest);
             this.rootSectionReflection = new SectionReflection(this.rootManifest, this, this.baseElement, null)
+            this.rootSectionReflection.onValueChange.subscribe(
+                // value => {
+                //     ( as Subject<any>).next(value);
+                // }
+
+                new EventObserve(value => {
+                    this.onValueChange.notify(value)
+                })
+            )
         }
     }
 
-    expand(baseElement: HTMLElement, parentField: IInitialFied, parentSectionReflection? : SectionReflection) {
+    expand(baseElement: HTMLElement, parentField: IInitialFied, parentSectionReflection?: SectionReflection) {
         /** in section, no element changes, content expanded into same element
          * in element, new element will be created and contents expanded into them
          */
@@ -38,18 +51,25 @@ export class Reflector {
         if (fields instanceof Array) {
             for (let index = 0; index < fields.length; index++) {
                 const field = fields[index] as IInitialFied;
-                console.info(field);
+
+                let reflection: Reflection;
                 if (field.isSection) {
-                    const sectionReflection = new SectionReflection(field as ISectionField, this, baseElement, null)
+                    reflection = new SectionReflection(
+                        field as ISectionField, 
+                        this, 
+                        baseElement, parentSectionReflection);
                 }
                 if (field.isElement) {
                     const elementField = field as IElementField;
-                    const elementReflection = new ElementReflection(elementField, this, baseElement, parentSectionReflection);
+                    new ElementReflection(elementField, this, baseElement, parentSectionReflection);
                 }
-          
+
                 if (field.isInput) {
-                    const inputReflection = new InputReflection(field as IInputField, this, baseElement, parentSectionReflection)
+                    
+                    reflection = new InputReflection(field as IInputField, this, baseElement, parentSectionReflection)
                 }
+                if (parentSectionReflection && reflection)
+                    parentSectionReflection.subReflections.push(reflection)
             }
         }
 

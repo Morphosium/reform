@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <div id="base">
+    <div style="display: flex;">
+        <div id="base">
 
+        </div>
+        <div id="jsonOutput">
+
+        </div>
     </div>
-    <script data-main="../output/testings/input-expanding.js" type="text/javascript" 
-    src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.js"></script>
-    <!-- <script type="module" src="./output/indexscript.js">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.js">
+    </script>
 
-    </script> -->
+    <script type="module">
+        let exports = {};
+        require([
+            '../output/testings/input-expanding.js'
+        ]);
+    </script>
 </body>
+
 </html>

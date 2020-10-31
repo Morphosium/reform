@@ -19,7 +19,7 @@ const compileFromTs = (cb) => {
     gulp.src(tsFiles)
         .pipe(ts({
             noImplicitAny: true,
-            module: "UMD",
+            module: "UMD"
             //outFile: 'reform.dist.js'
         }))
         .pipe(gulp.dest('output'));

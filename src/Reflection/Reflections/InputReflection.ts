@@ -7,12 +7,16 @@ import { SectionReflection } from "./SectionReflection";
 
 export class InputReflection extends Reflection {
     elementReflections: ElementReflection;
-
-    constructor(public inputField: IInputField,
+    value = "";
+    initialField : IInputField;
+    constructor(inputField: IInputField,
         reflector: Reflector,
         baseElement: HTMLElement,
-        public parentSectionReflection: SectionReflection) {
+        public parentSectionReflection: SectionReflection
+    ) {
         super();
+        this.value = inputField.initialValue;
+        this.initialField = inputField;
         this.elementReflections = new ElementReflection(
             {
                 isElement: true,
@@ -28,6 +32,14 @@ export class InputReflection extends Reflection {
 
                     new ElementField({
                         tag: "input",
+                        eventBindings: {
+                            "input": [
+                                (reflection: Reflection, event: InputEvent) => {
+                                  
+                                    this.changeValue((event.target as HTMLInputElement).value);
+                                }
+                            ]
+                        },
                         attributes: [
                             keyValue("reformjs-input-field"),
                             keyValue("type", inputField.inputType),
@@ -37,11 +49,17 @@ export class InputReflection extends Reflection {
                     })
                 ]
             },
-            reflector, baseElement,parentSectionReflection
+            reflector, baseElement, parentSectionReflection
         );
-
-
-        // baseElement.appendChild(element);
-        // reflector.expand(element,elementField);
     }
+
+    changeValue(value: string) {
+        this.value = value;
+        this.parentSectionReflection.valueChanged();
+    }
+
+    // getName() {
+    //     this.inputField.
+    // }
+
 }
