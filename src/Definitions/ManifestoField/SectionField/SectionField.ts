@@ -9,7 +9,7 @@ export class SectionField extends ManifestoField implements ISectionField {
     sectionName: string;
     content: IManifestoField[];
     name: string;
-
+    root = false;
 
     constructor(base : ISectionFieldInitial) {
         super(base);

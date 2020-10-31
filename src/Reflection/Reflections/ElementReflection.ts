@@ -1,13 +1,17 @@
 import { IElementField } from "../../Definitions/index";
 import { Reflection } from "./Reflection";
 import { Reflector } from "../Reflector";
+import { GenericReflection } from "./GenericReflection";
+import { SectionReflection } from "./SectionReflection";
 
-export class ElementReflection extends Reflection {
+export class ElementReflection extends GenericReflection {
     element: HTMLElement;
     constructor(
         public elementField: IElementField,
         reflector: Reflector,
-        baseElement: HTMLElement
+        baseElement: HTMLElement,
+        public parentSectionReflection : SectionReflection
+        
     ) {
         super();
         const element = document.createElement(elementField.tag || "div");
@@ -39,7 +43,7 @@ export class ElementReflection extends Reflection {
             element.textContent = elementField.content;
         }
         else {
-            reflector.expand(element, elementField);
+            reflector.expand(element, elementField,parentSectionReflection);
         }
     }
 }

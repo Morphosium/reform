@@ -3,13 +3,16 @@ import { keyValue, KeyValue } from "../../Definitions/Types/KeyValue";
 import { ElementReflection } from "./ElementReflection";
 import { Reflection } from "./Reflection";
 import { Reflector } from "../Reflector";
+import { GenericReflection } from "./GenericReflection";
+import { SectionReflection } from "./SectionReflection";
 
-export class InputReflection extends Reflection {
+export class InputReflection extends GenericReflection {
     elementReflections: ElementReflection;
 
-    constructor(public inputField: IInputField, 
-        reflector: Reflector, 
-        baseElement: HTMLElement) {
+    constructor(public inputField: IInputField,
+        reflector: Reflector,
+        baseElement: HTMLElement,
+        public parentSectionReflection: SectionReflection) {
         super();
         this.elementReflections = new ElementReflection(
             {
@@ -35,7 +38,7 @@ export class InputReflection extends Reflection {
                     })
                 ]
             },
-            reflector, baseElement
+            reflector, baseElement,parentSectionReflection
         );
 
 

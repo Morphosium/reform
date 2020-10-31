@@ -5,4 +5,5 @@ import { IManifestoFieldInitial } from "../ManifestoField/IManifestoFieldInitial
 export interface ISectionFieldInitial extends IManifestoFieldInitial {
     content: IManifestoField[];
     name?: string;
+    root: boolean;
 }
