@@ -3,10 +3,9 @@ import { keyValue, KeyValue } from "../../Definitions/Types/KeyValue";
 import { ElementReflection } from "./ElementReflection";
 import { Reflection } from "./Reflection";
 import { Reflector } from "../Reflector";
-import { GenericReflection } from "./GenericReflection";
 import { SectionReflection } from "./SectionReflection";
 
-export class InputReflection extends GenericReflection {
+export class InputReflection extends Reflection {
     elementReflections: ElementReflection;
 
     constructor(public inputField: IInputField,

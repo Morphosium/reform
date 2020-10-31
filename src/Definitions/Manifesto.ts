@@ -1,10 +1,10 @@
 import { ISectionField, ISectionFieldBase, SectionField } from "./ManifestoField/SectionField/index";
 
-export interface IManifesto {
+export interface IReformInitial {
     rootSection: ISectionField;
 }
 
-export class Manifesto implements IManifesto {
+export class ReformInitial implements IReformInitial {
 
     rootSection: ISectionField;
 
@@ -14,9 +14,9 @@ export class Manifesto implements IManifesto {
 }
 
 export interface ManifestoConstructor {
-    new (rootSectionBase: ISectionFieldBase) : Manifesto
-    (rootSectionBase: ISectionFieldBase) : Manifesto
+    new (rootSectionBase: ISectionFieldBase) : ReformInitial
+    (rootSectionBase: ISectionFieldBase) : ReformInitial
 }
 
 
-export const manifesto = function(rootSectionBase: ISectionFieldBase) { return new Manifesto(rootSectionBase) };
+export const reformInitial = function(rootSectionBase: ISectionFieldBase) { return new ReformInitial(rootSectionBase) };

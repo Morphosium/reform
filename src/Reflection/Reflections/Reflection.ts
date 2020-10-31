@@ -1,10 +1,10 @@
-import { IManifesto } from "../../Definitions/Manifesto";
-import { IElementField } from "../../Definitions/ManifestoField/ElementField/index";
-import { IInitialFied } from "../../Definitions/ManifestoField/InitialField/IInitialField";
-import { RootSectionField } from "../../Definitions/ManifestoField/SectionField/index";
+
+import { IInitialFied } from "../../Definitions/index";
 import { Reflector } from "../Reflector";
+import { SectionReflection } from "./SectionReflection";
 
 export abstract class Reflection {
-  manifest : IInitialFied;
+  // initialField : IInitialFied;
   reflector : Reflector;
+  abstract parentSectionReflection : SectionReflection;
 }

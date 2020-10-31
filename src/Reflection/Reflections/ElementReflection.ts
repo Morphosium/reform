@@ -1,10 +1,9 @@
 import { IElementField } from "../../Definitions/index";
 import { Reflection } from "./Reflection";
 import { Reflector } from "../Reflector";
-import { GenericReflection } from "./GenericReflection";
 import { SectionReflection } from "./SectionReflection";
 
-export class ElementReflection extends GenericReflection {
+export class ElementReflection extends Reflection {
     element: HTMLElement;
     constructor(
         public elementField: IElementField,

@@ -1,9 +1,8 @@
 import { ISectionField } from "../../Definitions/index";
 import { Reflector } from "../Reflector";
-import { GenericReflection } from "./GenericReflection";
 import { Reflection } from "./Reflection";
 
-export class SectionReflection extends GenericReflection {
+export class SectionReflection extends Reflection {
 
     constructor(
         public sectionField: ISectionField,

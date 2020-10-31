@@ -1,5 +1,4 @@
 import { IInputField, IInitialFiedBase } from "../Definitions/index";
-import { IManifesto } from "../Definitions/Manifesto";
 import { IElementField } from "../Definitions/ManifestoField/ElementField/index";
 import { IInitialFied } from "../Definitions/ManifestoField/InitialField/IInitialField";
 import { ISectionField, RootSectionField } from "../Definitions/ManifestoField/SectionField/index";
