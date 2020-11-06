@@ -6,4 +6,5 @@ export interface ISectionFieldBase extends IInitialFiedBase {
     content: IInitialFied[];
     name?: string;
     root?: boolean;
+    arraySection?: boolean;
 }
