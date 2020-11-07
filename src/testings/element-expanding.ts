@@ -36,7 +36,8 @@ function southParkCharacters() {
                         (reflection, event) => {
                             reflection.element.style.display = "none";
                             const description = reflector.findReflectionById("description") as ElementReflection;
-                            description.element.textContent = "Oh my god, they killed kenny! YOU BASTARD!!!"
+                            if (description?.element)
+                                description.element.textContent = "Oh my god, they killed Kenny! YOU BASTARD!!!"
                         }
                     ]
             }
