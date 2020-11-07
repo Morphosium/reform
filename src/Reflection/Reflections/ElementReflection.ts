@@ -19,7 +19,7 @@ export class ElementReflection extends Reflection {
     ) {
         super();
         this.initialField = elementField;
-        const element = createElement(elementField, reflector)
+        const element = createElement(elementField, reflector);
         baseElement.appendChild(element);
         if (typeof elementField.content === "string") {
             element.textContent = elementField.content;
@@ -27,5 +27,6 @@ export class ElementReflection extends Reflection {
         else {
             reflector.expand(element, elementField, parentSectionReflection);
         }
+        this.element = element;
     }
 }

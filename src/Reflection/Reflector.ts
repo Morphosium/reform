@@ -12,8 +12,8 @@ import { SectionReflection } from "./Reflections/SectionReflection";
 export class Reflector {
     baseElement: HTMLElement;
     rootSectionReflection: SectionReflection;
-
-    onValueChange : Subject;
+    idMap: { [reflectionId: string]: Reflection } = {};
+    onValueChange: Subject;
 
     constructor(public rootManifest: RootSectionField) {
         this.onValueChange = new Subject();
@@ -53,23 +53,29 @@ export class Reflector {
                 let reflection: Reflection;
                 if (field.isSection) {
                     reflection = new SectionReflection(
-                        field as ISectionField, 
-                        this, 
+                        field as ISectionField,
+                        this,
                         baseElement, parentSectionReflection);
                 }
                 if (field.isElement) {
                     const elementField = field as IElementField;
-                    new ElementReflection(elementField, this, baseElement, parentSectionReflection);
+                    reflection = new ElementReflection(elementField, this, baseElement, parentSectionReflection);
                 }
 
                 if (field.isInput) {
                     reflection = new InputReflection(field as IInputField, this, baseElement, parentSectionReflection)
                 }
-                if (parentSectionReflection && reflection)
+                if (parentSectionReflection && reflection && !field.isElement)
                     parentSectionReflection.subReflections.push(reflection)
+                if (reflection?.initialField?.id)
+                    this.idMap[reflection.initialField.id] = reflection;
+
             }
         }
 
     }
 
+    findReflectionById(id : string) : Reflection | null {
+        return this.idMap[id]
+    }
 }

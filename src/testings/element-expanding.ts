@@ -28,15 +28,15 @@ function southParkCharacters() {
     let chr;
     for (let index = 0; index < source.length; index++) {
         chr = source[index];
-        let eventThings : ElementFieldEventBinding = {};
+        let eventThings: ElementFieldEventBinding = {};
         if (chr.name === "kenny") {
             eventThings = {
                 "click":
                     [
                         (reflection, event) => {
                             reflection.element.style.display = "none";
-                            alert("Oh my god, they killed kenny");
-                            alert("You bastard");
+                            const description = reflector.findReflectionById("description") as ElementReflection;
+                            description.element.textContent = "Oh my god, they killed kenny! YOU BASTARD!!!"
                         }
                     ]
             }
@@ -69,6 +69,15 @@ function southParkCharacters() {
 
 const reflector = new Reflector(new RootSectionField({
     content: [
+        new ElementField({
+            tag: "h1",
+            content: "reform-js element rendering, includes event binding..."
+        }),
+        new ElementField({
+            tag: "p",
+            id: "description",
+            content: "Maybe, you can consider click the known person."
+        }),
         ...southParkCharacters()
     ]
 }));

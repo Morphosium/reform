@@ -45,7 +45,8 @@ export class InputReflection extends Reflection {
                             keyValue("type", inputField.inputType),
                             inputField.initialValue ? keyValue("value", inputField.initialValue) : null,
                             inputField.placeholder ? keyValue("placeholder", inputField.placeholder) : null
-                        ]
+                        ],
+                        class: inputField.inputClass
                     })
                 ]
             },

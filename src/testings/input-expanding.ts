@@ -68,16 +68,25 @@ const reflector = new Reflector(new RootSectionField({
         new SectionField({
             name: "Address",
             content: [
-                new InputField({
-                    inputType: "text",
-                    name: "city",
-                    label: "Şehir"
+                new ElementField({
+                    class: "h1",
+                    content: "Adres bilgileri"
                 }),
-                new InputField({
-                    inputType: "text",
-                    name: "street",
-                    label: "Mahalle"
-                }),
+                columnElements(12,
+                    [
+                        new InputField({
+                            inputType: "text",
+                            name: "city",
+                            label: "Şehir",
+                            inputClass: "w-100"
+                        }),
+                        new InputField({
+                            inputType: "text",
+                            name: "street",
+                            label: "Mahalle",
+                            inputClass: "w-100"
+                        })]
+                )
             ]
         })
     ]
@@ -87,6 +96,6 @@ reflector.expandThere("div#base");
 reflector.onValueChange.subscribe(
     new EventObserve(a => {
         const el = document.getElementById("jsonOutput");
-        el.textContent = JSON.stringify(a,null, '\t');
+        el.textContent = JSON.stringify(a, null, '\t');
     })
 )
