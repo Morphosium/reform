@@ -2,6 +2,6 @@ import { ISubject } from './ISubject';
 import {IObserver } from "./IObserver";
 
 
-export abstract class Observer implements IObserver {
-    abstract update(subject: ISubject, param : any): void;
+export abstract class Observer<T = any> implements IObserver<T> {
+    abstract update(subject: ISubject, param : T): void;
 }

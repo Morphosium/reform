@@ -13,7 +13,7 @@ export class Reflector {
     baseElement: HTMLElement;
     rootSectionReflection: SectionReflection;
     idMap: { [reflectionId: string]: Reflection } = {};
-    onValueChange: Subject;
+    onValueChange: Subject<void>;
 
     constructor(public rootManifest: RootSectionField) {
         this.onValueChange = new Subject();

@@ -1,7 +1,7 @@
 import { Observer } from './Base/Observer.class';
 import { ISubject } from './Base/ISubject';
 
-export class EventObserve<T extends any> extends Observer {
+export class EventObserve<T = any> extends Observer<T> {
 
     constructor(private updateEvent: (param : T) => any) {
         super();
