@@ -20,7 +20,7 @@ export class Reflector {
     }
 
     expandThere(elementOrSelector: HTMLElement | string) {
-        console.info(elementOrSelector)
+
         this.baseElement = null;
         if (typeof elementOrSelector === "string") {
             this.baseElement = document.querySelector(elementOrSelector);
@@ -29,17 +29,15 @@ export class Reflector {
             this.baseElement = elementOrSelector;
         }
         if (this.baseElement) {
-            // this.expand(this.baseElement, this.rootManifest);
             this.rootSectionReflection = new SectionReflection(this.rootManifest, this, this.baseElement, null)
             this.rootSectionReflection.onValueChange.subscribe(
-                // value => {
-                //     ( as Subject<any>).next(value);
-                // }
-
                 new EventObserve(value => {
                     this.onValueChange.notify(value)
                 })
             )
+        }
+        else {
+            //TODO: throw exception about no provided element
         }
     }
 
@@ -65,7 +63,6 @@ export class Reflector {
                 }
 
                 if (field.isInput) {
-                    
                     reflection = new InputReflection(field as IInputField, this, baseElement, parentSectionReflection)
                 }
                 if (parentSectionReflection && reflection)

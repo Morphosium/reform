@@ -1,38 +1,69 @@
-import { InputField, RootSectionField, SectionField } from "../Definitions/index";
+import { ElementField, InputField, RootSectionField, SectionField } from "../Definitions/index";
 import { EventObserve } from "../Definitions/Utils/Reactivity/EventObverser";
 import { Reflector } from "../Reflection/Reflector";
 
 const reflector = new Reflector(new RootSectionField({
     content: [
-        new InputField(
-            {
-                inputType: "text",
-                name: "firstName",
-                label: "İsim"
-            }
-        ),
-        new InputField(
-            {
-                inputType: "text",
-                name: "lastName",
-                label: "Soyisim"
-            }
-        ),
-        new InputField(
-            {
-                inputType: "text",
-                name: "email",
-                label: "E-Posta"
-            }
-        ),
-        new InputField(
-            {
-                inputType: "text",
-                name: "phone",
-                label: "Telefon"
-            }
-        ),
-
+        new ElementField({
+            content: [
+                new ElementField({
+                    content: [
+                        new InputField(
+                            {
+                                inputType: "text",
+                                name: "firstName",
+                                label: "İsim"
+                            }
+                        ),
+                    ],
+                    class: "col-6"
+                }),
+                new ElementField({
+                    content: [
+                        new InputField(
+                            {
+                                inputType: "text",
+                                name: "lastName",
+                                label: "Soyisim"
+                            }
+                        ),
+                    ],
+                    class: "col-6"
+                })
+            ],
+            tag: "div",
+            class: "row"
+        }),
+        new ElementField({
+            content: [
+                new ElementField({
+                    content: [
+                        new InputField(
+                            {
+                                inputType: "text",
+                                name: "email",
+                                label: "E-Posta"
+                            }
+                        ),
+                    ],
+                    class: "col-6"
+                }),
+                new ElementField({
+                    content: [
+                        new InputField(
+                            {
+                                inputType: "text",
+                                name: "phone",
+                                label: "Telefon"
+                            }
+                        ),
+                    ],
+                    class: "col-6"
+                })
+            ],
+            tag: "div",
+            class: "row"
+        }),
 
         new SectionField({
             name: "Address",
