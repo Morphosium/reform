@@ -1,10 +1,11 @@
+import { Reflector } from "../../Reflection/Reflector";
 import { IElementField } from "../ManifestoField/index";
 
 /**
  * Creates and returns a HTML Element by Element initial field
  * @param elementField A Element field instance for binding attributes and events and etc
  */
-export function createElement(elementField: IElementField): HTMLElement {
+export function createElement(elementField: IElementField, reflector : Reflector): HTMLElement {
     const element = document.createElement(elementField.tag || "div");
     this.element = element;
     if (elementField.class)
@@ -25,7 +26,7 @@ export function createElement(elementField: IElementField): HTMLElement {
             const methods = elementField.eventBindings[key]?.filter(a => a != null);
             for (let methodIndex = 0; methodIndex < methods?.length; methodIndex++) {
                 const method = methods?.[methodIndex];
-                element.addEventListener(key, (event => { method(this, event) }));
+                element.addEventListener(key, (event => { method(this, event, reflector) }));
             }
         }
     }
