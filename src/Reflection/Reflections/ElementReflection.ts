@@ -12,20 +12,24 @@ export class ElementReflection extends Reflection {
     element: HTMLElement;
     constructor(
         public elementField: IElementField,
-        reflector: Reflector,
-        baseElement: HTMLElement,
+        public reflector: Reflector,
+        private baseElement: HTMLElement,
         public parentSectionReflection: SectionReflection
 
     ) {
         super();
-        this.initialField = elementField;
-        const element = createElement(elementField, reflector);
-        baseElement.appendChild(element);
-        if (typeof elementField.content === "string") {
-            element.textContent = elementField.content;
+        this.constructReflection()
+    }
+    
+    constructReflection() {
+        this.initialField = this.elementField;
+        const element = createElement(this.elementField, this.reflector);
+        this.baseElement.appendChild(element);
+        if (typeof this.elementField.content === "string") {
+            element.textContent = this.elementField.content;
         }
         else {
-            reflector.expand(element, elementField, parentSectionReflection);
+            this.reflector.expand(element, this.elementField, this.parentSectionReflection);
         }
         this.element = element;
     }
