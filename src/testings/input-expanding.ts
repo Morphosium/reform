@@ -94,8 +94,11 @@ const reflector = new Reflector(new RootSectionField({
 
 reflector.expandThere("div#base");
 reflector.onValueChange.subscribe(
-    new EventObserve(a => {
-        const el = document.getElementById("jsonOutput");
-        el.textContent = JSON.stringify(a, null, '\t');
+    new EventObserve(
+        () => {
+        
+        //TODO: Fetch different ways 
+        // const el = document.getElementById("jsonOutput");
+        // el.textContent = JSON.stringify(a, null, '\t');
     })
 )

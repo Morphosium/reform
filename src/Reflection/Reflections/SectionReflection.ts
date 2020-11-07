@@ -7,7 +7,7 @@ import { Reflection } from "./Reflection";
 export class SectionReflection extends Reflection {
     readonly subReflections: Reflection[] = [];
     initialField: ISectionFieldBase;
-    onValueChange: Subject
+    onValueChange: Subject<void>
     rawValue: { [key: string]: any; };
     constructor(
         sectionField: ISectionField,
@@ -28,9 +28,13 @@ export class SectionReflection extends Reflection {
             this.parentSectionReflection.valueChanged();
         }
         else {
-            this.onValueChange.notify(this.rawValue)
+            this.onValueChange.notify()
         }
 
+    }
+
+    getValue(raw = false, showGhost = false) {
+        
     }
 
 
@@ -54,7 +58,6 @@ export class SectionReflection extends Reflection {
     }
 
     collectSectionRaw() {
-
         if (this.initialField.arraySectionRaw) {
             const array: any[] = [];
             this.rawCollection((value) => {
