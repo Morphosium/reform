@@ -2,7 +2,7 @@ import { InitialFied } from "../InitialField/InitialField";
 import { IInitialFied } from "../InitialField/IInitialField";
 import { IElementField } from "./IElementField";
 import { IElementFieldBase } from "./IElementFieldBase";
-import { ObjectFieldTransfer } from "../../Utils/ObjectFieldTransfer";
+import { ObjectFieldTransfer } from "../../../Utils/ObjectFieldTransfer";
 
 
 export class ElementField extends InitialFied implements IElementField {

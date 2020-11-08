@@ -1,5 +1,5 @@
-import { Reflector } from "../../Reflection/Reflector";
-import { IElementField } from "../ManifestoField/index";
+import { Reflector } from "../Reflection/Reflector";
+import { IElementField } from "../Definitions/ManifestoField/index";
 
 /**
  * Creates and returns a HTML Element by Element initial field

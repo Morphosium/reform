@@ -1,5 +1,5 @@
 import { ISectionField, ISectionFieldBase } from "../../Definitions/index";
-import { Subject } from "../../Definitions/Utils/Reactivity/Base/Subject.class";
+import { Subject } from "../../Utils/Reactivity/Base/Subject.class";
 import { Reflector } from "../Reflector";
 import { InputReflection } from "./InputReflection";
 import { Reflection } from "./Reflection";
