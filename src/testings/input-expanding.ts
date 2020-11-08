@@ -50,14 +50,16 @@ const reflector = new Reflector(new RootSectionField({
                 {
                     inputType: "text",
                     name: "email",
-                    label: "E-Posta"
+                    label: "E-Posta",
+                    convertToFinalValue: (rawValue) => rawValue.trim()
                 }
             ),
             new InputField(
                 {
                     inputType: "text",
                     name: "phone",
-                    label: "Telefon"
+                    label: "Telefon",
+                    convertToFinalValue: (rawValue) => rawValue.replace(/\s/g, "")
                 }
             ),
         ]),
@@ -96,9 +98,10 @@ reflector.expandThere("div#base");
 reflector.onValueChange.subscribe(
     new EventObserve(
         () => {
-        
-        //TODO: Fetch different ways 
-        // const el = document.getElementById("jsonOutput");
-        // el.textContent = JSON.stringify(a, null, '\t');
-    })
+
+            //TODO: Fetch different ways 
+            const el = document.getElementById("jsonOutput"),
+                a = reflector.getValue(true);
+            el.textContent = JSON.stringify(a, null, '\t');
+        })
 )

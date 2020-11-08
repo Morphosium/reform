@@ -1,14 +1,15 @@
+import { IInputValidation } from "../../../InputValidations/IInputValidation";
 import { InputType } from "../../Types/InputType";
 import { IInitialFiedBase } from "../InitialField/index";
-import { IInputValidation } from "./IInputValidation";
 
 
-export interface IInputFieldBase<V extends any | string = string> extends IInitialFiedBase {
+
+export interface IInputFieldBase<V = string> extends IInitialFiedBase {
     inputType: InputType;
     name: string;
     label?: string;
     initialValue?: V;
-    ghost?: boolean;
+    excludeOnFinalData?: boolean;
     disabled?: boolean;
     placeholder?: string;
     labelClass? : string;
@@ -16,5 +17,5 @@ export interface IInputFieldBase<V extends any | string = string> extends IIniti
     labelAttributes? : string;
     inputAttributes? : string;
     validations?: IInputValidation[];
-
+    convertToFinalValue?: (rawValue : V | any) => V | any;
 }

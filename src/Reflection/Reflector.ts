@@ -78,4 +78,8 @@ export class Reflector {
     findReflectionById(id : string) : Reflection | null {
         return this.idMap[id]
     }
+
+    getValue(final = true ) {
+        return this.rootSectionReflection.getValue(final ? "final" : "raw");
+    }
 }

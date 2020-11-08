@@ -8,7 +8,10 @@ import { SectionReflection } from "./SectionReflection";
 export class InputReflection extends Reflection {
     elementReflections: ElementReflection;
     value = "";
-    initialField : IInputField;
+    initialField: IInputField;
+    rawValue: string;
+    rawToFinalValue: (rawValue: string) => string;
+
     constructor(inputField: IInputField,
         reflector: Reflector,
         baseElement: HTMLElement,
@@ -17,6 +20,7 @@ export class InputReflection extends Reflection {
         super();
         this.value = inputField.initialValue;
         this.initialField = inputField;
+        this.rawToFinalValue = this.initialField.convertToFinalValue;
         this.elementReflections = new ElementReflection(
             {
                 isElement: true,
@@ -35,7 +39,7 @@ export class InputReflection extends Reflection {
                         eventBindings: {
                             "input": [
                                 (reflection: Reflection, event: InputEvent) => {
-                                  
+
                                     this.changeValue((event.target as HTMLInputElement).value);
                                 }
                             ]
@@ -55,12 +59,14 @@ export class InputReflection extends Reflection {
     }
 
     changeValue(value: string) {
-        this.value = value;
+        this.rawValue = value;
+        if (this.rawToFinalValue) {
+            this.value = this.rawToFinalValue(value);
+            console.info(this.value)
+        }
+        else
+            this.value = value;
+
         this.parentSectionReflection.valueChanged();
     }
-
-    // getName() {
-    //     this.inputField.
-    // }
-
 }

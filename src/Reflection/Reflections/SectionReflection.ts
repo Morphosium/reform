@@ -23,7 +23,7 @@ export class SectionReflection extends Reflection {
     }
 
     valueChanged() {
-        this.rawValue = this.collectSectionRaw();
+        this.rawValue = this.collectSectionRawData();
         if (this.parentSectionReflection) {
             this.parentSectionReflection.valueChanged();
         }
@@ -33,12 +33,12 @@ export class SectionReflection extends Reflection {
 
     }
 
-    getValue(raw = false, showGhost = false) {
-        
+    getValue(mode : "final" | "raw", showGhost = false) {
+        return this.collectSectionRawData()
     }
 
 
-    private rawCollection(callback: (incomeValue: any, name?: string) => any) {
+    private dataCollection(mode : "final" | "raw", callback: (incomeValue: any, name?: string) => any) {
         const usefulReflections = this.subReflections.filter(a => a.initialField.isInput || a.initialField.isSection);
         for (let reflectionIndex = 0; reflectionIndex < usefulReflections.length; reflectionIndex++) {
             const reflection = usefulReflections[reflectionIndex];
@@ -46,29 +46,27 @@ export class SectionReflection extends Reflection {
                 const inputReflection = reflection as InputReflection;
                 if (inputReflection.value)
                     callback(inputReflection.value, inputReflection.initialField.name)
-
             }
             else if (reflection.initialField.isSection) {
                 const sectionReflection = reflection as SectionReflection;
-                const value = sectionReflection.collectSectionRaw();
+                const value = sectionReflection.collectSectionRawData();
                 if (value && Object.keys(value).length > 0)
                     callback(value, sectionReflection.initialField.name)
             }
         }
     }
 
-    collectSectionRaw() {
+    collectSectionRawData() {
         if (this.initialField.arraySectionRaw) {
             const array: any[] = [];
-            this.rawCollection((value) => {
+            this.dataCollection("raw",(value) => {
                 array.push(value)
             });
             return array;
         }
         else {
             const objectMap: { [key: string]: any } = {};
-            const usefulReflections = this.subReflections.filter(a => a.initialField.isInput || a.initialField.isSection);
-            this.rawCollection((value, name) => {
+            this.dataCollection("raw",(value, name) => {
                 objectMap[name] = value;
             });
             return objectMap;
