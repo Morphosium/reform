@@ -21,48 +21,52 @@ export class InputReflection extends Reflection {
         this.value = inputField.initialValue;
         this.initialField = inputField;
         this.rawToFinalValue = this.initialField.convertToFinalValue;
+        let elementContent = [
+            new ElementField({
+                tag: this.initialField.inputType === "checkbox" ? "span" : "div",
+                content: inputField.label,
+                attributes: [
+                    keyValue("reformjs-input-label")
+                ]
+            }),
+
+            new ElementField({
+                tag: "input",
+                eventBindings: {
+                    "input": [
+                        (reflection: ElementReflection, event: InputEvent) => {
+                            const inputElement = event.target as HTMLInputElement;
+                            let value: any;
+                            if (inputField.inputType === "checkbox") {
+                                value = inputElement.checked
+                            }
+                            else if (inputField.inputType === "number") {
+                                value = inputElement.valueAsNumber
+                            }
+                            else {
+                                value = inputElement.value
+                            }
+                            this.changeValue(value);
+                        }
+                    ]
+                },
+                attributes: [
+                    keyValue("reformjs-input-field"),
+                    keyValue("type", inputField.inputType),
+                    inputField.initialValue ? keyValue("value", inputField.initialValue) : null,
+                    inputField.placeholder ? keyValue("placeholder", inputField.placeholder) : null
+                ],
+                class: inputField.inputClass
+            })
+        ];
+        if (this.initialField.inputType === "checkbox") {
+            elementContent = elementContent.reverse();
+        }
         this.elementReflections = new ElementReflection(
             {
                 isElement: true,
                 attributes: [keyValue("reformjs-input-area")],
-                content: [
-                    new ElementField({
-                        tag: "div",
-                        content: inputField.label,
-                        attributes: [
-                            keyValue("reformjs-input-label")
-                        ]
-                    }),
-
-                    new ElementField({
-                        tag: "input",
-                        eventBindings: {
-                            "input": [
-                                (reflection: ElementReflection, event: InputEvent) => {
-                                    const inputElement = event.target as HTMLInputElement;
-                                    let value: any;
-                                    if (inputField.inputType === "checkbox") {
-                                        value = inputElement.checked
-                                    }
-                                    else if (inputField.inputType === "number") {
-                                        value = inputElement.valueAsNumber
-                                    }
-                                    else {
-                                        value = inputElement.value
-                                    }
-                                    this.changeValue(value);
-                                }
-                            ]
-                        },
-                        attributes: [
-                            keyValue("reformjs-input-field"),
-                            keyValue("type", inputField.inputType),
-                            inputField.initialValue ? keyValue("value", inputField.initialValue) : null,
-                            inputField.placeholder ? keyValue("placeholder", inputField.placeholder) : null
-                        ],
-                        class: inputField.inputClass
-                    })
-                ]
+                content: elementContent
             },
             reflector, baseElement, parentSectionReflection
         );
