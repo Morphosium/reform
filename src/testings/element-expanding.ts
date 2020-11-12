@@ -37,7 +37,7 @@ function southParkCharacters() {
                             reflection.element.style.display = "none";
                             const description = reflector.findReflectionById("description") as ElementReflection;
                             if (description?.element)
-                                description.element.textContent = "Oh my god, they killed Kenny! YOU BASTARD!!!"
+                                description.element.textContent = "Oh my god, they killed Kenny! YOU B🤬ARD!!!"
                         }
                     ]
             }

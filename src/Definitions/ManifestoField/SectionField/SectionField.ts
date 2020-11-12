@@ -14,10 +14,12 @@ export class SectionField extends InitialFied implements ISectionField {
     content: IInitialFied[];
     name: string;
     root = false;
+    convertToFinalValue: (hamObject: { [key: string]: any; }) => any;
 
     constructor(base : ISectionFieldBase) {
         super(base);
         ObjectFieldTransfer(base, this);
+        this.convertToFinalValue = base.convertToFinalValue;
     }
 
     

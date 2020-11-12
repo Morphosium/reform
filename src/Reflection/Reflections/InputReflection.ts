@@ -38,9 +38,19 @@ export class InputReflection extends Reflection {
                         tag: "input",
                         eventBindings: {
                             "input": [
-                                (reflection: Reflection, event: InputEvent) => {
-
-                                    this.changeValue((event.target as HTMLInputElement).value);
+                                (reflection: ElementReflection, event: InputEvent) => {
+                                    const inputElement = event.target as HTMLInputElement;
+                                    let value: any;
+                                    if (inputField.inputType === "checkbox") {
+                                        value = inputElement.checked
+                                    }
+                                    else if (inputField.inputType === "number") {
+                                        value = inputElement.valueAsNumber
+                                    }
+                                    else {
+                                        value = inputElement.value
+                                    }
+                                    this.changeValue(value);
                                 }
                             ]
                         },
@@ -62,7 +72,6 @@ export class InputReflection extends Reflection {
         this.rawValue = value;
         if (this.rawToFinalValue) {
             this.value = this.rawToFinalValue(value);
-            console.info(this.value)
         }
         else
             this.value = value;

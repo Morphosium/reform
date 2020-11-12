@@ -30,5 +30,5 @@ export interface ISectionFieldBase extends IInitialFiedBase {
     /**
      * 
      */
-    convertToFinalValue? : (hamObject : Object) => any;
+    convertToFinalValue? : (hamObject : {[key: string]: any}) => any;
 }

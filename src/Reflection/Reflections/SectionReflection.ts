@@ -23,7 +23,7 @@ export class SectionReflection extends Reflection {
     }
 
     valueChanged() {
-        this.rawValue = this.collectSectionRawData();
+        this.rawValue = this.collectSectionData();
         if (this.parentSectionReflection) {
             this.parentSectionReflection.valueChanged();
         }
@@ -33,12 +33,12 @@ export class SectionReflection extends Reflection {
 
     }
 
-    getValue(mode : "final" | "raw", showGhost = false) {
-        return this.collectSectionRawData()
+    getValue(mode: "final" | "raw", showGhost = false) {
+        return this.collectSectionData(mode)
     }
 
 
-    private dataCollection(mode : "final" | "raw", callback: (incomeValue: any, name?: string) => any) {
+    private dataCollection(mode: "final" | "raw", callback: (incomeValue: any, name?: string) => any) {
         const usefulReflections = this.subReflections.filter(a => a.initialField.isInput || a.initialField.isSection);
         for (let reflectionIndex = 0; reflectionIndex < usefulReflections.length; reflectionIndex++) {
             const reflection = usefulReflections[reflectionIndex];
@@ -49,27 +49,36 @@ export class SectionReflection extends Reflection {
             }
             else if (reflection.initialField.isSection) {
                 const sectionReflection = reflection as SectionReflection;
-                const value = sectionReflection.collectSectionRawData();
-                if (value && Object.keys(value).length > 0)
+                const value = sectionReflection.collectSectionData(mode);
+                if (value && ((typeof value != "object") || Object.keys(value).length > 0))
                     callback(value, sectionReflection.initialField.name)
             }
         }
     }
 
-    collectSectionRawData() {
+    convertDataByMode(data: any, mode: "final" | "raw") {
+        if ((mode === "final") && (this.initialField.convertToFinalValue)) {
+            return this.initialField.convertToFinalValue(data)
+        }
+        else
+            return data
+
+    }
+
+    collectSectionData(mode: "final" | "raw" = "final") {
         if (this.initialField.arraySectionRaw) {
             const array: any[] = [];
-            this.dataCollection("raw",(value) => {
+            this.dataCollection(mode, (value) => {
                 array.push(value)
             });
-            return array;
+            return this.convertDataByMode(array, mode);
         }
         else {
             const objectMap: { [key: string]: any } = {};
-            this.dataCollection("raw",(value, name) => {
+            this.dataCollection(mode, (value, name) => {
                 objectMap[name] = value;
             });
-            return objectMap;
+            return this.convertDataByMode(objectMap, mode);
         }
 
     }

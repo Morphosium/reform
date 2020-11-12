@@ -2,6 +2,7 @@ import { ElementField, IElementField, IInitialFied, IInputField, InputField, Roo
 import { EventObserve } from "../Utils/Reactivity/EventObverser";
 import { Reflector } from "../Reflection/Reflector";
 
+let finalMode = false;
 
 const rowElement = (content: string | IElementField[]) => {
     return new ElementField(
@@ -12,6 +13,8 @@ const rowElement = (content: string | IElementField[]) => {
         }
     )
 }
+
+
 const columnElements = (column: number, singleContents: Array<IInputField | IElementField>) => {
 
     return rowElement([
@@ -90,6 +93,23 @@ const reflector = new Reflector(new RootSectionField({
                         })]
                 )
             ]
+        }),
+
+        new SectionField({
+            name: "agreements",
+            content: [
+                new InputField({
+                    inputType: "checkbox",
+                    name: "agreement1",
+                    label: "Şunun şeylerini kabul ediyorum",
+                }),
+                new InputField({
+                    inputType: "checkbox",
+                    name: "agreement2",
+                    label: "Onun şeylerini kabul ediyorum"
+                }),
+            ],
+            convertToFinalValue: (raw) => raw.agreement1 && raw.agreement2
         })
     ]
 }));
@@ -98,10 +118,19 @@ reflector.expandThere("div#base");
 reflector.onValueChange.subscribe(
     new EventObserve(
         () => {
-
-            //TODO: Fetch different ways 
-            const el = document.getElementById("jsonOutput"),
-                a = reflector.getValue(true);
-            el.textContent = JSON.stringify(a, null, '\t');
+            updateOutput()
         })
 )
+//@ts-ignore
+window["setFinalMode"] = (fmode: boolean) => {
+    finalMode = fmode
+    updateOutput()
+}
+
+function updateOutput() {
+
+    //TODO: Fetch different ways 
+    const el = document.getElementById("jsonOutput"),
+        a = reflector.getValue(finalMode);
+    el.textContent = JSON.stringify(a, null, '\t');
+}
