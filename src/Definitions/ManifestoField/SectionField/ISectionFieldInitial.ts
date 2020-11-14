@@ -28,7 +28,7 @@ export interface ISectionFieldBase extends IInitialFiedBase {
     arraySectionRaw?: boolean;
 
     /**
-     * 
+     * The value that raw (Collected data as object or array), is turned into different type. Example of: 2, 3, 4 numbers can contained in section. That is maybe reflected as sum of each one, 9.
      */
-    convertToFinalValue? : (hamObject : {[key: string]: any}) => any;
+    convertToFinalValue? : (rawObject : {[key: string]: any}) => any;
 }
