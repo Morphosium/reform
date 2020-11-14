@@ -1,6 +1,7 @@
 import { ElementField, IElementField, IInitialFied, IInputField, InputField, RootSectionField, SectionField } from "../Definitions/index";
 import { EventObserve } from "../Utils/Reactivity/EventObverser";
 import { Reflector } from "../Reflection/Reflector";
+import { EmailValidator } from "../InputValidations/Validations";
 
 let finalMode = false;
 
@@ -54,7 +55,11 @@ const reflector = new Reflector(new RootSectionField({
                     inputType: "text",
                     name: "email",
                     label: "E-Posta",
-                    convertToFinalValue: (rawValue) => rawValue.trim()
+                    convertToFinalValue: (rawValue) => rawValue.trim(),
+                    validations: [
+                        new EmailValidator()
+                    ]
+                    
                 }
             ),
             new InputField(

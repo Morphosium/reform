@@ -11,9 +11,12 @@ export class InputReflection extends Reflection {
     initialField: IInputField;
     rawValue: string;
     rawToFinalValue: (rawValue: string) => string;
+    validationErrors: { [key: string]: { invalid: boolean, message: string } };
+    validationErrorsKeys: string[];
+    errorMessageFieldId: string;
 
     constructor(inputField: IInputField,
-        reflector: Reflector,
+        public reflector: Reflector,
         baseElement: HTMLElement,
         public parentSectionReflection: SectionReflection
     ) {
@@ -21,6 +24,7 @@ export class InputReflection extends Reflection {
         this.value = inputField.initialValue;
         this.initialField = inputField;
         this.rawToFinalValue = this.initialField.convertToFinalValue;
+        this.errorMessageFieldId = this.initialField.name.replace(/\s/g,"-") + "-error-message-" + Math.random().toString(36).substring(7);
         let elementContent = [
             new ElementField({
                 tag: this.initialField.inputType === "checkbox" ? "span" : "div",
@@ -29,7 +33,6 @@ export class InputReflection extends Reflection {
                     keyValue("reformjs-input-label")
                 ]
             }),
-
             new ElementField({
                 tag: "input",
                 eventBindings: {
@@ -57,11 +60,18 @@ export class InputReflection extends Reflection {
                     inputField.placeholder ? keyValue("placeholder", inputField.placeholder) : null
                 ],
                 class: inputField.inputClass
-            })
+            }),
         ];
         if (this.initialField.inputType === "checkbox") {
             elementContent = elementContent.reverse();
         }
+        elementContent.push(
+            new ElementField({
+                tag: "div",
+                attributes: [{ key: "style", value: "display; none" }],
+                id: this.errorMessageFieldId
+            })
+        )
         this.elementReflections = new ElementReflection(
             {
                 isElement: true,
@@ -81,5 +91,32 @@ export class InputReflection extends Reflection {
             this.value = value;
 
         this.parentSectionReflection.valueChanged();
+        this.validate()
+    }
+
+    validate() {
+        this.validationErrors = {};
+        this.validationErrorsKeys = []
+        for (let validationIndex = 0; validationIndex < this.initialField.validations?.length; validationIndex++) {
+            const validation = this.initialField.validations[validationIndex];
+            if (validation) {
+                if (!validation.method(this.value)) {
+                    this.validationErrors[validation.name] = { invalid: true, message: validation.message };
+                    this.validationErrorsKeys.push(validation.name);
+                }
+            }
+        }
+
+        //TODO: When reactive initial field changes is ok, update here for this
+        const element = (this.reflector.findReflectionById(this.errorMessageFieldId) as ElementReflection).element;
+        if (this.validationErrorsKeys.length > 0) {
+            element.style.display = "block";
+            element.textContent = this.validationErrors[this.validationErrorsKeys[0]].message;
+        }
+        else {
+            element.style.display = "none";
+            element.textContent = "";
+        }
+        // console.info(.e)
     }
 }
