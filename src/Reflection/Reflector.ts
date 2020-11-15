@@ -41,11 +41,17 @@ export class Reflector {
         }
     }
 
-    expand(baseElement: HTMLElement, parentField: IInitialFied, parentSectionReflection?: SectionReflection) {
+    /**
+     * Expands stated initial fields into a base element. Returns reflection instances of initial field contents these are expanded now
+     * @param baseElement the element where is expanded in
+     * @param initialField the initial parent will be expanded
+     * @param parentSectionReflection the parent section reflection of that initial field
+     */
+    expand(baseElement: HTMLElement, initialField: IInitialFied, parentSectionReflection?: SectionReflection): Reflection[] {
         /** in section, no element changes, content expanded into same element
          * in element, new element will be created and contents expanded into them
          */
-        const fields = parentField.content;
+        const fields = initialField.content, reflections : Reflection[] = [];
         if (fields instanceof Array) {
             for (let index = 0; index < fields.length; index++) {
                 const field = fields[index] as IInitialFied;
@@ -65,21 +71,26 @@ export class Reflector {
                 if (field.isInput) {
                     reflection = new InputReflection(field as IInputField, this, baseElement, parentSectionReflection)
                 }
-                if (parentSectionReflection && reflection && !field.isElement)
-                    parentSectionReflection.subReflections.push(reflection)
-                if (reflection?.initialField?.id)
+                if (parentSectionReflection && reflection && !field.isElement) { 
+                    parentSectionReflection.subReflections.push(reflection);
+                    reflections.push(reflection);
+                }
+                if (reflection?.initialField?.id) { 
                     this.idMap[reflection.initialField.id] = reflection;
-
+                 }
             }
+            return reflections
         }
 
     }
 
-    findReflectionById(id : string) : Reflection | null {
+    findReflectionById(id: string): Reflection | null {
         return this.idMap[id]
     }
 
-    getValue(final = true ) {
+    getValue(final = true) {
         return this.rootSectionReflection.getValue(final ? "final" : "raw");
     }
+
+   
 }

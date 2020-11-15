@@ -12,7 +12,6 @@ export class InputReflection extends Reflection {
     rawValue: string;
     rawToFinalValue: (rawValue: string) => string;
     validationErrors: { [key: string]: { invalid: boolean, message: string } };
-    validationErrorsKeys: string[];
     errorMessageFieldId: string;
 
     constructor(inputField: IInputField,
@@ -24,7 +23,8 @@ export class InputReflection extends Reflection {
         this.value = inputField.initialValue;
         this.initialField = inputField;
         this.rawToFinalValue = this.initialField.convertToFinalValue;
-        this.errorMessageFieldId = this.initialField.name.replace(/\s/g,"-") + "-error-message-" + Math.random().toString(36).substring(7);
+        this.errorMessageFieldId = this.initialField.name.replace(/\s/g, "-") + "-error-message-" + Math.random().toString(36).substring(7);
+        
         let elementContent = [
             new ElementField({
                 tag: this.initialField.inputType === "checkbox" ? "span" : "div",
@@ -62,6 +62,7 @@ export class InputReflection extends Reflection {
                 class: inputField.inputClass
             }),
         ];
+
         if (this.initialField.inputType === "checkbox") {
             elementContent = elementContent.reverse();
         }
@@ -82,6 +83,10 @@ export class InputReflection extends Reflection {
         );
     }
 
+    /**
+     * Changes value of input 
+     * @param value the new value user typed
+     * */
     changeValue(value: string) {
         this.rawValue = value;
         if (this.rawToFinalValue) {
@@ -94,29 +99,37 @@ export class InputReflection extends Reflection {
         this.validate()
     }
 
+    /**
+     * Checks final value of input (after user typed and text is operated)
+     * is valid or invalid. If invalid, validation error will be in @field validationError with error message and issue name.
+     */
     validate() {
         this.validationErrors = {};
-        this.validationErrorsKeys = []
         for (let validationIndex = 0; validationIndex < this.initialField.validations?.length; validationIndex++) {
             const validation = this.initialField.validations[validationIndex];
             if (validation) {
                 if (!validation.method(this.value)) {
                     this.validationErrors[validation.name] = { invalid: true, message: validation.message };
-                    this.validationErrorsKeys.push(validation.name);
                 }
             }
         }
-
+        this.setValidationText();
+    }
+    /**
+     * Updates error message element with first validation error,
+     * if there is. Othervise, element will be hidden 
+     */
+    setValidationText() {
         //TODO: When reactive initial field changes is ok, update here for this
         const element = (this.reflector.findReflectionById(this.errorMessageFieldId) as ElementReflection).element;
-        if (this.validationErrorsKeys.length > 0) {
+        const errorKeys = Object.keys(this.validationErrors);
+        if (errorKeys.length > 0) {
             element.style.display = "block";
-            element.textContent = this.validationErrors[this.validationErrorsKeys[0]].message;
+            element.textContent = this.validationErrors[errorKeys[0]].message;
         }
         else {
             element.style.display = "none";
             element.textContent = "";
         }
-        // console.info(.e)
     }
 }

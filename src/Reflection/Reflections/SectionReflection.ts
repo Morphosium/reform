@@ -56,6 +56,7 @@ export class SectionReflection extends Reflection {
         }
     }
 
+    /**Converts raw data into intended value specified in initial field */
     convertDataByMode(data: any, mode: "final" | "raw") {
         if ((mode === "final") && (this.initialField.convertToFinalValue)) {
             return this.initialField.convertToFinalValue(data)
@@ -80,6 +81,21 @@ export class SectionReflection extends Reflection {
             });
             return this.convertDataByMode(objectMap, mode);
         }
+
+    }
+
+    /**
+    * @todo
+    */
+    collectErrors() {
+        const errorList = {};
+        for (let subFieldIndex = 0; subFieldIndex < this.subReflections.length; subFieldIndex++) {
+            const subReflection = this.subReflections[subFieldIndex];
+
+        }
+    }
+
+    collectErrorsNested() {
 
     }
 }
