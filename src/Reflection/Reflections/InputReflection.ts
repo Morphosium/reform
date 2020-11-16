@@ -1,4 +1,4 @@
-import { ElementField, IInputField } from "../../Definitions/index";
+import { ElementField, IInputField, ValidationErrorMap } from "../../Definitions/index";
 import { keyValue, KeyValue } from "../../Definitions/Types/KeyValue";
 import { ElementReflection } from "./ElementReflection";
 import { Reflection } from "./Reflection";
@@ -11,7 +11,7 @@ export class InputReflection extends Reflection {
     initialField: IInputField;
     rawValue: string;
     rawToFinalValue: (rawValue: string) => string;
-    validationErrors: { [key: string]: { invalid: boolean, message: string } };
+    validationErrors: ValidationErrorMap;
     errorMessageFieldId: string;
 
     constructor(inputField: IInputField,

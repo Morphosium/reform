@@ -1,4 +1,4 @@
-import { ISectionField, ISectionFieldBase } from "../../Definitions/index";
+import { ISectionField, ISectionFieldBase, ValidationErrorMap } from "../../Definitions/index";
 import { Subject } from "../../Utils/Reactivity/Base/Subject.class";
 import { Reflector } from "../Reflector";
 import { InputReflection } from "./InputReflection";
@@ -85,17 +85,36 @@ export class SectionReflection extends Reflection {
     }
 
     /**
-    * @todo
+    * Collects all validation error and presents them like:
+    * {
+    *   'age': {atLeast: ...},
+    *   'name': {required: ...},
+    *   'email': {required: ...},
+    *   'address.city': {required: ...}
+    * } 
+    * (3 input and 1 section field contains 'city' input)
     */
-    collectErrors() {
-        const errorList = {};
+    collectValidationErrors(): { [key: string]: ValidationErrorMap } {
+        const fieldNameHeader = this.initialField.name ? `${this.initialField.name}.` : '';
+        const errorList: { [key: string]: ValidationErrorMap } = {};
         for (let subFieldIndex = 0; subFieldIndex < this.subReflections.length; subFieldIndex++) {
             const subReflection = this.subReflections[subFieldIndex];
-
+            if (subReflection.initialField.isInput) {
+                const inputReflection = (subReflection as InputReflection);
+                inputReflection.validate();
+                errorList[fieldNameHeader + subReflection.initialField.name] = inputReflection.validationErrors;
+            }
+            else if (subReflection.initialField.isSection) {
+                const subReflectionValidationErrors = (subReflection as SectionReflection).collectValidationErrors();
+                for (const key in subReflectionValidationErrors) {
+                    if (Object.prototype.hasOwnProperty.call(subReflectionValidationErrors, key)) {
+                        const validationErrorMap = subReflectionValidationErrors[key];
+                        if (validationErrorMap != null && (Object.keys(validationErrorMap).length > 0))
+                            errorList[fieldNameHeader + key] = validationErrorMap;
+                    }
+                }
+            }
         }
-    }
-
-    collectErrorsNested() {
-
+        return errorList;
     }
 }

@@ -1,0 +1,1 @@
+export type ValidationErrorMap = { [key: string]: { invalid: boolean, message: string } };

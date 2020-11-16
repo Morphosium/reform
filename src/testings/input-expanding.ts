@@ -138,4 +138,5 @@ function updateOutput() {
     const el = document.getElementById("jsonOutput"),
         a = reflector.getValue(finalMode);
     el.textContent = JSON.stringify(a, null, '\t');
+    console.info(reflector.rootSectionReflection.collectValidationErrors());
 }
