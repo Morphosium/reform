@@ -13,7 +13,7 @@ export class EmailValidator implements IInputValidation {
 
 export class NotEmpty implements IInputValidation 
 {
-    name = "notEmpty";
+    readonly name = "notEmpty";
     message = "Please don't leave this area empty ";
     method(value : string) : boolean 
     {

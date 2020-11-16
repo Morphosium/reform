@@ -1,7 +1,7 @@
 import { ElementField, IElementField, IInitialFied, IInputField, InputField, RootSectionField, SectionField } from "../Definitions/index";
 import { EventObserve } from "../Utils/Reactivity/EventObverser";
 import { Reflector } from "../Reflection/Reflector";
-import { EmailValidator } from "../InputValidations/Validations";
+import { EmailValidator, NotEmpty } from "../InputValidations/Validations";
 
 let finalMode = false;
 
@@ -40,14 +40,16 @@ const reflector = new Reflector(new RootSectionField({
                 {
                     inputType: "text",
                     name: "firstName",
-                    label: "İsim"
+                    label: "İsim",
+                    validations: [new NotEmpty()]
                 }
             ),
             new InputField(
                 {
                     inputType: "text",
                     name: "lastName",
-                    label: "Soyad"
+                    label: "Soyad",
+                    validations: [new NotEmpty()]
                 }
             ),
             new InputField(
@@ -133,8 +135,10 @@ window["setFinalMode"] = (fmode: boolean) => {
 }
 
 function updateOutput() {
+
+    //TODO: Fetch different ways 
     const el = document.getElementById("jsonOutput"),
         a = reflector.getValue(finalMode);
     el.textContent = JSON.stringify(a, null, '\t');
-    // console.info(reflector.rootSectionReflection.collectValidationErrors());
+    console.info(reflector.rootSectionReflection.collectValidationErrors());
 }
