@@ -1,2 +1,2 @@
-export * from "./ManifestoField/index";
+export * from "./InitialFields/index";
 export * from "./Types/index"

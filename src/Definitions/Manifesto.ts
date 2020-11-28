@@ -1,4 +1,4 @@
-import { ISectionField, ISectionFieldBase, SectionField } from "./ManifestoField/SectionField/index";
+import { ISectionField, ISectionFieldBase, SectionField } from "./InitialFields/SectionField/index";
 
 export interface IReformInitial {
     rootSection: ISectionField;

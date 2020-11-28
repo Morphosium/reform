@@ -1,6 +1,6 @@
 
-import { ElementField } from "../Definitions/ManifestoField/ElementField/index";
-import { RootSectionField } from "../Definitions/ManifestoField/SectionField/index";
+import { ElementField } from "../Definitions/InitialFields/ElementField/index";
+import { RootSectionField } from "../Definitions/InitialFields/SectionField/index";
 import { ElementFieldEventBinding } from "../Definitions/Types/ElementFieldEventBinding";
 import { ElementReflection } from "../Reflection/Reflections/ElementReflection";
 import { Reflector } from "../Reflection/Reflector";

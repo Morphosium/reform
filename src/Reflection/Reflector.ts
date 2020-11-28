@@ -1,7 +1,7 @@
 import { IInputField, IInitialFiedBase } from "../Definitions/index";
-import { IElementField } from "../Definitions/ManifestoField/ElementField/index";
-import { IInitialFied } from "../Definitions/ManifestoField/InitialField/IInitialField";
-import { ISectionField, RootSectionField } from "../Definitions/ManifestoField/SectionField/index";
+import { IElementField } from "../Definitions/InitialFields/ElementField/index";
+import { IInitialFied } from "../Definitions/InitialFields/InitialField/IInitialField";
+import { ISectionField, RootSectionField } from "../Definitions/InitialFields/SectionField/index";
 import { Subject } from "../Utils/Reactivity/Base/Subject.class";
 import { EventObserve } from "../Utils/Reactivity/EventObverser";
 import { ElementReflection } from "./Reflections/ElementReflection";
