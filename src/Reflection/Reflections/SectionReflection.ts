@@ -9,6 +9,7 @@ export class SectionReflection extends Reflection {
     initialField: ISectionFieldBase;
     onValueChange: Subject<void>
     rawValue: { [key: string]: any; };
+
     constructor(
         sectionField: ISectionField,
         reflector: Reflector,
@@ -37,7 +38,11 @@ export class SectionReflection extends Reflection {
         return this.collectSectionData(mode)
     }
 
-
+    /**
+     * Collects data under that's subsections
+     * @param mode Final or Raw mode
+     * @param callback callback that triggered with fetched data
+     */
     private dataCollection(mode: "final" | "raw", callback: (incomeValue: any, name?: string) => any) {
         const usefulReflections = this.subReflections.filter(a => a.initialField.isInput || a.initialField.isSection);
         for (let reflectionIndex = 0; reflectionIndex < usefulReflections.length; reflectionIndex++) {
@@ -116,5 +121,47 @@ export class SectionReflection extends Reflection {
             }
         }
         return errorList;
+    }
+
+    /**
+     * Sets corresponding values of section 
+     * @param data incoming new data
+     */
+    setValue(data: any) {
+        if (data instanceof Object) {
+            const dataAsObj = data as { [key: string]: any };
+            for (const key in dataAsObj) {
+                if (Object.prototype.hasOwnProperty.call(dataAsObj, key)) {
+                    const value = dataAsObj[key];
+                    if (
+                        (typeof value != "function") &&
+                        (key != "__proto__")
+                    ) {
+                        const reflection = this.findSubReflectionByName(key);
+                        if (reflection.initialField.isSection) {
+                            (reflection as SectionReflection).setValue(value);
+                        }
+                        else if (reflection.initialField.isInput) {
+                           //TODO: Set value on input
+                            // (reflection as InputReflection).setValue(value);
+                        }
+                    }
+                }
+            }
+
+        }
+        else {
+
+        }
+    }
+
+    /**
+     * Finds reflection under this' first level sub reflections
+     * @param key name of reflection/field
+     */
+    findSubReflectionByName(key: string) {
+       return this.subReflections?.find(
+           refl => refl.initialField.name === key
+       )
     }
 }

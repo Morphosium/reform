@@ -31,4 +31,12 @@ export interface ISectionFieldBase extends IInitialFiedBase {
      * The value that raw (Collected data as object or array), is turned into different type. Example of: 2, 3, 4 numbers can contained in section. That is maybe reflected as sum of each one, 9.
      */
     convertToFinalValue? : (rawObject : {[key: string]: any}) => any;
+
+    /**
+     * When a data applied to array, this corresponding field's that method will be triggered with that 
+     * if not provided:
+     * - If incoming final data is object (has no method), sub fields applied with sub items.
+     * - If it is a primitive type or different thing, nothing happens.
+     */
+    getFromFinalValue? : (final : any) => any;
 }

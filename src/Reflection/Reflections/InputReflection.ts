@@ -84,10 +84,10 @@ export class InputReflection extends Reflection {
     }
 
     /**
-     * Changes value of input 
+     * Changes value of input, triggered by input 
      * @param value the new value user typed
      * */
-    changeValue(value: string) {
+    private changeValue(value: string) {
         this.rawValue = value;
         if (this.rawToFinalValue) {
             this.value = this.rawToFinalValue(value);
