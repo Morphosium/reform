@@ -10,6 +10,7 @@ import { createElement } from "../../Utils/createElement";
  */
 export class ElementReflection extends Reflection {
     element: HTMLElement;
+    subReflections: Reflection[];
     constructor(
         public elementField: IElementField,
         public reflector: Reflector,
@@ -20,7 +21,7 @@ export class ElementReflection extends Reflection {
         super();
         this.constructReflection()
     }
-    
+
     constructReflection() {
         this.initialField = this.elementField;
         const element = createElement(this.elementField, this.reflector);
@@ -29,8 +30,15 @@ export class ElementReflection extends Reflection {
             element.textContent = this.elementField.content;
         }
         else {
-            this.reflector.expand(element, this.elementField, this.parentSectionReflection);
+            this.subReflections = this.reflector.expand(element, this.elementField, this.parentSectionReflection);
         }
         this.element = element;
+    }
+
+    getElementByName(name: string) {
+        return this.subReflections?.find(
+            //@ts-ignore
+            a => a["name"] === name
+        )
     }
 }

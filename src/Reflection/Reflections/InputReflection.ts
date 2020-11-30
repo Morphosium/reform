@@ -36,12 +36,8 @@ export class InputReflection extends Reflection {
             }),
             new ElementField({
                 tag: "input",
+                name: "input",
                 eventBindings: {
-                    "load": [
-                        (reflection, event) => {
-                            this.inputElementReflection = reflection;
-                        }
-                    ],
                     "input": [
                         (reflection: ElementReflection, event: InputEvent) => {
                             const inputElement = event.target as HTMLInputElement;
@@ -60,7 +56,7 @@ export class InputReflection extends Reflection {
                     ]
                 },
                 attributes: [
-                    keyValue("reformjs-input-field"),
+                    keyValue("reformjs-input"),
                     keyValue("type", inputField.inputType),
                     inputField.initialValue ? keyValue("value", inputField.initialValue) : null,
                     inputField.placeholder ? keyValue("placeholder", inputField.placeholder) : null
@@ -87,6 +83,7 @@ export class InputReflection extends Reflection {
             },
             reflector, baseElement, parentSectionReflection
         );
+        //this.inputElementReflection = this.elementReflections.getElementByName("input") as ElementReflection;
     }
 
     /**
@@ -146,7 +143,7 @@ export class InputReflection extends Reflection {
      * @param emit If true, entire section notified value is changed. Defaultly True
      */
     setValueExternal(newValue: any, emit = true) {
-        const inputElement = this.inputElementReflection.element as HTMLInputElement;
+        const inputElement = this.elementReflections.element.querySelector("input[reformjs-input]") as HTMLInputElement;
         const inputType = this.initialField.inputType;
         if (inputType === "checkbox") {
             inputElement.checked = newValue;

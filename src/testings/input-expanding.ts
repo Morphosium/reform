@@ -61,7 +61,7 @@ const reflector = new Reflector(new RootSectionField({
                     validations: [
                         new EmailValidator()
                     ]
-                    
+
                 }
             ),
             new InputField(
@@ -142,3 +142,17 @@ function updateOutput() {
     el.textContent = JSON.stringify(a, null, '\t');
     console.info(reflector.rootSectionReflection.collectValidationErrors());
 }
+
+function jsonInputApply() {
+    const jsonInput = document.getElementById("jsonInput") as HTMLTextAreaElement;
+    try {
+        const obj = JSON.parse(jsonInput?.value)
+        if (obj) {
+            reflector.patchValue(obj)
+        }
+    } catch (error) {
+        console.warn(error)
+    }
+}
+//@ts-ignore
+window["jsonInputApply"] = jsonInputApply;
