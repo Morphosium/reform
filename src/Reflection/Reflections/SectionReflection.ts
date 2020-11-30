@@ -143,7 +143,7 @@ export class SectionReflection extends Reflection {
                         }
                         else if (reflection.initialField.isInput) {
                            //TODO: Set value on input
-                            (reflection as InputReflection).setValueExternal(value,false);
+                            (reflection as InputReflection).setValueExternal(value);
                         }
                     }
                 }

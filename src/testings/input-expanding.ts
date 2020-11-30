@@ -148,7 +148,8 @@ function jsonInputApply() {
     try {
         const obj = JSON.parse(jsonInput?.value)
         if (obj) {
-            reflector.patchValue(obj)
+            reflector.patchValue(obj);
+            this.updateOutput();
         }
     } catch (error) {
         console.warn(error)
