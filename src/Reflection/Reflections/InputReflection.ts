@@ -13,6 +13,7 @@ export class InputReflection extends Reflection {
     rawToFinalValue: (rawValue: string) => string;
     validationErrors: ValidationErrorMap;
     errorMessageFieldId: string;
+    private inputElementReflection: ElementReflection;
 
     constructor(inputField: IInputField,
         public reflector: Reflector,
@@ -24,7 +25,7 @@ export class InputReflection extends Reflection {
         this.initialField = inputField;
         this.rawToFinalValue = this.initialField.convertToFinalValue;
         this.errorMessageFieldId = this.initialField.name.replace(/\s/g, "-") + "-error-message-" + Math.random().toString(36).substring(7);
-        
+
         let elementContent = [
             new ElementField({
                 tag: this.initialField.inputType === "checkbox" ? "span" : "div",
@@ -36,6 +37,11 @@ export class InputReflection extends Reflection {
             new ElementField({
                 tag: "input",
                 eventBindings: {
+                    "load": [
+                        (reflection, event) => {
+                            this.inputElementReflection = reflection;
+                        }
+                    ],
                     "input": [
                         (reflection: ElementReflection, event: InputEvent) => {
                             const inputElement = event.target as HTMLInputElement;
@@ -115,6 +121,7 @@ export class InputReflection extends Reflection {
         }
         this.setValidationText();
     }
+
     /**
      * Updates error message element with first validation error,
      * if there is. Othervise, element will be hidden 
@@ -131,5 +138,25 @@ export class InputReflection extends Reflection {
             element.style.display = "none";
             element.textContent = "";
         }
+    }
+
+    /**
+     * Sets element externally, when section reflection set 
+     * @param newValue new value
+     * @param emit If true, entire section notified value is changed. Defaultly True
+     */
+    setValueExternal(newValue: any, emit = true) {
+        const inputElement = this.inputElementReflection.element as HTMLInputElement;
+        const inputType = this.initialField.inputType;
+        if (inputType === "checkbox") {
+            inputElement.checked = newValue;
+        }
+        else if (inputType === "number" && parseInt(newValue)) {
+            inputElement.valueAsNumber = parseInt(newValue);
+        }
+        else {
+            inputElement.value = newValue
+        }
+        if (emit) this.changeValue(newValue);
     }
 }

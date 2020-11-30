@@ -92,5 +92,14 @@ export class Reflector {
         return this.rootSectionReflection.getValue(final ? "final" : "raw");
     }
 
+    /**
+     * Sets value of root section by corresponding fields
+     * @param data incoming data
+     * @param isIntegrityImportant (Not stable) when missing fields on all sections, exception will be raised
+     */
+    patchValue(data : {[key : string] : string}, isIntegrityImportant = false) {
+        //TODO: integrity
+        this.rootSectionReflection.setValue(data);
+    }
    
 }
