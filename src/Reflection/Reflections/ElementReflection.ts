@@ -41,4 +41,8 @@ export class ElementReflection extends Reflection {
             a => a["name"] === name
         )
     }
+
+    setErrorMessageVisibility(value: boolean): void {
+
+    }
 }

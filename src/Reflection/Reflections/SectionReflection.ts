@@ -171,4 +171,9 @@ export class SectionReflection extends Reflection {
             refl => refl.initialField.name === key
         )
     }
+
+    setErrorMessageVisibility(value: boolean): void {
+
+    }
+
 }
