@@ -5,6 +5,8 @@ import { InputReflection } from "./InputReflection";
 import { Reflection } from "./Reflection";
 
 export class SectionReflection extends Reflection {
+
+
     readonly subReflections: Reflection[] = [];
     initialField: ISectionFieldBase;
     onValueChange: Subject<void>
@@ -17,6 +19,10 @@ export class SectionReflection extends Reflection {
         public parentSectionReflection: SectionReflection
     ) {
         super();
+        this.constructReflection(sectionField, reflector, baseElement, parentSectionReflection);
+    }
+
+    constructReflection(sectionField: ISectionField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection): void {
         this.onValueChange = new Subject();
         this.initialField = sectionField;
         const inheritedSection = sectionField.root ? this : parentSectionReflection;
@@ -33,6 +39,7 @@ export class SectionReflection extends Reflection {
         }
 
     }
+
 
     getValue(mode: "final" | "raw", showGhost = false) {
         return this.collectSectionData(mode)
@@ -142,7 +149,7 @@ export class SectionReflection extends Reflection {
                             (reflection as SectionReflection).setValue(value);
                         }
                         else if (reflection.initialField.isInput) {
-                           //TODO: Set value on input
+                            //TODO: Set value on input
                             (reflection as InputReflection).setValueExternal(value);
                         }
                     }
@@ -160,8 +167,8 @@ export class SectionReflection extends Reflection {
      * @param key name of reflection/field
      */
     findSubReflectionByName(key: string) {
-       return this.subReflections?.find(
-           refl => refl.initialField.name === key
-       )
+        return this.subReflections?.find(
+            refl => refl.initialField.name === key
+        )
     }
 }

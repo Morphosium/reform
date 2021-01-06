@@ -1,4 +1,4 @@
-import { ElementField, IInputField, ValidationErrorMap } from "../../Definitions/index";
+import { ElementField, IInputField, ISectionField, ValidationErrorMap } from "../../Definitions/index";
 import { keyValue, KeyValue } from "../../Definitions/Types/KeyValue";
 import { ElementReflection } from "./ElementReflection";
 import { Reflection } from "./Reflection";
@@ -6,6 +6,8 @@ import { Reflector } from "../Reflector";
 import { SectionReflection } from "./SectionReflection";
 
 export class InputReflection extends Reflection {
+
+
     elementReflections: ElementReflection;
     value = "";
     initialField: IInputField;
@@ -23,6 +25,12 @@ export class InputReflection extends Reflection {
         super();
         this.value = inputField.initialValue;
         this.initialField = inputField;
+        this.constructReflection(inputField, reflector, baseElement, parentSectionReflection)
+    }
+
+
+    constructReflection(sectionField: IInputField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection): void {
+        const inputField = this.initialField;
         this.rawToFinalValue = this.initialField.convertToFinalValue;
         this.errorMessageFieldId = this.initialField.name.replace(/\s/g, "-") + "-error-message-" + Math.random().toString(36).substring(7);
 
@@ -83,7 +91,7 @@ export class InputReflection extends Reflection {
             },
             reflector, baseElement, parentSectionReflection
         );
-        //this.inputElementReflection = this.elementReflections.getElementByName("input") as ElementReflection;
+
     }
 
     /**
@@ -155,5 +163,9 @@ export class InputReflection extends Reflection {
             inputElement.value = newValue
         }
         if (emit) this.changeValue(newValue);
+    }
+
+    setErrorMessageVisibility(value: boolean): void {
+        // TODO: FİLL METHOD throw new Error("Method not implemented.");
     }
 }
