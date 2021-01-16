@@ -14,5 +14,6 @@ export abstract class Reflection {
     baseElement: HTMLElement,
     parentSectionReflection: SectionReflection): void;
 
+  /**Sets error message visibility */
   abstract setErrorMessageVisibility(value: boolean): void;
 }

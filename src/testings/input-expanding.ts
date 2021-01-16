@@ -69,13 +69,10 @@ const reflector = new Reflector(new RootSectionField({
                     inputType: "text",
                     name: "phone",
                     label: "Telefon",
-                    convertToFinalValue: (rawValue) => rawValue.replace(/\s/g, "")
+                    convertToFinalValue: (rawValue) => rawValue?.replace(/\s/g, "")
                 }
             ),
         ]),
-
-
-
 
         new SectionField({
             name: "Address",
@@ -155,5 +152,12 @@ function jsonInputApply() {
         console.warn(error)
     }
 }
+
+function submitForm() {
+    reflector.setErrorMessageVisibility(true);
+}
+
 //@ts-ignore
 window["jsonInputApply"] = jsonInputApply;
+//@ts-ignore
+window["submitForm"] = submitForm;

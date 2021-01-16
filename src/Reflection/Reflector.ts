@@ -103,7 +103,7 @@ export class Reflector {
     }
    
     setErrorMessageVisibility(visible : boolean) {
-       // this.rootSectionReflection.
+      this.rootSectionReflection.setErrorMessageVisibility(visible)
     }
 
 }

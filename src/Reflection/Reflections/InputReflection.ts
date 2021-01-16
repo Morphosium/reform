@@ -13,9 +13,10 @@ export class InputReflection extends Reflection {
     initialField: IInputField;
     rawValue: string;
     rawToFinalValue: (rawValue: string) => string;
-    validationErrors: ValidationErrorMap;
+    validationErrors: ValidationErrorMap = {};
     errorMessageFieldId: string;
     private inputElementReflection: ElementReflection;
+    showErrorMessage: boolean;
 
     constructor(inputField: IInputField,
         public reflector: Reflector,
@@ -25,11 +26,15 @@ export class InputReflection extends Reflection {
         super();
         this.value = inputField.initialValue;
         this.initialField = inputField;
-        this.constructReflection(inputField, reflector, baseElement, parentSectionReflection)
+        this.constructReflection(inputField, reflector, baseElement, parentSectionReflection);
     }
 
 
     constructReflection(sectionField: IInputField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection): void {
+    
+        if (this.elementReflections?.element?.innerHTML) {
+            this.elementReflections.element.innerHTML = "";
+        }
         const inputField = this.initialField;
         this.rawToFinalValue = this.initialField.convertToFinalValue;
         this.errorMessageFieldId = this.initialField.name.replace(/\s/g, "-") + "-error-message-" + Math.random().toString(36).substring(7);
@@ -91,7 +96,6 @@ export class InputReflection extends Reflection {
             },
             reflector, baseElement, parentSectionReflection
         );
-
     }
 
     /**
@@ -128,14 +132,15 @@ export class InputReflection extends Reflection {
     }
 
     /**
-     * Updates error message element with first validation error,
-     * if there is. Othervise, element will be hidden 
+     * Updates error message element with first validation error if showing errors is enabled,
+     * if there is. Othervise, element will be hidden.
+     * That doesn't validate. It shows first validation error if there.
      */
     setValidationText() {
         //TODO: When reactive initial field changes is ok, update here for this
         const element = (this.reflector.findReflectionById(this.errorMessageFieldId) as ElementReflection).element;
         const errorKeys = Object.keys(this.validationErrors);
-        if (errorKeys.length > 0) {
+        if ((errorKeys.length > 0) && this.showErrorMessage) {
             element.style.display = "block";
             element.textContent = this.validationErrors[errorKeys[0]].message;
         }
@@ -166,6 +171,8 @@ export class InputReflection extends Reflection {
     }
 
     setErrorMessageVisibility(value: boolean): void {
-        // TODO: FİLL METHOD throw new Error("Method not implemented.");
+        this.validate();
+        this.showErrorMessage = value;
+        this.setValidationText();
     }
 }

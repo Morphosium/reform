@@ -149,7 +149,6 @@ export class SectionReflection extends Reflection {
                             (reflection as SectionReflection).setValue(value);
                         }
                         else if (reflection.initialField.isInput) {
-                            //TODO: Set value on input
                             (reflection as InputReflection).setValueExternal(value);
                         }
                     }
@@ -173,7 +172,10 @@ export class SectionReflection extends Reflection {
     }
 
     setErrorMessageVisibility(value: boolean): void {
-
+        for (let reflectionIndex = 0; reflectionIndex < this.subReflections.length; reflectionIndex++) {
+            const reflection = this.subReflections[reflectionIndex];
+            reflection.setErrorMessageVisibility(value);
+        }
     }
 
 }
