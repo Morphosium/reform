@@ -14,8 +14,10 @@
   "dependencies": {
     "es6-imports-renamer": "^0.1.6",
     "gulp-es6-imports-renamer": "^0.1.8",
+    "ini": "^2.0.0",
     "lodash": "^4.17.20",
-    "lodash.template": "^4.5.0"
+    "lodash.template": "^4.5.0",
+    "yargs-parser": "^20.2.4"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
