@@ -13,7 +13,9 @@
   "license": "ISC",
   "dependencies": {
     "es6-imports-renamer": "^0.1.6",
-    "gulp-es6-imports-renamer": "^0.1.8"
+    "gulp-es6-imports-renamer": "^0.1.8",
+    "lodash": "^4.17.20",
+    "lodash.template": "^4.5.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
