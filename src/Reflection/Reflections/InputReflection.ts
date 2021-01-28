@@ -32,9 +32,9 @@ export class InputReflection extends Reflection {
 
 
     constructReflection(inputField: IInputField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection): void {
-        if (baseElement) {
-            baseElement.innerHTML = "";
-            baseElement.innerText = "";
+        if (this._baseElement) {
+            this._baseElement.innerHTML = "";
+            this._baseElement.innerText = "";
         }
 
         let inputHtml: string,
@@ -47,6 +47,7 @@ export class InputReflection extends Reflection {
         //initializations
         if (inputField.inputType === "checkbox") {
             inputHtml = `<input reformjs-input type="checkbox"> <span reformjs-input-label>${inputField.label}</span>`
+            labelHtml = `<span></span>`
         }
         else {
             inputHtml = `<input reformjs-input type="${inputField.inputType}">`
