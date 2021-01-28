@@ -7,8 +7,6 @@ import { SectionReflection } from "./SectionReflection";
 
 export class InputReflection extends Reflection {
 
-
-    elementReflections: ElementReflection;
     value = "";
     initialField: IInputField;
     rawValue: string;
@@ -17,6 +15,9 @@ export class InputReflection extends Reflection {
     errorMessageFieldId: string;
     private inputElementReflection: ElementReflection;
     showErrorMessage: boolean;
+    private _messageElement: HTMLElement;
+    private _inputElement: HTMLInputElement;
+    private _baseElement: HTMLElement;
 
     constructor(inputField: IInputField,
         public reflector: Reflector,
@@ -30,72 +31,57 @@ export class InputReflection extends Reflection {
     }
 
 
-    constructReflection(sectionField: IInputField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection): void {
-    
-        if (this.elementReflections?.element?.innerHTML) {
-            this.elementReflections.element.innerHTML = "";
+    constructReflection(inputField: IInputField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection): void {
+        if (baseElement) {
+            baseElement.innerHTML = "";
+            baseElement.innerText = "";
         }
-        const inputField = this.initialField;
-        this.rawToFinalValue = this.initialField.convertToFinalValue;
-        this.errorMessageFieldId = this.initialField.name.replace(/\s/g, "-") + "-error-message-" + Math.random().toString(36).substring(7);
 
-        let elementContent = [
-            new ElementField({
-                tag: this.initialField.inputType === "checkbox" ? "span" : "div",
-                content: inputField.label,
-                attributes: [
-                    keyValue("reformjs-input-label")
-                ]
-            }),
-            new ElementField({
-                tag: "input",
-                name: "input",
-                eventBindings: {
-                    "input": [
-                        (reflection: ElementReflection, event: InputEvent) => {
-                            const inputElement = event.target as HTMLInputElement;
-                            let value: any;
-                            if (inputField.inputType === "checkbox") {
-                                value = inputElement.checked
-                            }
-                            else if (inputField.inputType === "number") {
-                                value = inputElement.valueAsNumber
-                            }
-                            else {
-                                value = inputElement.value
-                            }
-                            this.changeValue(value);
-                        }
-                    ]
-                },
-                attributes: [
-                    keyValue("reformjs-input"),
-                    keyValue("type", inputField.inputType),
-                    inputField.initialValue ? keyValue("value", inputField.initialValue) : null,
-                    inputField.placeholder ? keyValue("placeholder", inputField.placeholder) : null
-                ],
-                class: inputField.inputClass
-            }),
-        ];
-
-        if (this.initialField.inputType === "checkbox") {
-            elementContent = elementContent.reverse();
+        let inputHtml: string,
+            labelHtml: string,
+            messageHtml: string,
+            template = inputField.template || `
+            <div>$label</div>
+            <div>$input</div>
+            <div>$message</div>`;
+        //initializations
+        if (inputField.inputType === "checkbox") {
+            inputHtml = `<input reformjs-input type="checkbox"> <span reformjs-input-label>${inputField.label}</span>`
         }
-        elementContent.push(
-            new ElementField({
-                tag: "div",
-                attributes: [{ key: "style", value: "display; none" }],
-                id: this.errorMessageFieldId
-            })
-        )
-        this.elementReflections = new ElementReflection(
-            {
-                isElement: true,
-                attributes: [keyValue("reformjs-input-area")],
-                content: elementContent
-            },
-            reflector, baseElement, parentSectionReflection
-        );
+        else {
+            inputHtml = `<input reformjs-input type="${inputField.inputType}">`
+            labelHtml = `<span reformjs-input-label>${inputField.label}</span>`
+        }
+        messageHtml = `<span reformjs-message></span>`
+
+        const initBundle = template.replace("$label", labelHtml).replace("$input", inputHtml).replace("$message", messageHtml);
+        const elementBase = document.createElement("div");
+        elementBase.innerHTML = initBundle;
+        const inputElement = elementBase.querySelector("[reformjs-input]") as HTMLInputElement,
+            messageElement = elementBase.querySelector("[reformjs-message]") as HTMLElement;
+
+
+        this._inputElement = inputElement;
+        this._messageElement = messageElement;
+        this._baseElement = baseElement;
+        if (this.initialField.placeholder) {
+            inputElement.placeholder = this.initialField.placeholder;
+        }
+        inputElement.addEventListener("input", event => {
+            const inputElement = event.target as HTMLInputElement;
+            let value: any;
+            if (inputField.inputType === "checkbox") {
+                value = inputElement.checked
+            }
+            else if (inputField.inputType === "number") {
+                value = inputElement.valueAsNumber
+            }
+            else {
+                value = inputElement.value
+            }
+            this.changeValue(value);
+        });
+        baseElement.appendChild(elementBase);
     }
 
     /**
@@ -138,7 +124,7 @@ export class InputReflection extends Reflection {
      */
     setValidationText() {
         //TODO: When reactive initial field changes is ok, update here for this
-        const element = (this.reflector.findReflectionById(this.errorMessageFieldId) as ElementReflection).element;
+        const element = this._messageElement;
         const errorKeys = Object.keys(this.validationErrors);
         if ((errorKeys.length > 0) && this.showErrorMessage) {
             element.style.display = "block";
@@ -156,7 +142,7 @@ export class InputReflection extends Reflection {
      * @param emit If true, entire section notified value is changed. Defaultly True
      */
     setValueExternal(newValue: any, emit = true) {
-        const inputElement = this.elementReflections.element.querySelector("input[reformjs-input]") as HTMLInputElement;
+        const inputElement = this._inputElement;
         const inputType = this.initialField.inputType;
         if (inputType === "checkbox") {
             inputElement.checked = newValue;
