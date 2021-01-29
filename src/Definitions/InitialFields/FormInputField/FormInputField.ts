@@ -24,9 +24,9 @@ export class InputField<V = string> extends InitialFied implements IInputField<V
     inputClass?: string;
     labelAttributes?: ElementAttribute[];
     inputAttributes?: ElementAttribute[];
-    template: string;
+    template?: string;
     validations?: IInputValidation[];
-    
+
     constructor(base : IInputFieldBase<V>) {
         super(base);
         ObjectFieldTransfer(base, this);

@@ -39,7 +39,7 @@ export interface IInputFieldBase<V = string> extends IInitialFiedBase {
      * $input  => means input element
      * $message =>  means error message or hint
      */
-    template: string;
+    template?: string;
 
     /** 
      * If your input must be validated as intended, validations can be inserted. 
