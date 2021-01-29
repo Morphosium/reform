@@ -3,7 +3,7 @@ var ts = require('gulp-typescript');
 const { series } = require('gulp');
 const tsFiles = "src/**/*.ts";
 
-
+var bundle = require( '@lernetz/gulp-typescript-bundle' );
 var rename = require('gulp-es6-imports-renamer');
 
 var fs = require('fs');
@@ -35,3 +35,4 @@ const watchChanges = (cb) => {
 
 gulp.task("default", watchChanges)
 gulp.task("watch-on-changes", watchChanges)
+gulp.task( 'bundle', bundle( { dest:'public', src:'src/main.ts' } ) );
