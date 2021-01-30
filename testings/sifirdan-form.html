@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="base">
+
+    </div>
+
+    <script src="../public/reform.js"></script>
+    <script>
+        const { Reflector, InputField, SectionField, EventObserve } = Reform
+        const reflector = new Reflector(
+            {
+                content: [
+                    new InputField({
+                        name: "name",
+                        label: "Name",
+                    }),
+                    new InputField({
+                        name: "lastname",
+                        label: "Lastname",
+                    }),
+                    new SectionField({
+                        name: "address",
+                        content: [
+                            new InputField({
+                                name: "state",
+                                label: "State",
+                            }),
+                            new InputField({
+                                name: "city",
+                                label: "City",
+                            }),
+                            new InputField({
+                                name: "street",
+                                label: "Street",
+                            }),
+                        ]
+                    })
+                ]
+            }
+        );
+
+        reflector.expandThere("#base");
+        reflector.onValueChange.subscribe(
+            new EventObserve(
+                value => {
+                    console.info(reflector.getValue())
+                }
+            )
+        )
+    </script>
+</body>
+
+</html>
