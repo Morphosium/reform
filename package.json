@@ -1,5 +1,5 @@
 {
-  "name": "reform-js",
+  "name": "@morphosium/reform",
   "version": "1.0.0",
   "description": "A library for build user forms and generating data",
   "main": "index.js",
@@ -29,5 +29,13 @@
     "gulp-es6-imports-renamer": "^0.1.8",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Morphosium/reForm-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Morphosium/reForm-js/issues"
+  },
+  "homepage": "https://github.com/Morphosium/reForm-js#readme"
 }
