@@ -1,3 +1,3 @@
-export * from "./Definitions/index"
-export * from "./InputValidations/index"
-export * from "./Reflection/index"
+import * as Reform from "./main";
+//@ts-ignore
+window["Reform"] = Reform;

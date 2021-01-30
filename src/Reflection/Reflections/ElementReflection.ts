@@ -23,8 +23,9 @@ export class ElementReflection extends Reflection {
     }
 
     constructReflection() {
+        const selfClass = this;
         this.initialField = this.elementField;
-        const element = createElement(this.elementField, this.reflector);
+        const element = createElement(selfClass, this.reflector,this.elementField);
         this.baseElement.appendChild(element);
         if (typeof this.elementField.content === "string") {
             element.textContent = this.elementField.content;

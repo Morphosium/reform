@@ -37,7 +37,7 @@ export class Reflector {
             )
         }
         else {
-            //TODO: throw exception about no provided element
+            throw "No provided element. Please make sure element is not null"
         }
     }
 
@@ -84,10 +84,19 @@ export class Reflector {
 
     }
 
+    /**
+     * Finds reflection by id that provided in initial field
+     * @param id id field of initial field before reflected
+     */
     findReflectionById(id: string): Reflection | null {
         return this.idMap[id]
     }
 
+    /**
+     * Returns value of form
+     * @param final if final is true and any section has convertToFinalValue method, 
+     * section value is will be return of convertToFinalValue method
+     */
     getValue(final = true) {
         return this.rootSectionReflection.getValue(final ? "final" : "raw");
     }
@@ -102,6 +111,10 @@ export class Reflector {
         this.rootSectionReflection.setValue(data);
     }
    
+    collectValidationErrors() {
+        return this.rootSectionReflection.collectValidationErrors();
+    }
+
     setErrorMessageVisibility(visible : boolean) {
       this.rootSectionReflection.setErrorMessageVisibility(visible)
     }

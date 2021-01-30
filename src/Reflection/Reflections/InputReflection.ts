@@ -68,6 +68,8 @@ export class InputReflection extends Reflection {
         if (this.initialField.placeholder) {
             inputElement.placeholder = this.initialField.placeholder;
         }
+        if (this.initialField.initialValue)
+            inputElement.value = this.initialField.initialValue;
         inputElement.addEventListener("input", event => {
             const inputElement = event.target as HTMLInputElement;
             let value: any;
