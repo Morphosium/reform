@@ -1,6 +1,6 @@
 {
   "name": "@morphosium/reform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library for build user forms and generating data",
   "main": "public/reform.js",
   "scripts": {
@@ -11,14 +11,13 @@
   ],
   "author": "Morphosium Yazilim ve Donanim Hizmetleri Ticaret Ltd. Sti.",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@lernetz/gulp-typescript-bundle": "^0.3.1",
     "ini": "^2.0.0",
     "lodash": "^4.17.20",
     "lodash.template": "^4.5.0",
-    "yargs-parser": "^20.2.4"
-  },
-  "devDependencies": {
+    "yargs-parser": "^20.2.4",
     "gulp": "^4.0.2",
     "gulp-typescript": "^6.0.0-alpha.1",
     "typescript": "^3.9.7",

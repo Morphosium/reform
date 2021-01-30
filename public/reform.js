@@ -1,4 +1,4 @@
-(function () {
+var reform = (function () {
     'use strict';
 
     /*! *****************************************************************************
@@ -630,6 +630,8 @@
     });
 
     window["Reform"] = Reform;
+
+    return Reform;
 
 }());
 //# sourceMappingURL=reform.js.map
