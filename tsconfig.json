@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "module": "UMD",
         "lib": ["ES2015","dom"],
         "target": "ES6",
         "noImplicitAny": true,

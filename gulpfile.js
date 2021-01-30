@@ -35,4 +35,4 @@ const watchChanges = (cb) => {
 
 gulp.task("default", watchChanges)
 gulp.task("watch-on-changes", watchChanges)
-gulp.task( 'bundle', bundle( { dest:'public', src:'src/main.ts' } ) );
+gulp.task( 'bundle', bundle( { dest:'public', src:'src/reform.ts', name:"reform" } ) );

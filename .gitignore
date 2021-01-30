@@ -1,6 +1,7 @@
 node_modules/
 output/
 dist/
+public/
 .vscode/
 .rpt2_cache/
 .public/
