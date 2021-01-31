@@ -1,7 +1,8 @@
 {
+    /**Bundle configiration. Module build config is in gulp file*/
     "compilerOptions": {
         "target": "ES5",
-        "module": "commonjs",
+        "module": "ES2015",
         "lib": ["ES2015","dom"],
         "noImplicitAny": true,
         "removeComments": true,
