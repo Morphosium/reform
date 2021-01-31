@@ -1,11 +1,16 @@
 {
     "compilerOptions": {
-        "module": "ES2015",
+        "target": "ES5",
+        "module": "ESNext",
         "lib": ["ES2015","dom"],
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+        "allowJs": true,
+        "esModuleInterop": false
     },
 
 }

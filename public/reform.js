@@ -1,4 +1,4 @@
-var reform = (function () {
+var reform = (function (exports) {
     'use strict';
 
     /*! *****************************************************************************
@@ -56,7 +56,7 @@ var reform = (function () {
             _this.attributes = [];
             _this.tag = "";
             _this.id = "";
-            _this["class"] = "";
+            _this.class = "";
             ObjectFieldTransfer(base, _this);
             return _this;
         }
@@ -230,8 +230,8 @@ var reform = (function () {
     function createElement(reflection, reflector, elementField) {
         var _a, _b;
         var element = document.createElement(elementField.tag || "div");
-        if (elementField["class"])
-            element.className = elementField["class"];
+        if (elementField.class)
+            element.className = elementField.class;
         var elementFieldAttributes = (_a = elementField.attributes) === null || _a === void 0 ? void 0 : _a.filter(function (a) { return a != null; });
         if ((elementFieldAttributes === null || elementFieldAttributes === void 0 ? void 0 : elementFieldAttributes.length) > 0) {
             for (var attributeIndex = 0; attributeIndex < elementFieldAttributes.length; attributeIndex++) {
@@ -601,37 +601,30 @@ var reform = (function () {
         return Reflector;
     }());
 
+    exports.ElementField = ElementField;
+    exports.ElementReflection = ElementReflection;
+    exports.EmailValidator = EmailValidator;
+    exports.EventObserve = EventObserve;
+    exports.InitialFied = InitialFied;
+    exports.InputField = InputField;
+    exports.InputReflection = InputReflection;
+    exports.MaximumNumber = MaximumNumber;
+    exports.MinimumNumber = MinimumNumber;
+    exports.NeedToBeTrue = NeedToBeTrue;
+    exports.NotEmpty = NotEmpty;
+    exports.NumberGreaterThan = NumberGreaterThan;
+    exports.NumberLessThan = NumberLessThan;
+    exports.ObjectFieldTransfer = ObjectFieldTransfer;
+    exports.Observer = Observer;
+    exports.Reflection = Reflection;
+    exports.Reflector = Reflector;
+    exports.RootSectionField = RootSectionField;
+    exports.SectionField = SectionField;
+    exports.SectionReflection = SectionReflection;
+    exports.Subject = Subject;
+    exports.createElement = createElement;
 
+    return exports;
 
-    var Reform = /*#__PURE__*/Object.freeze({
-        __proto__: null,
-        ElementField: ElementField,
-        InputField: InputField,
-        InitialFied: InitialFied,
-        RootSectionField: RootSectionField,
-        SectionField: SectionField,
-        EmailValidator: EmailValidator,
-        NotEmpty: NotEmpty,
-        NeedToBeTrue: NeedToBeTrue,
-        MinimumNumber: MinimumNumber,
-        MaximumNumber: MaximumNumber,
-        NumberGreaterThan: NumberGreaterThan,
-        NumberLessThan: NumberLessThan,
-        Reflector: Reflector,
-        Reflection: Reflection,
-        InputReflection: InputReflection,
-        SectionReflection: SectionReflection,
-        ElementReflection: ElementReflection,
-        ObjectFieldTransfer: ObjectFieldTransfer,
-        createElement: createElement,
-        Observer: Observer,
-        Subject: Subject,
-        EventObserve: EventObserve
-    });
-
-    window["Reform"] = Reform;
-
-    return Reform;
-
-}());
+}({}));
 //# sourceMappingURL=reform.js.map
