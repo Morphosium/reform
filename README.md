@@ -113,7 +113,9 @@ We are planning develop that framework for our requirements. At the future, We d
 
 - Translation of error message (Firstly Turkish)
 
-In this progress, your feedbacks, improvements, (and if you wish, contribution) will be welcomed
+At the same time. New features planned are going to be in "projects" page of github page
+
+In this development progress, your feedbacks, improvements, (and if you wish, contribution) will be welcomed
 
 ## Contact
 
