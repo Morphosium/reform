@@ -78,7 +78,7 @@ In any browser screen, shown as like following
 
 At the same time,at each value change of any input, new value is written in console like this
 
-![reform console output](./assets/console-output.PNG)
+![reform console output](./assets/console-output.png)
 
 ## Terminology
 
