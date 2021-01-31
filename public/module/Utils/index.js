@@ -10,8 +10,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./ObjectFieldTransfer"), exports);
-__exportStar(require("./CreateElement"), exports);
+__exportStar(require("./objectFieldTransfer"), exports);
+__exportStar(require("./elementCreationUtil"), exports);
 __exportStar(require("./Reactivity/Base/IObserver"), exports);
 __exportStar(require("./Reactivity/Base/ISubject"), exports);
 __exportStar(require("./Reactivity/Base/Observer.class"), exports);

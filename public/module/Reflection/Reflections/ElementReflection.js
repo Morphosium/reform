@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ElementReflection = void 0;
 const Reflection_1 = require("./Reflection");
-const CreateElement_1 = require("../../Utils/CreateElement");
+const elementCreationUtil_1 = require("../../Utils/elementCreationUtil");
 /**
  * ElementReflection class is a reflection class for arrange visual and structural
  * arrangement
@@ -19,7 +19,7 @@ class ElementReflection extends Reflection_1.Reflection {
     constructReflection() {
         const selfClass = this;
         this.initialField = this.elementField;
-        const element = CreateElement_1.createElement(selfClass, this.reflector, this.elementField);
+        const element = elementCreationUtil_1.createElement(selfClass, this.reflector, this.elementField);
         this.baseElement.appendChild(element);
         if (typeof this.elementField.content === "string") {
             element.textContent = this.elementField.content;

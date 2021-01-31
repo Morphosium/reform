@@ -2,7 +2,7 @@ import { ElementField } from "../ElementField/ElementField";
 import { InputType } from "../../Types/InputType";
 import { IInputField } from "./IInputField";
 import { IInputFieldBase } from "./IInputFieldBase";
-import { ObjectFieldTransfer } from "../../../Utils/ObjectFieldTransfer";
+import { ObjectFieldTransfer } from "../../../Utils/objectFieldTransfer";
 import { InitialFied } from "../InitialField/index";
 import { IInputValidation } from "../../../InputValidations/index";
 import { ElementAttribute } from "../../Types/ElementAttribute";

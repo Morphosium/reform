@@ -1,5 +1,5 @@
-export * from "./ObjectFieldTransfer";
-export * from "./CreateElement";
+export * from "./objectFieldTransfer";
+export * from "./elementCreationUtil";
 export * from "./Reactivity/Base/IObserver";
 export * from "./Reactivity/Base/ISubject";
 export * from "./Reactivity/Base/Observer.class";

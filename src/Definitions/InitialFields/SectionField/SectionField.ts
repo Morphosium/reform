@@ -2,7 +2,7 @@ import { InitialFied } from "../InitialField/InitialField";
 import { IInitialFied } from "../InitialField/IInitialField";
 import { ISectionFieldBase } from "./ISectionFieldInitial";
 import { ISectionField } from "./ISectionField";
-import { ObjectFieldTransfer } from "../../../Utils/ObjectFieldTransfer";
+import { ObjectFieldTransfer } from "../../../Utils/objectFieldTransfer";
 
 /**
  * Sections are represents object, array. In same time if there is provider, can be returned any specified value.
