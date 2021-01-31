@@ -1,1 +1,0 @@
-{"version":3,"file":"InitialField.d.ts","sourceRoot":"","sources":["InitialField.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,iBAAiB,CAAC;AAC/C,OAAO,EAAE,gBAAgB,EAAE,MAAM,qBAAqB,CAAC;AAGvD,8BAAsB,WAAY,YAAW,YAAY;IACrD,OAAO,EAAE,MAAM,GAAG,YAAY,EAAE,CAAC;gBAErB,IAAI,CAAC,EAAE,gBAAgB;CAGtC"}

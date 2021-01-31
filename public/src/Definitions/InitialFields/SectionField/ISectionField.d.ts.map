@@ -1,1 +1,0 @@
-{"version":3,"file":"ISectionField.d.ts","sourceRoot":"","sources":["ISectionField.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,MAAM,+BAA+B,CAAC;AAC7D,OAAO,EAAE,iBAAiB,EAAE,MAAM,SAAS,CAAC;AAM5C,MAAM,WAAW,aAAc,SAAQ,YAAY,EAAE,iBAAiB;IAClE,SAAS,EAAE,OAAO,CAAC;IACnB,OAAO,EAAE,YAAY,EAAE,CAAC;CAC3B"}

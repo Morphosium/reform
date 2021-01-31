@@ -2,7 +2,7 @@ import { IElementField } from "../../Definitions/index";
 import { Reflection } from "./Reflection";
 import { Reflector } from "../Reflector";
 import { SectionReflection } from "./SectionReflection";
-import { createElement } from "../../Utils/createElement";
+import { createElement } from "../../Utils/CreateElement";
 
 /**
  * ElementReflection class is a reflection class for arrange visual and structural 

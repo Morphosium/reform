@@ -7,10 +7,8 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
-        "declaration": true,
-        "declarationMap": true,
         "allowJs": true,
-        "esModuleInterop": false
-    },
+        "esModuleInterop": true,
+    }
 
 }
