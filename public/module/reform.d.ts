@@ -1,2 +1,2 @@
 import * as Reform from "./main";
-export default Reform;
+export declare const a: typeof Reform;

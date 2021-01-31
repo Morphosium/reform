@@ -1,4 +1,4 @@
-var reform = (function () {
+var reform = (function (exports) {
     'use strict';
 
     /*! *****************************************************************************
@@ -630,8 +630,11 @@ var reform = (function () {
     });
 
     window["Reform"] = Reform;
+    var a = Reform;
 
-    return Reform;
+    exports.a = a;
 
-}());
+    return exports;
+
+}({}));
 //# sourceMappingURL=reform.js.map
