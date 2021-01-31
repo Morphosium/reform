@@ -40,7 +40,7 @@ export declare class Reflector {
         [key: string]: string;
     }, isIntegrityImportant?: boolean): void;
     collectValidationErrors(): {
-        [key: string]: import("../Definitions/index").ValidationErrorMap;
+        [key: string]: import("../Definitions").ValidationErrorMap;
     };
     setErrorMessageVisibility(visible: boolean): void;
 }

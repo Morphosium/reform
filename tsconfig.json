@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "ES5",
-        "module": "ESNext",
+        "module": "commonjs",
         "lib": ["ES2015","dom"],
         "noImplicitAny": true,
         "removeComments": true,

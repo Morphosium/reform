@@ -19,7 +19,7 @@ const compileFromTs = (cb) => {
     gulp.src(tsFiles)
         .pipe(ts({
             noImplicitAny: true,
-            module: "UMD",
+            module: "commonjs",
             target: "es6",
             "sourceMap": true,
             "declaration": true,
