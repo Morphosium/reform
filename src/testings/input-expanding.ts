@@ -1,4 +1,4 @@
-import { ElementField, IElementField, IInitialFied, IInputField, InputField, RootSectionField, SectionField } from "../Definitions/index";
+import { ElementField, IElementField, IInitialField, IInputField, InputField, RootSectionField, SectionField } from "../Definitions/index";
 import { EventObserve } from "../Utils/Reactivity/EventObverser";
 import { Reflector } from "../Reflection/Reflector";
 import { EmailValidator, NotEmpty } from "../InputValidations/Validations";

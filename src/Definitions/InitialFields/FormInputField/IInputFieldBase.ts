@@ -1,11 +1,11 @@
 import { IInputValidation } from "../../../InputValidations/IInputValidation";
 import { ElementAttribute } from "../../Types/ElementAttribute";
 import { InputType } from "../../Types/InputType";
-import { IInitialFiedBase } from "../InitialField/index";
+import { IInitialFieldBase } from "../InitialField/index";
 
 
 
-export interface IInputFieldBase<V = string> extends IInitialFiedBase {
+export interface IInputFieldBase<V = string> extends IInitialFieldBase {
     /**Type of input, same as definition in HTML */
     inputType: InputType;
 

@@ -1,8 +1,8 @@
-import { IInitialFiedBase } from "./IInitialFieldBase";
+import { IInitialFieldBase } from "./IInitialFieldBase";
 
 
 
-export interface IInitialFied extends IInitialFiedBase {
+export interface IInitialField extends IInitialFieldBase {
     /**
      * This field can be set as true to detect as element, othervise false.
      * more than 1 fields of "isElement", "isSection" and "isInput" shouldn't to be true in same time
@@ -21,5 +21,5 @@ export interface IInitialFied extends IInitialFiedBase {
     /**
     * Sub initial fields that is contains another initial fields (These are contained in Section or element field), or text content if it is ElementField.
     */
-    content?: IInitialFied[] | string;
+    content?: IInitialField[] | string;
 }

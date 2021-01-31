@@ -11,7 +11,8 @@
         "allowJs": true,
         "esModuleInterop": true,
         //TODO: Convert file names to kebab-case
-        "forceConsistentCasingInFileNames": false
+        "forceConsistentCasingInFileNames": false,
+        "baseUrl": "./src/"
     }
 
 }

@@ -1,11 +1,11 @@
-import { IInitialFied } from "../InitialField/IInitialField";
-import { IInitialFiedBase } from "../InitialField/IInitialFieldBase";
+import { IInitialField } from "../InitialField/IInitialField";
+import { IInitialFieldBase } from "../InitialField/IInitialFieldBase";
 
 /**
  * Section constructor parameters for Class entity of Section.
  */
-export interface ISectionFieldBase extends IInitialFiedBase {
-    content: IInitialFied[];
+export interface ISectionFieldBase extends IInitialFieldBase {
+    content: IInitialField[];
 
     /**
      * When get value from Reflector in any mode, that section's value is will be there with that name

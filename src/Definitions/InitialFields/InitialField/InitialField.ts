@@ -1,11 +1,11 @@
-import { IInitialFied } from "./IInitialField";
-import { IInitialFiedBase } from "./IInitialFieldBase";
+import { IInitialField } from "./IInitialField";
+import { IInitialFieldBase } from "./IInitialFieldBase";
 
 
-export abstract class InitialFied implements IInitialFied {
-    content: string | IInitialFied[];
+export abstract class InitialFied implements IInitialField {
+    content: string | IInitialField[];
 
-    constructor(base?: IInitialFiedBase) {
+    constructor(base?: IInitialFieldBase) {
         this.content = base.content;
     }
 }

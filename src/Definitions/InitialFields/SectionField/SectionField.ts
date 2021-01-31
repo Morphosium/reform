@@ -1,5 +1,5 @@
 import { InitialFied } from "../InitialField/InitialField";
-import { IInitialFied } from "../InitialField/IInitialField";
+import { IInitialField } from "../InitialField/IInitialField";
 import { ISectionFieldBase } from "./ISectionFieldInitial";
 import { ISectionField } from "./ISectionField";
 import { ObjectFieldTransfer } from "../../../Utils/objectFieldTransfer";
@@ -11,7 +11,7 @@ import { ObjectFieldTransfer } from "../../../Utils/objectFieldTransfer";
 export class SectionField extends InitialFied implements ISectionField {
     readonly isSection = true;
     sectionName: string;
-    content: IInitialFied[];
+    content: IInitialField[];
     name: string;
     root = false;
     convertToFinalValue: (hamObject: { [key: string]: any; }) => any;

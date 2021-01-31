@@ -1,5 +1,5 @@
 import { InitialFied } from "../InitialField/InitialField";
-import { IInitialFied } from "../InitialField/IInitialField";
+import { IInitialField } from "../InitialField/IInitialField";
 import { IElementField } from "./IElementField";
 import { IElementFieldBase } from "./IElementFieldBase";
 import { ObjectFieldTransfer } from "../../../Utils/objectFieldTransfer";
@@ -10,7 +10,7 @@ export class ElementField extends InitialFied implements IElementField {
     readonly isElement = true;
     attributes: ElementAttribute[] = [];
     reflection: HTMLElement;
-    content: IInitialFied[];
+    content: IInitialField[];
     tag: string = "";
     id: string = "";
     class: string = "";

@@ -1,9 +1,9 @@
-import { IInitialFied } from "./IInitialField";
-export interface IInitialFiedBase {
+import { IInitialField } from "./IInitialField";
+export interface IInitialFieldBase {
     /**
      * Sub initial fields that is contains another initial fields (These are contained in Section or element field), or text content if it is ElementField.
      */
-    content?: IInitialFied[] | string;
+    content?: IInitialField[] | string;
     /**
      * Name, that should be unique in contained section
      */

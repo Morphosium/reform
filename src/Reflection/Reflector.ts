@@ -1,6 +1,6 @@
-import { IInputField, IInitialFiedBase } from "../Definitions/index";
+import { IInputField, IInitialFieldBase } from "../Definitions/index";
 import { IElementField } from "../Definitions/InitialFields/ElementField/index";
-import { IInitialFied } from "../Definitions/InitialFields/InitialField/IInitialField";
+import { IInitialField } from "../Definitions/InitialFields/InitialField/IInitialField";
 import { ISectionField, RootSectionField } from "../Definitions/InitialFields/SectionField/index";
 import { Subject } from "../Utils/Reactivity/Base/Subject.class";
 import { EventObserve } from "../Utils/Reactivity/EventObverser";
@@ -47,14 +47,14 @@ export class Reflector {
      * @param initialField the initial parent will be expanded
      * @param parentSectionReflection the parent section reflection of that initial field
      */
-    expand(baseElement: HTMLElement, initialField: IInitialFied, parentSectionReflection?: SectionReflection): Reflection[] {
+    expand(baseElement: HTMLElement, initialField: IInitialField, parentSectionReflection?: SectionReflection): Reflection[] {
         /** in section, no element changes, content expanded into same element
          * in element, new element will be created and contents expanded into them
          */
         const fields = initialField.content, reflections : Reflection[] = [];
         if (fields instanceof Array) {
             for (let index = 0; index < fields.length; index++) {
-                const field = fields[index] as IInitialFied;
+                const field = fields[index] as IInitialField;
 
                 let reflection: Reflection;
                 if (field.isSection) {

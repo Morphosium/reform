@@ -1,5 +1,5 @@
 import { InitialFied } from "../InitialField/InitialField";
-import { IInitialFied } from "../InitialField/IInitialField";
+import { IInitialField } from "../InitialField/IInitialField";
 import { ISectionFieldBase } from "./ISectionFieldInitial";
 import { ISectionField } from "./ISectionField";
 /**
@@ -9,7 +9,7 @@ import { ISectionField } from "./ISectionField";
 export declare class SectionField extends InitialFied implements ISectionField {
     readonly isSection = true;
     sectionName: string;
-    content: IInitialFied[];
+    content: IInitialField[];
     name: string;
     root: boolean;
     convertToFinalValue: (hamObject: {

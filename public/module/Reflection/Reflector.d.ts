@@ -1,4 +1,4 @@
-import { IInitialFied } from "../Definitions/InitialFields/InitialField/IInitialField";
+import { IInitialField } from "../Definitions/InitialFields/InitialField/IInitialField";
 import { RootSectionField } from "../Definitions/InitialFields/SectionField/index";
 import { Subject } from "../Utils/Reactivity/Base/Subject.class";
 import { Reflection } from "./Reflections/Reflection";
@@ -19,7 +19,7 @@ export declare class Reflector {
      * @param initialField the initial parent will be expanded
      * @param parentSectionReflection the parent section reflection of that initial field
      */
-    expand(baseElement: HTMLElement, initialField: IInitialFied, parentSectionReflection?: SectionReflection): Reflection[];
+    expand(baseElement: HTMLElement, initialField: IInitialField, parentSectionReflection?: SectionReflection): Reflection[];
     /**
      * Finds reflection by id that provided in initial field
      * @param id id field of initial field before reflected
