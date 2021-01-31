@@ -1,4 +1,4 @@
-var reform = (function (exports) {
+var reform = (function () {
     'use strict';
 
     /*! *****************************************************************************
@@ -601,30 +601,37 @@ var reform = (function (exports) {
         return Reflector;
     }());
 
-    exports.ElementField = ElementField;
-    exports.ElementReflection = ElementReflection;
-    exports.EmailValidator = EmailValidator;
-    exports.EventObserve = EventObserve;
-    exports.InitialFied = InitialFied;
-    exports.InputField = InputField;
-    exports.InputReflection = InputReflection;
-    exports.MaximumNumber = MaximumNumber;
-    exports.MinimumNumber = MinimumNumber;
-    exports.NeedToBeTrue = NeedToBeTrue;
-    exports.NotEmpty = NotEmpty;
-    exports.NumberGreaterThan = NumberGreaterThan;
-    exports.NumberLessThan = NumberLessThan;
-    exports.ObjectFieldTransfer = ObjectFieldTransfer;
-    exports.Observer = Observer;
-    exports.Reflection = Reflection;
-    exports.Reflector = Reflector;
-    exports.RootSectionField = RootSectionField;
-    exports.SectionField = SectionField;
-    exports.SectionReflection = SectionReflection;
-    exports.Subject = Subject;
-    exports.createElement = createElement;
 
-    return exports;
 
-}({}));
+    var Reform = /*#__PURE__*/Object.freeze({
+        __proto__: null,
+        ElementField: ElementField,
+        InputField: InputField,
+        InitialFied: InitialFied,
+        RootSectionField: RootSectionField,
+        SectionField: SectionField,
+        EmailValidator: EmailValidator,
+        NotEmpty: NotEmpty,
+        NeedToBeTrue: NeedToBeTrue,
+        MinimumNumber: MinimumNumber,
+        MaximumNumber: MaximumNumber,
+        NumberGreaterThan: NumberGreaterThan,
+        NumberLessThan: NumberLessThan,
+        Reflector: Reflector,
+        Reflection: Reflection,
+        InputReflection: InputReflection,
+        SectionReflection: SectionReflection,
+        ElementReflection: ElementReflection,
+        ObjectFieldTransfer: ObjectFieldTransfer,
+        createElement: createElement,
+        Observer: Observer,
+        Subject: Subject,
+        EventObserve: EventObserve
+    });
+
+    window["Reform"] = Reform;
+
+    return Reform;
+
+}());
 //# sourceMappingURL=reform.js.map

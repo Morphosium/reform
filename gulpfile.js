@@ -39,5 +39,5 @@ const watchChanges = (cb) => {
 
 gulp.task("default", watchChanges)
 gulp.task("watch-on-changes", watchChanges)
-gulp.task('build-bundle', bundle({ dest: 'public/bundle', src: 'src/main.ts', name: "reform" }));
+gulp.task('build-bundle', bundle({ dest: 'public/bundle', src: 'src/reform.ts', name: "reform" }));
 gulp.task('build-module', series(compileFromTs));
