@@ -36,7 +36,8 @@ const reflector = new Reflector(
                 name: "lastname",
                 label: "Lastname",
             }),
-            /* Sections is represents values group. At the final value,  */
+            /* Sections is represents values group. 
+            At the final value: State, City and Streets values will be under "address" field */
             new SectionField({
                 name: "address",
                 content: [
@@ -79,9 +80,27 @@ At the same time,at each value change of any input, new value is written in cons
 
 ![reform console output](./assets/console-output.PNG)
 
+## Terminology
+
+**Initial fields** represents form build instructions. 
+
+Initial fields are separated within itself as *InputField*, *ElementField* and *SectionField*
+
+**InputFields** are user input instructions contains *name, label, validations* and etc.
+
+**ElementField** represents HTMLElement, contains another InitialFields. But at the reflecting into browser, inputs will be seperated according ElementField definitions.
+
+**SectionField** represents object at the value, contains child input and section values
+
+**Reflector** builds form on the screen by provided instructions. At needed, values and validation issues can be fetched from reflector. 
+
+and *(In development for now)* another reflections of initial fields can be made some changes by reaching reflector.
+
+
 ## Detailed info
 
-Documentation will be released as soon as
+Documentation will be released as soon as.
+
 Some examples available pages in testings folder. testing pages scripts are located in src/testings/
 
 ## Roadmap
