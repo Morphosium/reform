@@ -103,6 +103,11 @@ Documentation will be released as soon as.
 
 Some examples available in Examples folder.
 
+- Creating documentation from comments in your local
+
+
+```$ ./node_modules/typedoc/bin/typedoc ./src/main.ts --name "ReformJS" --includeVersion```
+
 ## Roadmap
 
 We are planning develop that framework for our requirements. At the future, We decided to add following features
