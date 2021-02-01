@@ -1,6 +1,6 @@
 # reForm-js
 
-## Under development. All suggestions, feedbacks and contribution is welcomed
+#### Under development. All suggestions, feedbacks and contribution is welcomed
 
 ![ReformJS](./assets/reform-logo.png)
 
@@ -16,7 +16,7 @@ You can install ReformJS via
 
 or  
 
-```<script src="./path-of-reform/reform.js">```
+```<script src="./path-of/public/bundle/reform.js">```
 
 Code implementation will be like this
 
@@ -112,6 +112,8 @@ We are planning develop that framework for our requirements. At the future, We d
 - Initial field definition as HTML-Similar format
 
 - Translation of error message (Firstly Turkish)
+
+- Instantly changes of Reflections state
 
 At the same time. New features planned are going to be in "projects" page of github page
 
