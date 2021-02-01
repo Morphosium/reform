@@ -10,6 +10,9 @@ export function createElement(reflection: ElementReflection, reflector: Reflecto
     const element = document.createElement(elementField.tag || "div");
     if (elementField.class)
         element.className = elementField.class;
+    if (elementField.id) {
+        element.id = elementField.id;
+    }
     const elementFieldAttributes = elementField.attributes?.filter(a => a != null);
     if (elementFieldAttributes?.length > 0) {
         for (let attributeIndex = 0; attributeIndex < elementFieldAttributes.length; attributeIndex++) {
