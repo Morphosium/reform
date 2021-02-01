@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <style>
+        * {
+            font-family: "Poppins";
+        }
+
+        #jsonOutput {
+            white-space: break-spaces;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row p-2">
+        <div class="col-6 mx-0">
+            <div id="base">
+
+            </div>
+            <button onclick="submitForm()">Submit</button>
+        </div>
+
+        <div class="outputArea col-6 mx-0">
+            <input type="checkbox" onchange="setFinalMode(event.target.checked)"> Final mode
+            <div id="jsonOutput">
+
+            </div>
+            <div>
+                <textarea id="jsonInput" cols="30" rows="10"></textarea>
+                <button onclick="jsonInputApply()">Apply Data</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+
+    <script src="../public/bundle/reform.min.js">
+    </script>
+    <script>
+        const { ElementField, IElementField, IInitialFied, IInputField, InputField, RootSectionField, SectionField, EventObserve, Reflector, EmailValidator, NotEmpty } = Reform;
+
+        let finalMode = false;
+
+        const rowElement = (content) => {
+            return new ElementField(
+                {
+                    tag: "div",
+                    class: "row",
+                    content
+                }
+            )
+        }
+
+
+        const columnElements = (column, singleContents) => {
+
+            return rowElement([
+                ...singleContents.map(
+                    field => {
+                        return new ElementField(
+                            {
+                                tag: "div",
+                                class: `col-${column}`,
+                                content: [field]
+                            }
+                        )
+                    }
+                )]);
+
+        }
+
+        const reflector = new Reflector(new RootSectionField({
+            content: [
+                columnElements(6, [
+                    new InputField(
+                        {
+                            inputType: "text",
+                            name: "firstName",
+                            label: "Name",
+                            validations: [new NotEmpty()]
+                        }
+                    ),
+                    new InputField(
+                        {
+                            inputType: "text",
+                            name: "lastName",
+                            label: "Last Name",
+                            validations: [new NotEmpty()]
+                        }
+                    ),
+                    new InputField(
+                        {
+                            inputType: "text",
+                            name: "email",
+                            label: "E-Mail",
+                            convertToFinalValue: (rawValue) => rawValue.trim(),
+                            validations: [
+                                new EmailValidator()
+                            ]
+
+                        }
+                    ),
+                    new InputField(
+                        {
+                            inputType: "text",
+                            name: "phone",
+                            label: "Phone",
+                            convertToFinalValue: (rawValue) => rawValue?.replace(/\s/g, "")
+                        }
+                    ),
+                ]),
+
+                new SectionField({
+                    name: "Address",
+                    content: [
+                        new ElementField({
+                            class: "h1",
+                            content: "Address information"
+                        }),
+                        columnElements(12,
+                            [
+                                new InputField({
+                                    inputType: "text",
+                                    name: "city",
+                                    label: "City",
+                                    inputClass: "w-100"
+                                }),
+                                new InputField({
+                                    inputType: "text",
+                                    name: "street",
+                                    label: "Street",
+                                    inputClass: "w-100"
+                                })]
+                        )
+                    ]
+                }),
+
+                new SectionField({
+                    name: "agreements",
+                    content: [
+                        new InputField({
+                            inputType: "checkbox",
+                            name: "agreement1",
+                            label: "Accept",
+                        }),
+                        new InputField({
+                            inputType: "checkbox",
+                            name: "agreement2",
+                            label: "I accept Next next next"
+                        }),
+                    ],
+                    convertToFinalValue: (raw) => raw.agreement1 && raw.agreement2
+                })
+            ]
+        }));
+
+        reflector.expandThere("div#base");
+        reflector.onValueChange.subscribe(
+            new EventObserve(
+                () => {
+                    updateOutput()
+                })
+        )
+        
+        setFinalMode = (fmode) => {
+            finalMode = fmode
+            updateOutput()
+        }
+
+        function updateOutput() {
+
+            //TODO: Fetch different ways 
+            const el = document.getElementById("jsonOutput"),
+                a = reflector.getValue(finalMode);
+            el.textContent = JSON.stringify(a, null, '\t');
+            console.info(reflector.rootSectionReflection.collectValidationErrors());
+        }
+
+        jsonInputApply = function () {
+            const jsonInput = document.getElementById("jsonInput");
+            try {
+                const obj = JSON.parse(jsonInput?.value)
+                if (obj) {
+                    reflector.patchValue(obj);
+                    this.updateOutput();
+                }
+            } catch (error) {
+                console.warn(error)
+            }
+        }
+
+        submitForm = function () {
+            reflector.setErrorMessageVisibility(true);
+        }
+    </script>
+
+</body>
+
+</html>

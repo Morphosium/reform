@@ -101,7 +101,7 @@ and *(In development for now)* another reflections of initial fields can be made
 
 Documentation will be released as soon as.
 
-Some examples available pages in testings folder. testing pages scripts are located in src/testings/
+Some examples available in Examples folder.
 
 ## Roadmap
 
