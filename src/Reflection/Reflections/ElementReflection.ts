@@ -11,6 +11,7 @@ import { createElement } from "../../Utils/elementCreationUtil";
 export class ElementReflection extends Reflection {
     element: HTMLElement;
     subReflections: Reflection[];
+
     constructor(
         public elementField: IElementField,
         public reflector: Reflector,
@@ -22,7 +23,11 @@ export class ElementReflection extends Reflection {
         this.constructReflection()
     }
 
+    /**
+     * Created an element and reflector extracts into created element if content is not string, etc... 
+     * */
     constructReflection() {
+        //Directly passing this makes it null. Anyone gets astonished
         const selfClass = this;
         this.initialField = this.elementField;
         const element = createElement(selfClass, this.reflector,this.elementField);
@@ -44,6 +49,9 @@ export class ElementReflection extends Reflection {
     }
 
     setErrorMessageVisibility(value: boolean): void {
-        //Nothing... :)
+        for (let reflectionIndex = 0; reflectionIndex < this.subReflections.length; reflectionIndex++) {
+            const reflection = this.subReflections[reflectionIndex];
+            reflection.setErrorMessageVisibility(value)
+        }
     }
 }

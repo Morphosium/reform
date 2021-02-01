@@ -2,7 +2,7 @@ import { IInitialField } from "../InitialField/IInitialField";
 import { IInitialFieldBase } from "../InitialField/IInitialFieldBase";
 
 /**
- * Section constructor parameters for Class entity of Section.
+ * Section constructor parameters for defining Section with class construction.
  */
 export interface ISectionFieldBase extends IInitialFieldBase {
     content: IInitialField[];

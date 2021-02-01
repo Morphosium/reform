@@ -9,6 +9,3 @@ export abstract class InitialFied implements IInitialField {
         this.content = base.content;
     }
 }
-
-// PARAMETER => MANIFESTO => VIEW
-

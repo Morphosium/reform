@@ -1,7 +1,8 @@
 import { IInitialFieldBase } from "./IInitialFieldBase";
 
-
-
+/**
+ * Represents form build instruction accepted by reflector
+ */
 export interface IInitialField extends IInitialFieldBase {
     /**
      * This field can be set as true to detect as element, othervise false.

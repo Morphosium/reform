@@ -31,7 +31,8 @@ export class InputReflection extends Reflection {
     }
 
 
-    constructReflection(inputField: IInputField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection): void {
+    constructReflection(inputField: IInputField, reflector: Reflector, baseElement: HTMLElement,
+         parentSectionReflection: SectionReflection): void {
         if (this._baseElement) {
             this._baseElement.innerHTML = "";
             this._baseElement.innerText = "";
@@ -46,12 +47,12 @@ export class InputReflection extends Reflection {
             <div>$message</div>`;
         //initializations
         if (inputField.inputType === "checkbox") {
-            inputHtml = `<input reformjs-input type="checkbox"> <span reformjs-input-label>${inputField.label}</span>`
+            inputHtml = `<input reformjs-input type="checkbox"> <span reformjs-input-label>${inputField.label || inputField.name}</span>`
             labelHtml = `<span></span>`
         }
         else {
             inputHtml = `<input reformjs-input type="${inputField.inputType}">`
-            labelHtml = `<span reformjs-input-label>${inputField.label}</span>`
+            labelHtml = `<span reformjs-input-label>${inputField.label || inputField.name}</span>`
         }
         messageHtml = `<span reformjs-message></span>`
 

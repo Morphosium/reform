@@ -68,7 +68,9 @@ export class SectionReflection extends Reflection {
         }
     }
 
-    /**Converts raw data into intended value specified in initial field */
+    /**
+     * Converts raw data into intended value specified in initial field 
+     * */
     convertDataByMode(data: any, mode: "final" | "raw") {
         if ((mode === "final") && (this.initialField.convertToFinalValue)) {
             return this.initialField.convertToFinalValue(data)
@@ -78,6 +80,9 @@ export class SectionReflection extends Reflection {
 
     }
 
+    /**
+     * Collects data under this sections and converts depending mode is final or not
+     */
     collectSectionData(mode: "final" | "raw" = "final") {
         if (this.initialField.arraySectionRaw) {
             const array: any[] = [];
@@ -171,11 +176,13 @@ export class SectionReflection extends Reflection {
         )
     }
 
+    /**
+     * Sets error message visibilities of the inputs 
+     * */
     setErrorMessageVisibility(value: boolean): void {
         for (let reflectionIndex = 0; reflectionIndex < this.subReflections.length; reflectionIndex++) {
             const reflection = this.subReflections[reflectionIndex];
             reflection.setErrorMessageVisibility(value);
         }
     }
-
 }
