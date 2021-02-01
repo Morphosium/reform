@@ -2,7 +2,7 @@
 
 #### Under development. All suggestions, feedbacks and contribution is welcomed
 
-![ReformJS](./assets/reform-logo.png)
+![ReformJS](./assets/images/reform-logo.png)
 
 ReformJS is a Javascript library developed for building form in detail, validating and managing easily.
 All definitions, validations are made with a object. Inputs, elements are placed according to these definitions.
@@ -74,11 +74,11 @@ reflector.onValueChange.subscribe(
 
 In any browser screen, shown as like following
 
-![reform browser screen](./assets/browser-screen.jpg)
+![reform browser screen](assets/images/browser-screen.jpg)
 
 At the same time,at each value change of any input, new value is written in console like this
 
-![reform console output](./assets/console-output.png)
+![reform console output](assets/images/console-output.png)
 
 ## Terminology
 
