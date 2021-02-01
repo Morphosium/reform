@@ -106,7 +106,7 @@ Some examples available in Examples folder.
 - Creating documentation from comments in your local
 
 
-```$ ./node_modules/typedoc/bin/typedoc ./src/main.ts --name "ReformJS" --includeVersion```
+    ```$ ./node_modules/typedoc/bin/typedoc ./src/main.ts --name "ReformJS" --includeVersion```
 
 ## Roadmap
 
