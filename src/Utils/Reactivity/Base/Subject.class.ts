@@ -1,9 +1,15 @@
 import { ISubject } from './ISubject';
 import { Observer } from './Observer.class';
 
+/**
+ * Basic subject structure for event emitting without extra installations
+ */
 export class Subject<T = any> implements ISubject<T> {
 
-    observers: Observer<T>[] = [];
+    /**
+     * Subscribed observers
+     */
+    private observers: Observer<T>[] = [];
 
     notify(param : T): void {
         for (const observer of this.observers) {

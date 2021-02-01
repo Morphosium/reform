@@ -40,8 +40,11 @@ export class SectionReflection extends Reflection {
 
     }
 
-
-    getValue(mode: "final" | "raw", showGhost = false) {
+    /**
+     * Returns value by compiled from child reflections currently filled 
+     * @param mode sets returned value according to ready for submit (final) or not (raw)
+     */
+    getValue(mode: "final" | "raw") {
         return this.collectSectionData(mode)
     }
 

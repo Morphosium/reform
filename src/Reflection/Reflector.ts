@@ -19,6 +19,10 @@ export class Reflector {
         this.onValueChange = new Subject();
     }
 
+    /**
+     * Constructs form to provided element
+     * @param elementOrSelector Provided element or element's query (like ```"#form"```) will be provided
+     */
     expandThere(elementOrSelector: HTMLElement | string) {
 
         this.baseElement = null;
@@ -51,7 +55,7 @@ export class Reflector {
         /** in section, no element changes, content expanded into same element
          * in element, new element will be created and contents expanded into them
          */
-        const fields = initialField.content, reflections : Reflection[] = [];
+        const fields = initialField.content, reflections: Reflection[] = [];
         if (fields instanceof Array) {
             for (let index = 0; index < fields.length; index++) {
                 const field = fields[index] as IInitialField;
@@ -71,13 +75,13 @@ export class Reflector {
                 if (field.isInput) {
                     reflection = new InputReflection(field as IInputField, this, baseElement, parentSectionReflection)
                 }
-                if (parentSectionReflection && reflection && !field.isElement) { 
+                if (parentSectionReflection && reflection && !field.isElement) {
                     parentSectionReflection.subReflections.push(reflection);
                     reflections.push(reflection);
                 }
-                if (reflection?.initialField?.id) { 
+                if (reflection?.initialField?.id) {
                     this.idMap[reflection.initialField.id] = reflection;
-                 }
+                }
             }
             return reflections
         }
@@ -106,17 +110,31 @@ export class Reflector {
      * @param data incoming data
      * @param isIntegrityImportant (Not stable) when missing fields on all sections, exception will be raised
      */
-    patchValue(data : {[key : string] : string}, isIntegrityImportant = false) {
+    patchValue(data: { [key: string]: string }, isIntegrityImportant = false) {
         //TODO: integrity
         this.rootSectionReflection.setValue(data);
     }
-   
+
+    /**
+     * Collects all validation error and presents them like:
+     * {
+     *   'age': {atLeast: ...},
+     *   'name': {required: ...},
+     *   'email': {required: ...},
+     *   'address.city': {required: ...}
+     * } 
+     * (3 input and 1 section field contains 'city' input)
+     */
     collectValidationErrors() {
         return this.rootSectionReflection.collectValidationErrors();
     }
 
-    setErrorMessageVisibility(visible : boolean) {
-      this.rootSectionReflection.setErrorMessageVisibility(visible)
+    /**
+     * Sets validation error messages visibility
+     * @param visible 
+     */
+    setErrorMessageVisibility(visible: boolean) {
+        this.rootSectionReflection.setErrorMessageVisibility(visible)
     }
 
 }
