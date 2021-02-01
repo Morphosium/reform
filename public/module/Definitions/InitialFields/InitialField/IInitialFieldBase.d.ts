@@ -1,4 +1,7 @@
 import { IInitialField } from "./IInitialField";
+/**
+ * Initial field construction parameters
+ */
 export interface IInitialFieldBase {
     /**
      * Sub initial fields that is contains another initial fields (These are contained in Section or element field), or text content if it is ElementField.

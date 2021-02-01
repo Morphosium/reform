@@ -24,12 +24,12 @@ class InputReflection extends Reflection_1.Reflection {
             <div>$message</div>`;
         //initializations
         if (inputField.inputType === "checkbox") {
-            inputHtml = `<input reformjs-input type="checkbox"> <span reformjs-input-label>${inputField.label}</span>`;
+            inputHtml = `<input reformjs-input type="checkbox"> <span reformjs-input-label>${inputField.label || inputField.name}</span>`;
             labelHtml = `<span></span>`;
         }
         else {
             inputHtml = `<input reformjs-input type="${inputField.inputType}">`;
-            labelHtml = `<span reformjs-input-label>${inputField.label}</span>`;
+            labelHtml = `<span reformjs-input-label>${inputField.label || inputField.name}</span>`;
         }
         messageHtml = `<span reformjs-message></span>`;
         const initBundle = template.replace("$label", labelHtml).replace("$input", inputHtml).replace("$message", messageHtml);

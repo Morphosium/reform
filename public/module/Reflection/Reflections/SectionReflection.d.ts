@@ -20,8 +20,13 @@ export declare class SectionReflection extends Reflection {
      * @param callback callback that triggered with fetched data
      */
     private dataCollection;
-    /**Converts raw data into intended value specified in initial field */
+    /**
+     * Converts raw data into intended value specified in initial field
+     * */
     convertDataByMode(data: any, mode: "final" | "raw"): any;
+    /**
+     * Collects data under this sections and converts depending mode is final or not
+     */
     collectSectionData(mode?: "final" | "raw"): any;
     /**
     * Collects all validation error and presents them like:
@@ -46,5 +51,8 @@ export declare class SectionReflection extends Reflection {
      * @param key name of reflection/field
      */
     findSubReflectionByName(key: string): Reflection;
+    /**
+     * Sets error message visibilities of the inputs
+     * */
     setErrorMessageVisibility(value: boolean): void;
 }

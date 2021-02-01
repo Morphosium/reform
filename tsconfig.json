@@ -8,10 +8,10 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
-        "allowJs": true,
+        // "allowJs": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": false,
-        "baseUrl": "./src/"
+        "baseUrl": "./src/",
+        
     }
-
 }

@@ -14,6 +14,9 @@ export declare class ElementReflection extends Reflection {
     element: HTMLElement;
     subReflections: Reflection[];
     constructor(elementField: IElementField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection);
+    /**
+     * Created an element and reflector extracts into created element if content is not string, etc...
+     * */
     constructReflection(): void;
     getElementByName(name: string): Reflection;
     setErrorMessageVisibility(value: boolean): void;

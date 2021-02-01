@@ -7,4 +7,3 @@ class InitialFied {
     }
 }
 exports.InitialFied = InitialFied;
-// PARAMETER => MANIFESTO => VIEW

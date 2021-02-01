@@ -16,7 +16,11 @@ class ElementReflection extends Reflection_1.Reflection {
         this.parentSectionReflection = parentSectionReflection;
         this.constructReflection();
     }
+    /**
+     * Created an element and reflector extracts into created element if content is not string, etc...
+     * */
     constructReflection() {
+        //Directly passing this makes it null. Anyone gets astonished
         const selfClass = this;
         this.initialField = this.elementField;
         const element = elementCreationUtil_1.createElement(selfClass, this.reflector, this.elementField);
@@ -36,7 +40,10 @@ class ElementReflection extends Reflection_1.Reflection {
         a => a["name"] === name);
     }
     setErrorMessageVisibility(value) {
-        //Nothing... :)
+        for (let reflectionIndex = 0; reflectionIndex < this.subReflections.length; reflectionIndex++) {
+            const reflection = this.subReflections[reflectionIndex];
+            reflection.setErrorMessageVisibility(value);
+        }
     }
 }
 exports.ElementReflection = ElementReflection;

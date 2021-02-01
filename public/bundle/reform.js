@@ -232,6 +232,9 @@ var reform = (function (exports) {
         var element = document.createElement(elementField.tag || "div");
         if (elementField.class)
             element.className = elementField.class;
+        if (elementField.id) {
+            element.id = elementField.id;
+        }
         var elementFieldAttributes = (_a = elementField.attributes) === null || _a === void 0 ? void 0 : _a.filter(function (a) { return a != null; });
         if ((elementFieldAttributes === null || elementFieldAttributes === void 0 ? void 0 : elementFieldAttributes.length) > 0) {
             for (var attributeIndex = 0; attributeIndex < elementFieldAttributes.length; attributeIndex++) {
@@ -285,6 +288,10 @@ var reform = (function (exports) {
             return (_a = this.subReflections) === null || _a === void 0 ? void 0 : _a.find(function (a) { return a["name"] === name; });
         };
         ElementReflection.prototype.setErrorMessageVisibility = function (value) {
+            for (var reflectionIndex = 0; reflectionIndex < this.subReflections.length; reflectionIndex++) {
+                var reflection = this.subReflections[reflectionIndex];
+                reflection.setErrorMessageVisibility(value);
+            }
         };
         return ElementReflection;
     }(Reflection));
@@ -310,12 +317,12 @@ var reform = (function (exports) {
             }
             var inputHtml, labelHtml, messageHtml, template = inputField.template || "\n            <div>$label</div>\n            <div>$input</div>\n            <div>$message</div>";
             if (inputField.inputType === "checkbox") {
-                inputHtml = "<input reformjs-input type=\"checkbox\"> <span reformjs-input-label>" + inputField.label + "</span>";
+                inputHtml = "<input reformjs-input type=\"checkbox\"> <span reformjs-input-label>" + (inputField.label || inputField.name) + "</span>";
                 labelHtml = "<span></span>";
             }
             else {
                 inputHtml = "<input reformjs-input type=\"" + inputField.inputType + "\">";
-                labelHtml = "<span reformjs-input-label>" + inputField.label + "</span>";
+                labelHtml = "<span reformjs-input-label>" + (inputField.label || inputField.name) + "</span>";
             }
             messageHtml = "<span reformjs-message></span>";
             var initBundle = template.replace("$label", labelHtml).replace("$input", inputHtml).replace("$message", messageHtml);

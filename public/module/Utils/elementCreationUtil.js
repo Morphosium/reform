@@ -10,6 +10,9 @@ function createElement(reflection, reflector, elementField) {
     const element = document.createElement(elementField.tag || "div");
     if (elementField.class)
         element.className = elementField.class;
+    if (elementField.id) {
+        element.id = elementField.id;
+    }
     const elementFieldAttributes = (_a = elementField.attributes) === null || _a === void 0 ? void 0 : _a.filter(a => a != null);
     if ((elementFieldAttributes === null || elementFieldAttributes === void 0 ? void 0 : elementFieldAttributes.length) > 0) {
         for (let attributeIndex = 0; attributeIndex < elementFieldAttributes.length; attributeIndex++) {
