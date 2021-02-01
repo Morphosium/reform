@@ -13,7 +13,7 @@ export interface IInputFieldBase<V = string> extends IInitialFieldBase {
      * "datetime", "email".
      */
     inputType: InputType;
-    
+
     /**
      * Name of input. same with value's name
      */
@@ -75,6 +75,7 @@ export interface IInputFieldBase<V = string> extends IInitialFieldBase {
      *       <div><input reformjs-input="" type="text"></div>
      *       <div><span reformjs-message=""></span></div></div>
      * ```
+     * these elements styled by ```[reformjs-input]```, ```[reformjs-input-label]```, ```[reformjs-message]``` queries
      */
     template?: string;
 

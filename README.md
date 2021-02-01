@@ -1,6 +1,6 @@
 # reForm-js
 
-# Notice: Under development. Not ready. all suggestions, feedbacks and contribution is welcomed
+## Under development. All suggestions, feedbacks and contribution is welcomed
 
 ![ReformJS](./assets/reform-logo.png)
 
