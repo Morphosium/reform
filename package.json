@@ -33,10 +33,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Morphosium/reForm-js.git"
+    "url": "git+https://github.com/Morphosium/reform.git"
   },
   "bugs": {
-    "url": "https://github.com/Morphosium/reForm-js/issues"
+    "url": "https://github.com/Morphosium/reform/issues"
   },
-  "homepage": "https://github.com/Morphosium/reForm-js#readme"
+  "homepage": "https://github.com/Morphosium/reform#readme"
 }
