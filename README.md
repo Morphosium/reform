@@ -1,4 +1,4 @@
-# reForm-js
+# ReformJS
 
 #### Under development. All suggestions, feedbacks and contribution is welcomed
 
@@ -14,6 +14,10 @@ You can install ReformJS via
 
 ```npm install @morphosium/reform``` 
 
+or
+
+```yarn add @morphosium/reform``` 
+
 or  
 
 ```<script src="./path-of/public/bundle/reform.js">```
@@ -21,7 +25,7 @@ or
 Code implementation will be like this
 
 ```
-/** You can consider use import or require if installed by npm
+/** You can consider use import or require if installed by npm / yarn
     import { Reflector, InputField, SectionField, EventObserve } from "@morphosium/reform";
  */
 const { Reflector, InputField, SectionField, EventObserve } = Reform
@@ -65,7 +69,7 @@ reflector.expandThere("#base");
 /* Each value changes notified and new value is written into console */
 reflector.onValueChange.subscribe(
     new EventObserve(
-        value => {
+        () => {
             console.info(reflector.getValue())
         }
     )
@@ -101,10 +105,9 @@ and *(In development for now)* another reflections of initial fields can be made
 
 Documentation will be released as soon as.
 
-Some examples available in Examples folder.
+Some examples and demostrations available in Examples folder.
 
 - Creating documentation from comments in your local
-
 
     ```$ ./node_modules/typedoc/bin/typedoc ./src/main.ts --name "ReformJS" --includeVersion```
 
