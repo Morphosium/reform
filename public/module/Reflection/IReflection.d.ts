@@ -14,5 +14,9 @@ export interface IReflection {
     * Constructs new reflection with provided initialField
     */
     constructReflection(): void;
+    /**
+     * Sets validation error messages visibility
+     * @param visible
+     */
     setErrorMessageVisibility(value: boolean): void;
 }
