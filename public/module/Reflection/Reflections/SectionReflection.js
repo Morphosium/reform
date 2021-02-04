@@ -2,19 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SectionReflection = void 0;
 const Subject_class_1 = require("../../Utils/Reactivity/Base/Subject.class");
-const Reflection_1 = require("./Reflection");
-class SectionReflection extends Reflection_1.Reflection {
-    constructor(sectionField, reflector, baseElement, parentSectionReflection) {
-        super();
+class SectionReflection {
+    constructor(initialField, reflector, baseParentalElement, parentSectionReflection) {
+        this.initialField = initialField;
+        this.reflector = reflector;
+        this.baseParentalElement = baseParentalElement;
         this.parentSectionReflection = parentSectionReflection;
         this.subReflections = [];
-        this.constructReflection(sectionField, reflector, baseElement, parentSectionReflection);
+        this.constructReflection();
     }
-    constructReflection(sectionField, reflector, baseElement, parentSectionReflection) {
+    constructReflection() {
+        const sectionField = this.initialField, reflector = this.reflector;
         this.onValueChange = new Subject_class_1.Subject();
         this.initialField = sectionField;
-        const inheritedSection = sectionField.root ? this : parentSectionReflection;
-        reflector.expand(baseElement, sectionField, this);
+        reflector.expand(this.baseParentalElement, sectionField, this);
     }
     valueChanged() {
         this.rawValue = this.collectSectionData();
@@ -25,7 +26,11 @@ class SectionReflection extends Reflection_1.Reflection {
             this.onValueChange.notify();
         }
     }
-    getValue(mode, showGhost = false) {
+    /**
+     * Returns value by compiled from child reflections currently filled
+     * @param mode sets returned value according to ready for submit (final) or not (raw)
+     */
+    getValue(mode) {
         return this.collectSectionData(mode);
     }
     /**

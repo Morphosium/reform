@@ -1,19 +1,25 @@
-import { ISectionField, ISectionFieldBase, ValidationErrorMap } from "../../Definitions/index";
+import { ISectionField, ValidationErrorMap } from "../../Definitions/index";
 import { Subject } from "../../Utils/Reactivity/Base/Subject.class";
 import { Reflector } from "../Reflector";
-import { Reflection } from "./Reflection";
-export declare class SectionReflection extends Reflection {
+import { IReflection } from "../IReflection";
+export declare class SectionReflection implements IReflection {
+    initialField: ISectionField;
+    reflector: Reflector;
+    baseParentalElement: HTMLElement;
     parentSectionReflection: SectionReflection;
-    readonly subReflections: Reflection[];
-    initialField: ISectionFieldBase;
+    readonly subReflections: IReflection[];
     onValueChange: Subject<void>;
     rawValue: {
         [key: string]: any;
     };
-    constructor(sectionField: ISectionField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection);
-    constructReflection(sectionField: ISectionField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection): void;
+    constructor(initialField: ISectionField, reflector: Reflector, baseParentalElement: HTMLElement, parentSectionReflection: SectionReflection);
+    constructReflection(): void;
     valueChanged(): void;
-    getValue(mode: "final" | "raw", showGhost?: boolean): any;
+    /**
+     * Returns value by compiled from child reflections currently filled
+     * @param mode sets returned value according to ready for submit (final) or not (raw)
+     */
+    getValue(mode: "final" | "raw"): any;
     /**
      * Collects data under that's subsections
      * @param mode Final or Raw mode
@@ -50,7 +56,7 @@ export declare class SectionReflection extends Reflection {
      * Finds reflection under this' first level sub reflections
      * @param key name of reflection/field
      */
-    findSubReflectionByName(key: string): Reflection;
+    findSubReflectionByName(key: string): IReflection;
     /**
      * Sets error message visibilities of the inputs
      * */

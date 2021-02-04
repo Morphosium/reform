@@ -1,19 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InputReflection = void 0;
-const Reflection_1 = require("./Reflection");
-class InputReflection extends Reflection_1.Reflection {
-    constructor(inputField, reflector, baseElement, parentSectionReflection) {
-        super();
+class InputReflection {
+    constructor(initialField, reflector, baseParentalElement, parentSectionReflection) {
+        this.initialField = initialField;
         this.reflector = reflector;
+        this.baseParentalElement = baseParentalElement;
         this.parentSectionReflection = parentSectionReflection;
         this.value = "";
         this.validationErrors = {};
-        this.value = inputField.initialValue;
-        this.initialField = inputField;
-        this.constructReflection(inputField, reflector, baseElement, parentSectionReflection);
+        this.value = initialField.initialValue;
+        this.initialField = initialField;
+        this.constructReflection();
     }
-    constructReflection(inputField, reflector, baseElement, parentSectionReflection) {
+    constructReflection() {
+        const inputField = this.initialField;
         if (this._baseElement) {
             this._baseElement.innerHTML = "";
             this._baseElement.innerText = "";
@@ -33,12 +34,11 @@ class InputReflection extends Reflection_1.Reflection {
         }
         messageHtml = `<span reformjs-message></span>`;
         const initBundle = template.replace("$label", labelHtml).replace("$input", inputHtml).replace("$message", messageHtml);
-        const elementBase = document.createElement("div");
-        elementBase.innerHTML = initBundle;
-        const inputElement = elementBase.querySelector("[reformjs-input]"), messageElement = elementBase.querySelector("[reformjs-message]");
+        const inputParentElement = document.createElement("div");
+        inputParentElement.innerHTML = initBundle;
+        const inputElement = inputParentElement.querySelector("[reformjs-input]"), messageElement = inputParentElement.querySelector("[reformjs-message]");
         this._inputElement = inputElement;
         this._messageElement = messageElement;
-        this._baseElement = baseElement;
         if (this.initialField.placeholder) {
             inputElement.placeholder = this.initialField.placeholder;
         }
@@ -58,7 +58,7 @@ class InputReflection extends Reflection_1.Reflection {
             }
             this.changeValue(value);
         });
-        baseElement.appendChild(elementBase);
+        this.baseParentalElement.appendChild(inputParentElement);
     }
     /**
      * Changes value of input, triggered by input

@@ -1,14 +1,12 @@
-import { ElementField, IInputField, ISectionField, ValidationErrorMap } from "../../Definitions/index";
-import { keyValue, KeyValue } from "../../Definitions/Types/KeyValue";
+import { IInputField, ValidationErrorMap } from "../../Definitions/index";
 import { ElementReflection } from "./ElementReflection";
-import { Reflection } from "./Reflection";
 import { Reflector } from "../Reflector";
 import { SectionReflection } from "./SectionReflection";
+import { IReflection } from "../IReflection";
 
-export class InputReflection extends Reflection {
+export class InputReflection implements IReflection {
 
     value = "";
-    initialField: IInputField;
     rawValue: string;
     rawToFinalValue: (rawValue: string) => string;
     validationErrors: ValidationErrorMap = {};
@@ -19,20 +17,19 @@ export class InputReflection extends Reflection {
     private _inputElement: HTMLInputElement;
     private _baseElement: HTMLElement;
 
-    constructor(inputField: IInputField,
+    constructor(public initialField: IInputField,
         public reflector: Reflector,
-        baseElement: HTMLElement,
+        public baseParentalElement: HTMLElement,
         public parentSectionReflection: SectionReflection
     ) {
-        super();
-        this.value = inputField.initialValue;
-        this.initialField = inputField;
-        this.constructReflection(inputField, reflector, baseElement, parentSectionReflection);
+        this.value = initialField.initialValue;
+        this.initialField = initialField;
+        this.constructReflection();
     }
 
 
-    constructReflection(inputField: IInputField, reflector: Reflector, baseElement: HTMLElement,
-         parentSectionReflection: SectionReflection): void {
+    constructReflection(): void {
+        const inputField = this.initialField;
         if (this._baseElement) {
             this._baseElement.innerHTML = "";
             this._baseElement.innerText = "";
@@ -57,15 +54,15 @@ export class InputReflection extends Reflection {
         messageHtml = `<span reformjs-message></span>`
 
         const initBundle = template.replace("$label", labelHtml).replace("$input", inputHtml).replace("$message", messageHtml);
-        const elementBase = document.createElement("div");
-        elementBase.innerHTML = initBundle;
-        const inputElement = elementBase.querySelector("[reformjs-input]") as HTMLInputElement,
-            messageElement = elementBase.querySelector("[reformjs-message]") as HTMLElement;
+        const inputParentElement = document.createElement("div");
+        inputParentElement.innerHTML = initBundle;
+        const inputElement = inputParentElement.querySelector("[reformjs-input]") as HTMLInputElement,
+            messageElement = inputParentElement.querySelector("[reformjs-message]") as HTMLElement;
 
 
         this._inputElement = inputElement;
         this._messageElement = messageElement;
-        this._baseElement = baseElement;
+      
         if (this.initialField.placeholder) {
             inputElement.placeholder = this.initialField.placeholder;
         }
@@ -85,7 +82,7 @@ export class InputReflection extends Reflection {
             }
             this.changeValue(value);
         });
-        baseElement.appendChild(elementBase);
+        this.baseParentalElement.appendChild(inputParentElement);
     }
 
     /**

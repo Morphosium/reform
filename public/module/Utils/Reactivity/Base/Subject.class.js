@@ -1,8 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Subject = void 0;
+/**
+ * Basic subject structure for event emitting without extra installations
+ */
 class Subject {
     constructor() {
+        /**
+         * Subscribed observers
+         */
         this.observers = [];
     }
     notify(param) {

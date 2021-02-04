@@ -6,13 +6,13 @@ import { Subject } from "../Utils/Reactivity/Base/Subject.class";
 import { EventObserve } from "../Utils/Reactivity/EventObverser";
 import { ElementReflection } from "./Reflections/ElementReflection";
 import { InputReflection } from "./Reflections/InputReflection";
-import { Reflection } from "./Reflections/Reflection";
+import { IReflection } from "./IReflection";
 import { SectionReflection } from "./Reflections/SectionReflection";
 
 export class Reflector {
     baseElement: HTMLElement;
     rootSectionReflection: SectionReflection;
-    idMap: { [reflectionId: string]: Reflection } = {};
+    idMap: { [reflectionId: string]: IReflection } = {};
     onValueChange: Subject<void>;
 
     constructor(public rootManifest: RootSectionField) {
@@ -51,16 +51,16 @@ export class Reflector {
      * @param initialField the initial parent will be expanded
      * @param parentSectionReflection the parent section reflection of that initial field
      */
-    expand(baseElement: HTMLElement, initialField: IInitialField, parentSectionReflection?: SectionReflection): Reflection[] {
+    expand(baseElement: HTMLElement, initialField: IInitialField, parentSectionReflection?: SectionReflection): IReflection[] {
         /** in section, no element changes, content expanded into same element
          * in element, new element will be created and contents expanded into them
          */
-        const fields = initialField.content, reflections: Reflection[] = [];
+        const fields = initialField.content, reflections: IReflection[] = [];
         if (fields instanceof Array) {
             for (let index = 0; index < fields.length; index++) {
                 const field = fields[index] as IInitialField;
 
-                let reflection: Reflection;
+                let reflection: IReflection;
                 if (field.isSection) {
                     reflection = new SectionReflection(
                         field as ISectionField,
@@ -92,7 +92,7 @@ export class Reflector {
      * Finds reflection by id that provided in initial field
      * @param id id field of initial field before reflected
      */
-    findReflectionById(id: string): Reflection | null {
+    findReflectionById(id: string): IReflection | null {
         return this.idMap[id]
     }
 

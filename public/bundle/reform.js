@@ -221,12 +221,6 @@ var reform = (function (exports) {
         return EventObserve;
     }(Observer));
 
-    var Reflection = (function () {
-        function Reflection() {
-        }
-        return Reflection;
-    }());
-
     function createElement(reflection, reflector, elementField) {
         var _a, _b;
         var element = document.createElement(elementField.tag || "div");
@@ -259,27 +253,24 @@ var reform = (function (exports) {
         return element;
     }
 
-    var ElementReflection = (function (_super) {
-        __extends(ElementReflection, _super);
-        function ElementReflection(elementField, reflector, baseElement, parentSectionReflection) {
-            var _this = _super.call(this) || this;
-            _this.elementField = elementField;
-            _this.reflector = reflector;
-            _this.baseElement = baseElement;
-            _this.parentSectionReflection = parentSectionReflection;
-            _this.constructReflection();
-            return _this;
+    var ElementReflection = (function () {
+        function ElementReflection(initialField, reflector, baseParentalElement, parentSectionReflection) {
+            this.initialField = initialField;
+            this.reflector = reflector;
+            this.baseParentalElement = baseParentalElement;
+            this.parentSectionReflection = parentSectionReflection;
+            this.constructReflection();
         }
         ElementReflection.prototype.constructReflection = function () {
             var selfClass = this;
-            this.initialField = this.elementField;
-            var element = createElement(selfClass, this.reflector, this.elementField);
-            this.baseElement.appendChild(element);
-            if (typeof this.elementField.content === "string") {
-                element.textContent = this.elementField.content;
+            this.initialField = this.initialField;
+            var element = createElement(selfClass, this.reflector, this.initialField);
+            this.baseParentalElement.appendChild(element);
+            if (typeof this.initialField.content === "string") {
+                element.textContent = this.initialField.content;
             }
             else {
-                this.subReflections = this.reflector.expand(element, this.elementField, this.parentSectionReflection);
+                this.subReflections = this.reflector.expand(element, this.initialField, this.parentSectionReflection);
             }
             this.element = element;
         };
@@ -294,23 +285,23 @@ var reform = (function (exports) {
             }
         };
         return ElementReflection;
-    }(Reflection));
+    }());
 
-    var InputReflection = (function (_super) {
-        __extends(InputReflection, _super);
-        function InputReflection(inputField, reflector, baseElement, parentSectionReflection) {
-            var _this = _super.call(this) || this;
-            _this.reflector = reflector;
-            _this.parentSectionReflection = parentSectionReflection;
-            _this.value = "";
-            _this.validationErrors = {};
-            _this.value = inputField.initialValue;
-            _this.initialField = inputField;
-            _this.constructReflection(inputField, reflector, baseElement, parentSectionReflection);
-            return _this;
+    var InputReflection = (function () {
+        function InputReflection(initialField, reflector, baseParentalElement, parentSectionReflection) {
+            this.initialField = initialField;
+            this.reflector = reflector;
+            this.baseParentalElement = baseParentalElement;
+            this.parentSectionReflection = parentSectionReflection;
+            this.value = "";
+            this.validationErrors = {};
+            this.value = initialField.initialValue;
+            this.initialField = initialField;
+            this.constructReflection();
         }
-        InputReflection.prototype.constructReflection = function (inputField, reflector, baseElement, parentSectionReflection) {
+        InputReflection.prototype.constructReflection = function () {
             var _this = this;
+            var inputField = this.initialField;
             if (this._baseElement) {
                 this._baseElement.innerHTML = "";
                 this._baseElement.innerText = "";
@@ -326,12 +317,11 @@ var reform = (function (exports) {
             }
             messageHtml = "<span reformjs-message></span>";
             var initBundle = template.replace("$label", labelHtml).replace("$input", inputHtml).replace("$message", messageHtml);
-            var elementBase = document.createElement("div");
-            elementBase.innerHTML = initBundle;
-            var inputElement = elementBase.querySelector("[reformjs-input]"), messageElement = elementBase.querySelector("[reformjs-message]");
+            var inputParentElement = document.createElement("div");
+            inputParentElement.innerHTML = initBundle;
+            var inputElement = inputParentElement.querySelector("[reformjs-input]"), messageElement = inputParentElement.querySelector("[reformjs-message]");
             this._inputElement = inputElement;
             this._messageElement = messageElement;
-            this._baseElement = baseElement;
             if (this.initialField.placeholder) {
                 inputElement.placeholder = this.initialField.placeholder;
             }
@@ -351,7 +341,7 @@ var reform = (function (exports) {
                 }
                 _this.changeValue(value);
             });
-            baseElement.appendChild(elementBase);
+            this.baseParentalElement.appendChild(inputParentElement);
         };
         InputReflection.prototype.changeValue = function (value) {
             this.rawValue = value;
@@ -410,22 +400,22 @@ var reform = (function (exports) {
             this.setValidationText();
         };
         return InputReflection;
-    }(Reflection));
+    }());
 
-    var SectionReflection = (function (_super) {
-        __extends(SectionReflection, _super);
-        function SectionReflection(sectionField, reflector, baseElement, parentSectionReflection) {
-            var _this = _super.call(this) || this;
-            _this.parentSectionReflection = parentSectionReflection;
-            _this.subReflections = [];
-            _this.constructReflection(sectionField, reflector, baseElement, parentSectionReflection);
-            return _this;
+    var SectionReflection = (function () {
+        function SectionReflection(initialField, reflector, baseParentalElement, parentSectionReflection) {
+            this.initialField = initialField;
+            this.reflector = reflector;
+            this.baseParentalElement = baseParentalElement;
+            this.parentSectionReflection = parentSectionReflection;
+            this.subReflections = [];
+            this.constructReflection();
         }
-        SectionReflection.prototype.constructReflection = function (sectionField, reflector, baseElement, parentSectionReflection) {
+        SectionReflection.prototype.constructReflection = function () {
+            var sectionField = this.initialField, reflector = this.reflector;
             this.onValueChange = new Subject();
             this.initialField = sectionField;
-            var inheritedSection = sectionField.root ? this : parentSectionReflection;
-            reflector.expand(baseElement, sectionField, this);
+            reflector.expand(this.baseParentalElement, sectionField, this);
         };
         SectionReflection.prototype.valueChanged = function () {
             this.rawValue = this.collectSectionData();
@@ -436,7 +426,7 @@ var reform = (function (exports) {
                 this.onValueChange.notify();
             }
         };
-        SectionReflection.prototype.getValue = function (mode, showGhost) {
+        SectionReflection.prototype.getValue = function (mode) {
             return this.collectSectionData(mode);
         };
         SectionReflection.prototype.dataCollection = function (mode, callback) {
@@ -534,7 +524,7 @@ var reform = (function (exports) {
             }
         };
         return SectionReflection;
-    }(Reflection));
+    }());
 
     var Reflector = (function () {
         function Reflector(rootManifest) {
@@ -606,6 +596,12 @@ var reform = (function (exports) {
             this.rootSectionReflection.setErrorMessageVisibility(visible);
         };
         return Reflector;
+    }());
+
+    var Reflection = (function () {
+        function Reflection() {
+        }
+        return Reflection;
     }());
 
 

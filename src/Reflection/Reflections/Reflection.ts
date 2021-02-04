@@ -1,8 +1,11 @@
 
+import { deprecate } from "util";
 import { IInitialField, ISectionField } from "../../Definitions/index";
 import { Reflector } from "../Reflector";
 import { SectionReflection } from "./SectionReflection";
-
+/**
+ * @deprecated
+ */
 export abstract class Reflection {
   initialField: IInitialField;
   reflector: Reflector;

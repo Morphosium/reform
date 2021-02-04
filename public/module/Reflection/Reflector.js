@@ -12,6 +12,10 @@ class Reflector {
         this.idMap = {};
         this.onValueChange = new Subject_class_1.Subject();
     }
+    /**
+     * Constructs form to provided element
+     * @param elementOrSelector Provided element or element's query (like ```"#form"```) will be provided
+     */
     expandThere(elementOrSelector) {
         this.baseElement = null;
         if (typeof elementOrSelector === "string") {
@@ -91,9 +95,23 @@ class Reflector {
         //TODO: integrity
         this.rootSectionReflection.setValue(data);
     }
+    /**
+     * Collects all validation error and presents them like:
+     * {
+     *   'age': {atLeast: ...},
+     *   'name': {required: ...},
+     *   'email': {required: ...},
+     *   'address.city': {required: ...}
+     * }
+     * (3 input and 1 section field contains 'city' input)
+     */
     collectValidationErrors() {
         return this.rootSectionReflection.collectValidationErrors();
     }
+    /**
+     * Sets validation error messages visibility
+     * @param visible
+     */
     setErrorMessageVisibility(visible) {
         this.rootSectionReflection.setErrorMessageVisibility(visible);
     }

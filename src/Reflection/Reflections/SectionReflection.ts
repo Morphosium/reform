@@ -2,31 +2,31 @@ import { ISectionField, ISectionFieldBase, ValidationErrorMap } from "../../Defi
 import { Subject } from "../../Utils/Reactivity/Base/Subject.class";
 import { Reflector } from "../Reflector";
 import { InputReflection } from "./InputReflection";
-import { Reflection } from "./Reflection";
-
-export class SectionReflection extends Reflection {
+import { IReflection } from "../IReflection";
 
 
-    readonly subReflections: Reflection[] = [];
-    initialField: ISectionFieldBase;
+export class SectionReflection implements IReflection {
+
+
+    readonly subReflections: IReflection[] = [];
     onValueChange: Subject<void>
     rawValue: { [key: string]: any; };
 
     constructor(
-        sectionField: ISectionField,
-        reflector: Reflector,
-        baseElement: HTMLElement,
+        public initialField: ISectionField,
+        public reflector: Reflector,
+        public baseParentalElement: HTMLElement,
         public parentSectionReflection: SectionReflection
     ) {
-        super();
-        this.constructReflection(sectionField, reflector, baseElement, parentSectionReflection);
+        this.constructReflection();
     }
 
-    constructReflection(sectionField: ISectionField, reflector: Reflector, baseElement: HTMLElement, parentSectionReflection: SectionReflection): void {
+    constructReflection(): void {
+        const sectionField = this.initialField,
+            reflector = this.reflector;
         this.onValueChange = new Subject();
         this.initialField = sectionField;
-        const inheritedSection = sectionField.root ? this : parentSectionReflection;
-        reflector.expand(baseElement, sectionField, this);
+        reflector.expand(this.baseParentalElement, sectionField, this);
     }
 
     valueChanged() {

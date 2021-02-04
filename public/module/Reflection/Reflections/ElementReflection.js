@@ -1,18 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ElementReflection = void 0;
-const Reflection_1 = require("./Reflection");
 const elementCreationUtil_1 = require("../../Utils/elementCreationUtil");
 /**
  * ElementReflection class is a reflection class for arrange visual and structural
  * arrangement
  */
-class ElementReflection extends Reflection_1.Reflection {
-    constructor(elementField, reflector, baseElement, parentSectionReflection) {
-        super();
-        this.elementField = elementField;
+class ElementReflection {
+    constructor(initialField, reflector, baseParentalElement, parentSectionReflection) {
+        this.initialField = initialField;
         this.reflector = reflector;
-        this.baseElement = baseElement;
+        this.baseParentalElement = baseParentalElement;
         this.parentSectionReflection = parentSectionReflection;
         this.constructReflection();
     }
@@ -22,14 +20,14 @@ class ElementReflection extends Reflection_1.Reflection {
     constructReflection() {
         //Directly passing this makes it null. Anyone gets astonished
         const selfClass = this;
-        this.initialField = this.elementField;
-        const element = elementCreationUtil_1.createElement(selfClass, this.reflector, this.elementField);
-        this.baseElement.appendChild(element);
-        if (typeof this.elementField.content === "string") {
-            element.textContent = this.elementField.content;
+        this.initialField = this.initialField;
+        const element = elementCreationUtil_1.createElement(selfClass, this.reflector, this.initialField);
+        this.baseParentalElement.appendChild(element);
+        if (typeof this.initialField.content === "string") {
+            element.textContent = this.initialField.content;
         }
         else {
-            this.subReflections = this.reflector.expand(element, this.elementField, this.parentSectionReflection);
+            this.subReflections = this.reflector.expand(element, this.initialField, this.parentSectionReflection);
         }
         this.element = element;
     }
