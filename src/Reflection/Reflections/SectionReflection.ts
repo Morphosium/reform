@@ -21,6 +21,7 @@ export class SectionReflection implements IReflection {
         this.constructReflection();
     }
 
+    /** @inheritDoc */
     constructReflection(): void {
         const sectionField = this.initialField,
             reflector = this.reflector;
@@ -29,6 +30,7 @@ export class SectionReflection implements IReflection {
         reflector.expand(this.baseParentalElement, sectionField, this);
     }
 
+    /** @inheritDoc */
     valueChanged() {
         this.rawValue = this.collectSectionData();
         if (this.parentSectionReflection) {

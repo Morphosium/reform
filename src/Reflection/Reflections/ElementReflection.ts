@@ -40,6 +40,7 @@ export class ElementReflection implements IReflection {
         this.element = element;
     }
 
+    /** @inheritDoc */
     getElementByName(name: string) {
         return this.subReflections?.find(
             //@ts-ignore
@@ -47,6 +48,7 @@ export class ElementReflection implements IReflection {
         )
     }
 
+    /** @inheritDoc */
     setErrorMessageVisibility(value: boolean): void {
         for (let reflectionIndex = 0; reflectionIndex < this.subReflections.length; reflectionIndex++) {
             const reflection = this.subReflections[reflectionIndex];

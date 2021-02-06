@@ -27,7 +27,7 @@ export class InputReflection implements IReflection {
         this.constructReflection();
     }
 
-
+/** @inheritDoc */
     constructReflection(): void {
         const inputField = this.initialField;
         if (this._baseElement) {
@@ -157,6 +157,7 @@ export class InputReflection implements IReflection {
         if (emit) this.changeValue(newValue);
     }
 
+    /** @inheritDoc */
     setErrorMessageVisibility(value: boolean): void {
         this.validate();
         this.showErrorMessage = value;

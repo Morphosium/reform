@@ -9,19 +9,25 @@ import { ObjectFieldTransfer } from "../../../Utils/objectFieldTransfer";
  * Sections is not fillable directly by user. This is a difference than @class InputField
  */
 export class SectionField extends InitialFied implements ISectionField {
+    /** @inheritDoc */
     readonly isSection = true;
+    /** @inheritDoc */
     sectionName: string;
+    /** @inheritDoc */
     content: IInitialField[];
+    /** @inheritDoc */
     name: string;
+    /** @inheritDoc */
     root = false;
+    /** @inheritDoc */
     convertToFinalValue: (hamObject: { [key: string]: any; }) => any;
 
-    constructor(base : ISectionFieldBase) {
+    constructor(base: ISectionFieldBase) {
         super(base);
         ObjectFieldTransfer(base, this);
         this.convertToFinalValue = base.convertToFinalValue;
     }
 
-    
+
 }
 
