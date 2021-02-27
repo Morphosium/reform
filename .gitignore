@@ -5,3 +5,4 @@ dist/
 .rpt2_cache/
 .public/
 docs/
+package-lock.json
