@@ -12,9 +12,7 @@
   ],
   "author": "Morphosium Yazilim ve Donanim Hizmetleri Ticaret Ltd. Sti.",
   "license": "ISC",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "@lernetz/gulp-typescript-bundle": "^0.3.1",
     "es6-imports-renamer": "^0.1.6",
@@ -32,7 +30,8 @@
     "typedoc": "^0.20.20",
     "typescript": "^3.9.7",
     "yargs-parser": "^20.2.4",
-    "shell-quote": "^1.7.2"
+    "shell-quote": "^1.7.2",
+    "marked": ">=2.0.0"
   },
   "repository": {
     "type": "git",
