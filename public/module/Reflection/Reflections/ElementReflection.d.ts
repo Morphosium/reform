@@ -18,6 +18,8 @@ export declare class ElementReflection implements IReflection {
      * Created an element and reflector extracts into created element if content is not string, etc...
      * */
     constructReflection(): void;
+    /** @inheritDoc */
     getElementByName(name: string): IReflection;
+    /** @inheritDoc */
     setErrorMessageVisibility(value: boolean): void;
 }

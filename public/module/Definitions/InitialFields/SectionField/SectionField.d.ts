@@ -7,11 +7,17 @@ import { ISectionField } from "./ISectionField";
  * Sections is not fillable directly by user. This is a difference than @class InputField
  */
 export declare class SectionField extends InitialFied implements ISectionField {
+    /** @inheritDoc */
     readonly isSection = true;
+    /** @inheritDoc */
     sectionName: string;
+    /** @inheritDoc */
     content: IInitialField[];
+    /** @inheritDoc */
     name: string;
+    /** @inheritDoc */
     root: boolean;
+    /** @inheritDoc */
     convertToFinalValue: (hamObject: {
         [key: string]: any;
     }) => any;

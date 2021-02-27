@@ -18,6 +18,7 @@ export declare class InputReflection implements IReflection {
     private _inputElement;
     private _baseElement;
     constructor(initialField: IInputField, reflector: Reflector, baseParentalElement: HTMLElement, parentSectionReflection: SectionReflection);
+    /** @inheritDoc */
     constructReflection(): void;
     /**
      * Changes value of input, triggered by input
@@ -41,5 +42,6 @@ export declare class InputReflection implements IReflection {
      * @param emit If true, entire section notified value is changed. Defaultly True
      */
     setValueExternal(newValue: any, emit?: boolean): void;
+    /** @inheritDoc */
     setErrorMessageVisibility(value: boolean): void;
 }

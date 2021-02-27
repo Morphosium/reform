@@ -13,6 +13,7 @@ class InputReflection {
         this.initialField = initialField;
         this.constructReflection();
     }
+    /** @inheritDoc */
     constructReflection() {
         const inputField = this.initialField;
         if (this._baseElement) {
@@ -129,6 +130,7 @@ class InputReflection {
         if (emit)
             this.changeValue(newValue);
     }
+    /** @inheritDoc */
     setErrorMessageVisibility(value) {
         this.validate();
         this.showErrorMessage = value;

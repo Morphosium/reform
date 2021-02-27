@@ -11,12 +11,14 @@ class SectionReflection {
         this.subReflections = [];
         this.constructReflection();
     }
+    /** @inheritDoc */
     constructReflection() {
         const sectionField = this.initialField, reflector = this.reflector;
         this.onValueChange = new Subject_class_1.Subject();
         this.initialField = sectionField;
         reflector.expand(this.baseParentalElement, sectionField, this);
     }
+    /** @inheritDoc */
     valueChanged() {
         this.rawValue = this.collectSectionData();
         if (this.parentSectionReflection) {

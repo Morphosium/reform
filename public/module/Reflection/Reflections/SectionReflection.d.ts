@@ -13,7 +13,9 @@ export declare class SectionReflection implements IReflection {
         [key: string]: any;
     };
     constructor(initialField: ISectionField, reflector: Reflector, baseParentalElement: HTMLElement, parentSectionReflection: SectionReflection);
+    /** @inheritDoc */
     constructReflection(): void;
+    /** @inheritDoc */
     valueChanged(): void;
     /**
      * Returns value by compiled from child reflections currently filled

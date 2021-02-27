@@ -31,12 +31,14 @@ class ElementReflection {
         }
         this.element = element;
     }
+    /** @inheritDoc */
     getElementByName(name) {
         var _a;
         return (_a = this.subReflections) === null || _a === void 0 ? void 0 : _a.find(
         //@ts-ignore
         a => a["name"] === name);
     }
+    /** @inheritDoc */
     setErrorMessageVisibility(value) {
         for (let reflectionIndex = 0; reflectionIndex < this.subReflections.length; reflectionIndex++) {
             const reflection = this.subReflections[reflectionIndex];

@@ -10,7 +10,9 @@ const objectFieldTransfer_1 = require("../../../Utils/objectFieldTransfer");
 class SectionField extends InitialField_1.InitialFied {
     constructor(base) {
         super(base);
+        /** @inheritDoc */
         this.isSection = true;
+        /** @inheritDoc */
         this.root = false;
         objectFieldTransfer_1.ObjectFieldTransfer(base, this);
         this.convertToFinalValue = base.convertToFinalValue;

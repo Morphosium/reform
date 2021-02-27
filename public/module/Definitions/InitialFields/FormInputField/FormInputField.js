@@ -6,6 +6,7 @@ const index_1 = require("../InitialField/index");
 class InputField extends index_1.InitialFied {
     constructor(base) {
         super(base);
+        /** @inheritDoc */
         this.isInput = true;
         objectFieldTransfer_1.ObjectFieldTransfer(base, this);
         this.convertToFinalValue = base.convertToFinalValue;
