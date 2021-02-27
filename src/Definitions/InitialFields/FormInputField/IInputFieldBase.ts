@@ -91,5 +91,14 @@ export interface IInputFieldBase<V = string> extends IInitialFieldBase {
      */
     convertToFinalValue?: (rawValue: V | any) => V | any;
 
+    /**
+     * Another value options 
+     */
+    optionValues?: V[];
 
+    /**
+     * If defined a method, option value content will be returned string.
+     * otherwise, object converted to string like .toString() method
+     */
+    stringifyValueOption: (optionValue : V) => string;
 }
