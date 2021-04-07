@@ -103,13 +103,7 @@ and *(In development for now)* another reflections of initial fields can be made
 
 ## Detailed info
 
-Documentation will be released as soon as.
-
-Some examples and demostrations available in Examples folder.
-
-- Creating documentation from comments in your local
-
-    ```$ ./node_modules/typedoc/bin/typedoc ./src/main.ts --name "ReformJS" --includeVersion```
+You can get documentation on [https://morphosium.com/projects/reform/documentations/1.1.0/]
 
 ## Roadmap
 
@@ -119,7 +113,7 @@ We are planning develop that framework for our requirements. At the future, We d
 
 - Initial field definition as HTML-Similar format
 
-- Translation of error message (Firstly Turkish)
+- Translation of validation messages (Firstly Turkish)
 
 - Instantly changes of Reflections state
 
